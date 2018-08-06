@@ -1,3 +1,4 @@
+#coding:utf-8
 """InterfaceAutoTest URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -15,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from django.conf.urls import url,include
+from InterfaceTestManage import urls
+from django.views.generic.base import RedirectView
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    url(r'^favicon.ico$',RedirectView.as_view(url=r'static/favicon.ico')),
+    url(r'^',include("InterfaceTestManage.urls")),
 ]
