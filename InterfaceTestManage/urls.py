@@ -12,4 +12,5 @@ from InterfaceTestManage import views
 
 urlpatterns = [
    url('^login$',views.login),
+   url('^register$',views.reigster),
 ]

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import  InterfaceAutoTest
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'InterfaceTestManage',
 ]
 
 MIDDLEWARE = [
@@ -47,7 +49,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+   # 'InterfaceAutoTest.redirectHtml.MiddlewareRedirectHtml',
+
 ]
+
+
 
 ROOT_URLCONF = 'InterfaceAutoTest.urls'
 
@@ -76,8 +82,12 @@ WSGI_APPLICATION = 'InterfaceAutoTest.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'interfacetest',  # 新建数据库名
+        'USER': 'root',  # 数据库登录名
+        'PASSWORD': 'root',  # 数据库登录密码
+        'HOST': 'localhost',  # 数据库所在服务器ip地址
+        'PORT': '3306',  # 监听端口 默认3306即可
     }
 }
 

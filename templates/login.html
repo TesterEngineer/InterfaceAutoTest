@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="{% static '/css/font.css' %}">
 	<link rel="stylesheet" href={% static "/css/xadmin.css" %}>
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
@@ -29,7 +28,8 @@
             <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
             <hr class="hr15">
             <input type="checkbox" name="remeberPw" lay-skin="primary" title="记住密码">
-            <span><a href="" style="float:right " lay-size="20px">注册</a></span>
+            <span  style="float:right " lay-size="20px" onclick="x_admin_show('注册用户','/register')"> <a href="javascript:void(0)">注册</a></span>
+
             <hr class="hr15">
             <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
             <hr class="hr20" >
