@@ -63,9 +63,9 @@
           <div class="layui-form-item">
               <label class="layui-form-label"><span class="x-red">*</span>角色</label>
               <div class="layui-input-block">
-                <input type="radio" name="role" lay-skin="primary" title="超级管理员" checked="">
-                <input type="radio" name="role" lay-skin="primary" title="测试人员">
-                <input type="radio" name="role" lay-skin="primary" title="开发人员" checked="">
+                <input type="radio" name="role" lay-skin="primary" title="超级管理员" />
+                <input type="radio" name="role" lay-skin="primary" title="测试人员" />
+                <input type="radio" name="role" lay-skin="primary" title="开发人员"/>
               </div>
           </div>
           <div class="layui-form-item">
@@ -73,7 +73,7 @@
                   <span class="x-red">*</span>密码
               </label>
               <div class="layui-input-inline">
-                  <input type="password" id="L_pass" name="pass" required="" lay-verify="pass"
+                  <input type="password" id="L_pass" name="password" required="" lay-verify="pass"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -85,7 +85,7 @@
                   <span class="x-red">*</span>确认密码
               </label>
               <div class="layui-input-inline">
-                  <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
+                  <input type="password" id="L_repass" name="password" required="" lay-verify="repass"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -122,13 +122,20 @@
           //监听提交
           form.on('submit(add)', function(data){
             console.log(data);
-            //发异步，把数据提交给php
-            layer.alert("增加成功", {icon: 6},function () {
+            //发异步，把数据提交给python
+            //'数据字段 '
+            $.post("/register",data.field,function (data) {
+                     console.log(data.field);
+                      layer.alert("增加成功", {icon: 6},function () {
                 // 获得frame索引
                 var index = parent.layer.getFrameIndex(window.name);
                 //关闭当前frame
                 parent.layer.close(index);
             });
+                }
+            )
+
+
             return false;
           });
           
