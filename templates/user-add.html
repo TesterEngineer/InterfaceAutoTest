@@ -78,48 +78,73 @@
           </div>
       </form>
     </div>
-    <script>
-        layui.use(['form','layer'], function(){
-            $ = layui.jquery;
-          var form = layui.form
-          ,layer = layui.layer;
-        
-          //自定义验证规则
-          form.verify({
-            nikename: function(value){
-              if(value.length < 5){
-                return '昵称至少得5个字符啊';
-              }
-            }
-            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-            ,repass: function(value){
-                if($('#L_pass').val()!=$('#L_repass').val()){
-                    return '两次密码不一致';
-                }
-            }
-          });
+        <script>
+            layui.use(['form','layer'], function(){
+                $ = layui.jquery;
+              var form = layui.form
+              ,layer = layui.layer;
 
-          //监听提交
-          form.on('submit(add)', function(data){
-            console.log(data);
-            //发异步，把数据提交给python
-            //'数据字段 '
-            $.post("/register",data.field,function (data) {
-                     console.log(data.field);
-                      layer.alert("增加成功", {icon: 6},function () {
-                // 获得frame索引
-                var index = parent.layer.getFrameIndex(window.name);
-                //关闭当前frame
-                parent.layer.close(index);
+              //自定义验证规则
+              form.verify({
+                nikename: function(value){
+                  if(value.length < 5){
+                    return '昵称至少得5个字符啊';
+                  }
+                }
+                ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+                ,repass: function(value){
+                    if($('#L_pass').val()!=$('#L_repass').val()){
+                        return '两次密码不一致';
+                    }
+                }
+              });
+
+              //监听提交
+              form.on('submit(add)', function(data){
+                console.log(data);
+                //发异步，把数据提交给python
+                //'数据字段 '
+            /*    $.post("/register",data.field,function (data,status) {
+                          console.log(data.field);
+                          console.log(status)
+                             layer.alert(info, {icon: 6},function () {
+                             // 获得frame索引
+                             var index = parent.layer.getFrameIndex(window.name);
+                             //关闭当前frame
+                              parent.layer.close(index);
+                            });
+
+
+                    }
+                )*/
+
+                 $.ajax({
+                       type:"POST",
+                       url: "/register",
+                       contentType: "application/json",
+                       success:function (data) {
+                              layer.alert("注册成功", {icon: 6},function () {
+                             // 获得frame索引
+                             var index = parent.layer.getFrameIndex(window.name);
+                             //关闭当前frame
+                              parent.layer.close(index);
+                            });
+                       },
+                       error:function (data) {
+                             console.log(data);
+                             layer.alert("亲，注册失败，用户名重复了", {icon: 5},function () {
+                             // 获得frame索引
+                             var index = parent.layer.getFrameIndex(window.name);
+                             //关闭当前frame
+                              parent.layer.close(index);
+                            });
+                       }
+                     }
+                 )
+                return false;
+              });
+
+
             });
-                }
-            )
-
-
-            return false;
-          });
-          
-          
-        });
-    </script>
+        </script>
 {% endblock content %}

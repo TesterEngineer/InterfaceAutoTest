@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block title %} {{ title }}  {% endblock title %}
+{% block cssboy%} class="login-bg" {% endblock cssboy %}
 
 {% block content %}
     <div class="login layui-anim layui-anim-up">
@@ -31,10 +32,10 @@
               form.on('submit(login)', function(data){
                 // alert(888)
                 layer.msg(JSON.stringify(data.field),function(){
-                    location.href='login'
+                     //location.href='login'
 
                 });
-               // return false;//阻止表单跳转。如果需要表单跳转，去掉这段即可。
+                // return false;//阻止表单跳转。如果需要表单跳转，去掉这段即可。
               });
             });
         })
