@@ -7,16 +7,19 @@ from django.http import *
 
 '''获取首页'''
 def getIndex(request):
-    return  render(request,'index.html')
+    context = {'title':'欢迎进入接口测试页'}
+    return  render(request,'index.html',context)
 
 '''统计页面'''
 def welcome(request):
-    return  render(request,'welcome.html')
+    context={'title':'主页统计页面'}
+    return  render(request,'welcome.html',context)
 
 '''登录'''
 def login(request):
     if request.method == 'GET':
-        return  render(request,'login.html')
+        context = {'title':'API接口自动化测试系统登录'}
+        return  render(request,'login.html',context)
     else:
         #
         return  HttpResponseRedirect('/index')

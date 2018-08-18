@@ -13,4 +13,6 @@ from InterfaceTestManage import views
 urlpatterns = [
    url(r'^login$',views.login),
    url(r'^register$',views.reigster),
+   url(r'^index$',views.getIndex),
+   url(r'^welcome$',views.welcome),
 ]
