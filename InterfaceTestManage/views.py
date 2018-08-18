@@ -19,13 +19,15 @@ def welcome(request):
 '''登录'''
 def login(request):
     if request.method == 'GET':
-        context = {'title':'API接口自动化测试系统登录'}
+        #如果用户第一次点击了记住密码，先从Cookie里面取值，在填充。
+        username=request.COOKIES.get('username','') #后面的空值是默认值，如果不填默认为None
+        password = request.COOKIES.get('password','')
+        context = {'title':'API接口自动化测试系统登录','username':username,'password':password}
         return  render(request,'login.html',context)
     else:
-        #
+        #post发送请求，就是表单里面的请求进来了
         username = request.POST['username']
         password = request.POST['password']
-
 
         user = userInfo.objects
         user_info = user.filter(username=username,password=password)
@@ -33,10 +35,12 @@ def login(request):
             #登录成功，如果存在用户名和密码
             #remeberPw = request.POST['remeberPw']
             remeberPw = request.POST.get('remeberPw')
+            redirect_index = HttpResponseRedirect('/index')
             if  remeberPw:
                 print("用户记住了密码啊！！")
-            #    request.COOKIES['login_pw']=
-            return HttpResponseRedirect('/index')
+                redirect_index.set_cookie('username',username)
+                redirect_index.set_cookie('password',password)
+            return redirect_index
         else:
             print('用户名或密码错误')
             return HttpResponseRedirect('/login')
