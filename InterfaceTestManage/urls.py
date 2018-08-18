@@ -11,6 +11,6 @@ from django.conf.urls import url
 from InterfaceTestManage import views
 
 urlpatterns = [
-   url('^login$',views.login),
-   url('^register$',views.reigster),
+   url(r'^login$',views.login),
+   url(r'^register$',views.reigster),
 ]

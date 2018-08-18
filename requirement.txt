@@ -1,0 +1,3 @@
+django2.1版本必须按照mysql大于5.5，否则报错。
+django没有默认安装mysqlclient库，必须自己引入。
+
