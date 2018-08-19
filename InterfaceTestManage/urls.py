@@ -15,4 +15,7 @@ urlpatterns = [
    url(r'^register$',views.register),
    url(r'^index$',views.getIndex),
    url(r'^welcome$',views.welcome),
+   url(r'^projectList$',views.projectManager),
+   url(r'^projectAdd$',views.projectAdd),
+   url(r'^ajaxtest', views.testajax),
 ]

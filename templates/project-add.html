@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title%} {{ title }} {% endblock %}
+{% block script %}
+    {% static '/lib/layui/layui.js' %}
+{% endblock script %}
+{% block content %}
+    <div class="x-body layui-anim layui-anim-up">
+        <form class="layui-form">
+          <div class="layui-form-item">
+              <label for="L_email" class="layui-form-label">
+                  <span class="x-red">*</span>项目名称
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_email" name="projectName" required="" lay-verify="projectName"
+                  autocomplete="off" class="layui-input">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_username" class="layui-form-label">
+                  <span class="x-red">*</span>项目描述
+              </label>
+              <div class="layui-input-inline">
+                   <textarea name="projectdesc" placeholder="请输入项目描述" class="layui-textarea"></textarea>
+              </div>
+          </div>
+
+
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+
+              <button id="project_add" class="layui-btn" lay-filter="add"  lay-submit="">
+                  增加
+              </button>
+               <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          </div>
+      </form>
+    </div>
+    <script>
+        layui.use(['form','layer'], function(){
+            $ = layui.jquery;
+          var form = layui.form
+          ,layer = layui.layer;
+        
+          //自定义验证规则
+          form.verify({
+            projectName: function(value){
+              if(value.length < 2){
+                return '项目名称至少得2个字符啊';
+              }
+            }
+
+          });
+
+          //监听提交
+          form.on('submit(add)', function(data){
+            //发异步，把数据提交给php
+            $.post('/projectAdd',data.field,function (data) {
+                       layer.alert("增加成功", {icon: 6},function () {
+                         // 获得frame索引
+                         var index = parent.layer.getFrameIndex(window.name);
+                         //关闭当前frame
+                         parent.layer.close(index);
+                         });
+
+               }
+            );
+            return false;
+          });
+
+
+        });
+
+
+{% comment %}     layer.alert("增加成功", {icon: 6},function () {
+                         // 获得frame索引
+                         var index = parent.layer.getFrameIndex(window.name);
+                         //关闭当前frame
+                         parent.layer.close(index);
+                         });{% endcomment %}
+    </script>
+{% endblock content %}

@@ -1,6 +1,6 @@
 #coding:utf-8
 from django.shortcuts import render
-from InterfaceTestManage.models import userInfo
+from InterfaceTestManage.models import userInfo,project
 from django.http import *
 from django.utils.datastructures import MultiValueDictKeyError
 
@@ -8,7 +8,9 @@ from django.utils.datastructures import MultiValueDictKeyError
 
 '''获取首页'''
 def getIndex(request):
-    context = {'title':'欢迎进入接口测试页'}
+
+    username = request.session.get('username','')
+    context = {'title': '欢迎进入接口测试页','username':username}
     return  render(request,'index.html',context)
 
 '''统计页面'''
@@ -34,12 +36,14 @@ def login(request):
         if user_info:
             #登录成功，如果存在用户名和密码
             #remeberPw = request.POST['remeberPw']
+            request.session['username'] = username
             remeberPw = request.POST.get('remeberPw')
             redirect_index = HttpResponseRedirect('/index')
             if  remeberPw:
                 print("用户记住了密码啊！！")
                 redirect_index.set_cookie('username',username)
                 redirect_index.set_cookie('password',password)
+
             return redirect_index
         else:
             print('用户名或密码错误')
@@ -78,3 +82,36 @@ def register(request):
             fail='注册失败,请重新注册'
             print("注册失败")
             return  HttpResponseRedirect('/register')
+
+'''项目管理'''
+def projectManager(request):
+    if request.method == 'GET':
+        return  render(request,'project-list.html')
+
+'''项目新增'''
+def projectAdd(request):
+    if request.method == 'GET':
+        return  render(request,'project-add.html')
+    if request.method == 'POST':
+        projectName = request.POST.get('projectName')
+        projectdesc = request.POST.get('projectdesc')
+        username = request.session.get("username")
+        project_info = project.objects
+        if projectName:
+            project_info.create(projectName=projectName,projectdesc=projectdesc,username=username)
+            return HttpResponseRedirect('/projectList')
+        else:
+            context = '添加失败了，请重新添加'
+            return JsonResponse({'context1':context})
+        # print("s输出了什么？")
+        # context1 = '添加失败了，请重新添加'
+        # flag = False
+        # return JsonResponse({'context1': context1,'flag':flag})
+        #print('xxx')
+
+def testajax(request):
+    if request.method == "GET":
+        return render(request, 'test.html')
+    else:
+        return  JsonResponse({'test':'hello js'})
+

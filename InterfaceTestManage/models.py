@@ -22,3 +22,11 @@ class userInfo(BaseTable):
         verbose_name = '用户信息表'
         db_table = 'userInfo'
 
+
+class project(BaseTable):
+    projectName = models.CharField('项目名称',max_length=10)
+    projectdesc = models.TextField('项目说明')
+    username = models.CharField('操作人',max_length=10,null=False)
+    class Meta:
+        verbose_name = '项目表'
+        db_table = 'project'
