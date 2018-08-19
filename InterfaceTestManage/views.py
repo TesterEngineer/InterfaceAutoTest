@@ -86,7 +86,11 @@ def register(request):
 '''项目管理'''
 def projectManager(request):
     if request.method == 'GET':
-        return  render(request,'project-list.html')
+        projects = project.objects
+        projectList = projects.filter()
+        context = {'projectList':projectList}
+        print(projectList)
+        return  render(request,'project-list.html',context)
 
 '''项目新增'''
 def projectAdd(request):
