@@ -17,9 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url,include
+
+from InterfaceAutoTest.activator import process
 from InterfaceTestManage import urls
 from django.views.generic.base import RedirectView
+
 urlpatterns = [
     url(r'^favicon.ico$',RedirectView.as_view(url=r'static/favicon.ico')),
     url(r'^',include("InterfaceTestManage.urls")),
+    url('^(?P<app>(\w+))/(?P<function>(\w+))/$', process),
+    url('^(?P<app>(\w+))/(?P<function>(\w+))/(?P<id>(\w+))/$', process),
 ]

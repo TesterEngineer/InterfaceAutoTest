@@ -16,28 +16,52 @@
             <span  style="float:right " lay-size="20px" onclick="x_admin_show('注册用户','/register')"> <a href="javascript:void(0)">注册</a></span>
 
             <hr class="hr15">
-            <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+            <input id="login" value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
             <hr class="hr20" >
         </form>
     </div>
 
     <script>
         $(function  () {
-            layui.use('form', function(){
-              var form = layui.form;
-              // layer.msg('玩命卖萌中', function(){
-              //   //关闭后的操作
-              //   });
-              //监听提交
-              form.on('submit(login)', function(data){
-                // alert(888)
-                layer.msg(JSON.stringify(data.field),function(){
-                     //location.href='login'
+            $('#login').click(function () {
+                var username = $("input[name='username']").val();
+                var password = $("input[name='password']").val();
+                 if (username.length <=0 || password.length <=0){
+                      layer.open({
+                            title: '登录出错！！',
+                            content:"用户名或密码不能为空！"
+                            });
+                     return false;
+                 }
+                 if(username.length >10 || password.length >10) {
+                         layer.open({
+                            title: '出错了!!',
+                            content:"用户名或密码不能限制哦！"
+                            });
+                         return false;
+                }
 
+                if (username.length > 0 && password.length > 0){
+                    var object ={};
+                    object['username'] = username;
+                    object['password'] = password;
+                }
+
+                $.post('/login',object,function (data) {
+                    if (data.message){
+                       // alert(data.message)
+                       layer.open({
+                            title: '出错了，错误信息如下',
+                            content: data.message
+                            });
+                       return false;
+                    }else {
+                        window.location.href='/index';
+                    }
                 });
-                // return false;//阻止表单跳转。如果需要表单跳转，去掉这段即可。
-              });
+                return false;
             });
+
         })
 
         

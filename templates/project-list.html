@@ -52,7 +52,7 @@
                 <td>{{ project.projectName }}aaa</td>
                 <td>{{ project.projectdesc }}</td>
                 <td>{{ project.username }}</td>
-                <td>{{ project.create_time }}{{ project.create_time|date:"Y-m-d H:i:s" }}</td>
+                <td>{{ project.create_time|date:"Y-m-d H:i:s" }}</td>
                 <td class="td-status">
                   <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
                 <td class="td-manage">
@@ -75,12 +75,23 @@
       </table>
       <div class="page">
         <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
+         {% if pages.has_previous  %}
+             <a class="prev" href="">&lt;&lt;</a>
+         {% endif %}
+
+          {% for num in  pageList.page_range  %}
+              {%  if num == currentPag %}
+                  <span class="current">{{ num }}</span>
+               {% else %}
+                   <a class="num" href="/api/projectManager/{{ num }}">{{ num}}</a>
+              {% endif %}
+
+          {% endfor %}
+
+
+            {% if pages.has_next %}
+                <a href="/api/projectManager/{{ pageList.next_page_number }}">下一页</a>
+             {% endif %}
         </div>
       </div>
 

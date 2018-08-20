@@ -58,14 +58,19 @@
 
           //监听提交
           form.on('submit(add)', function(data){
+
+              var  subbtn = $("#project_add");
+              subbtn.attr("class","layui-btn layui-btn-disabled")
             //发异步，把数据提交给php
             $.post('/projectAdd',data.field,function (data) {
-                       layer.alert("增加成功", {icon: 6},function () {
-                         // 获得frame索引
-                         var index = parent.layer.getFrameIndex(window.name);
-                         //关闭当前frame
-                         parent.layer.close(index);
-                         });
+                   debugger;
+
+                   layer.alert("增加成功", {icon: 6},function () {
+                     // 获得frame索引
+                     var index = parent.layer.getFrameIndex(window.name);
+                     //关闭当前frame
+                     parent.layer.close(index);
+                     });
 
                }
             );
@@ -75,12 +80,5 @@
 
         });
 
-
-{% comment %}     layer.alert("增加成功", {icon: 6},function () {
-                         // 获得frame索引
-                         var index = parent.layer.getFrameIndex(window.name);
-                         //关闭当前frame
-                         parent.layer.close(index);
-                         });{% endcomment %}
     </script>
 {% endblock content %}

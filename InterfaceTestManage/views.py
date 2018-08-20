@@ -1,12 +1,26 @@
 #coding:utf-8
-from django.shortcuts import render
+from django.core.paginator import Paginator
+from django.shortcuts import render,redirect
 from InterfaceTestManage.models import userInfo,project
-from django.http import *
+from django.http import HttpResponseRedirect,JsonResponse,HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
+
+
 
 # Create your views here.
 
+def login_check(func):
+    def wrapper(request, *args, **kwargs):
+        if not request.session.get('username'):
+            return HttpResponseRedirect('/login')
+        return func(request, *args, **kwargs)
+
+    return wrapper
+
+
+
 '''获取首页'''
+@login_check
 def getIndex(request):
 
     username = request.session.get('username','')
@@ -14,6 +28,7 @@ def getIndex(request):
     return  render(request,'index.html',context)
 
 '''统计页面'''
+@login_check
 def welcome(request):
     context={'title':'主页统计页面'}
     return  render(request,'welcome.html',context)
@@ -33,7 +48,8 @@ def login(request):
 
         user = userInfo.objects
         user_info = user.filter(username=username,password=password)
-        if user_info:
+        count = user_info.count()
+        if  count:
             #登录成功，如果存在用户名和密码
             #remeberPw = request.POST['remeberPw']
             request.session['username'] = username
@@ -45,9 +61,12 @@ def login(request):
                 redirect_index.set_cookie('password',password)
 
             return redirect_index
+            #return  request.getRequestDispatcher().forward('/index')
+
         else:
             print('用户名或密码错误')
-            return HttpResponseRedirect('/login')
+            context = {'message':'用户名或密码错误'}
+            return JsonResponse(context)
 
 
 
@@ -84,15 +103,26 @@ def register(request):
             return  HttpResponseRedirect('/register')
 
 '''项目管理'''
-def projectManager(request):
+@login_check
+def projectManager(request,id):
     if request.method == 'GET':
         projects = project.objects
-        projectList = projects.filter()
-        context = {'projectList':projectList}
+        projectList = projects.all()
+        paginator = Paginator(projectList, 8)
+        firstPage =id
+        if int(firstPage) > 0:
+            pages = paginator.page(int(firstPage))
+        else:
+            firstPage =1
+            pages = paginator.page(1)
+        projectList =pages.object_list
+        #print("-------------"+pages.has_next())
+        context = {'projectList':projectList,'pageList':paginator,'currentPag':int(firstPage),"pages":pages}
         print(projectList)
         return  render(request,'project-list.html',context)
 
 '''项目新增'''
+@login_check
 def projectAdd(request):
     if request.method == 'GET':
         return  render(request,'project-add.html')
@@ -113,9 +143,16 @@ def projectAdd(request):
         # return JsonResponse({'context1': context1,'flag':flag})
         #print('xxx')
 
-def testajax(request):
-    if request.method == "GET":
-        return render(request, 'test.html')
-    else:
-        return  JsonResponse({'test':'hello js'})
+@login_check
+def logout(request):
+    #request.session['username'] = None
+    if request.method == 'GET':
+        try:
+            del request.session['username']
+        except KeyError:
+            print(KeyError)
+    return  HttpResponseRedirect('/login')
 
+#关键字参数，key-value映射关系，与位置无关，所以当位置改变，值不变
+def name(request,month,year):
+    return HttpResponse('name:%s--%s' %(year,month))
