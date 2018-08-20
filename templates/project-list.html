@@ -76,7 +76,7 @@
       <div class="page">
         <div>
          {% if pages.has_previous  %}
-             <a class="prev" href="">&lt;&lt;</a>
+             <a class="prev" href="/api/projectManager/{{ pages.previous_page_number }} ">&lt;&lt;</a>
          {% endif %}
 
           {% for num in  pageList.page_range  %}
@@ -90,7 +90,7 @@
 
 
             {% if pages.has_next %}
-                <a href="/api/projectManager/{{ pageList.next_page_number }}">下一页</a>
+                <a href="/api/projectManager/{{ pages.next_page_number }}">下一页</a>
              {% endif %}
         </div>
       </div>
