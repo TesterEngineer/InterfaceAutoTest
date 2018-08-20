@@ -110,6 +110,7 @@ def projectManager(request,id):
         projectList = projects.all()
         paginator = Paginator(projectList, 8)
         firstPage =id
+        #默认id的值传递为0
         if int(firstPage) > 0:
             pages = paginator.page(int(firstPage))
         else:
