@@ -33,10 +33,10 @@
                             });
                      return false;
                  }
-                 if(username.length >10 || password.length >10) {
+                 if(username.length >10 || password.length >15) {
                          layer.open({
                             title: '出错了!!',
-                            content:"用户名或密码不能限制哦！"
+                            content:"用户名或密码的长度不符合要求呢！"
                             });
                          return false;
                 }

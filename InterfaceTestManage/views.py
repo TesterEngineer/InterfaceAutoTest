@@ -14,7 +14,7 @@ def login_check(func):
         if not request.session.get('username'):
             return HttpResponseRedirect('/login')
         return func(request, *args, **kwargs)
-
+        #func(request, *args, **kwargs)
     return wrapper
 
 
@@ -134,7 +134,7 @@ def projectAdd(request):
         project_info = project.objects
         if projectName:
             project_info.create(projectName=projectName,projectdesc=projectdesc,username=username)
-            return HttpResponseRedirect('/projectList')
+            return HttpResponseRedirect('/api/projectManager/0')
         else:
             context = '添加失败了，请重新添加'
             return JsonResponse({'context1':context})
