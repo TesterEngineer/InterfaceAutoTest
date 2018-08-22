@@ -6,14 +6,15 @@
 {% endblock script %}
 {% block content %}
     <div class="x-body layui-anim layui-anim-up">
-        <form class="layui-form">
+
+       {% comment %} class="layui-form"{% endcomment %}
           <div class="layui-form-item">
               <label for="L_email" class="layui-form-label">
                   <span class="x-red">*</span>项目名称
               </label>
               <div class="layui-input-inline">
                   <input type="text" id="L_email" name="projectName" required="" lay-verify="projectName"
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" value="{{ projectName }}">
               </div>
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red">*</span>
@@ -24,61 +25,85 @@
                   <span class="x-red">*</span>项目描述
               </label>
               <div class="layui-input-inline">
-                   <textarea name="projectdesc" placeholder="请输入项目描述" class="layui-textarea"></textarea>
+                   <textarea name="projectdesc" placeholder="请输入项目描述" class="layui-textarea" >{{ projectdesc }}</textarea>
               </div>
           </div>
 
 
-          <div class="layui-form-item">
+
               <label for="L_repass" class="layui-form-label">
               </label>
-
-              <button id="project_add" class="layui-btn" lay-filter="add"  lay-submit="">
-                  增加
+{% comment %}lay-filter="add"   lay-submit=""{% endcomment %}
+              <button id="project_add_edit" class="layui-btn"  >
+                 {{ btn }}
               </button>
                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-          </div>
-      </form>
+
+
     </div>
     <script>
-        layui.use(['form','layer'], function(){
-            $ = layui.jquery;
-          var form = layui.form
-          ,layer = layui.layer;
-        
-          //自定义验证规则
-          form.verify({
-            projectName: function(value){
-              if(value.length < 2){
-                return '项目名称至少得2个字符啊';
-              }
-            }
+        $('#project_add_edit').on('click',function(){
 
-          });
+                var  subbtn = $("#project_add_edit");
+                subbtn.attr("class","layui-btn layui-btn-disabled");
 
-          //监听提交
-          form.on('submit(add)', function(data){
+                //如果你想关闭最新弹出的层，直接获取layer.index即可
+                //layer.close(layer.index); //它获取的始终是最新弹出的某个层，值是由layer内部动态递增计算的
 
-              var  subbtn = $("#project_add");
-              subbtn.attr("class","layui-btn layui-btn-disabled")
-            //发异步，把数据提交给php
-            $.post('/projectAdd',data.field,function (data) {
-                   debugger;
+                //发异步
+                var projectname = $("input[name='projectName']").val();
+                var projectdesc = $("textarea[name='projectdesc']").val();
+                if(projectname.length >0){
+                     var datas ={};
+                     datas['projectName'] = projectname;
+                    datas['projectdesc'] = projectdesc;
+                    $.post('/projectAdd',datas,function (data) {
+                         if (data.sucess.length >0) {
+                             window.parent.location.href ='/api/projectManager/0';
+                                     layer.alert(data.sucess, {icon: 6}, function () {
+                                         // 获得frame索引
+                                         var index = parent.layer.getFrameIndex(window.name);
+                                         //关闭当前frame
+                                         parent.layer.close(index);
+                                         //window.location.href ='/api/projectManager/0'
+                                     });
+                                    //window.location.href ='/api/projectManager/0' 会加在这个iframe里面
+                                 }
+                         }
 
-                   layer.alert("增加成功", {icon: 6},function () {
-                     // 获得frame索引
-                     var index = parent.layer.getFrameIndex(window.name);
-                     //关闭当前frame
-                     parent.layer.close(index);
-                     });
+                     )
+                }else {
+                     layer.open({title: '出错提示啦！！', content:"请按照要求填写信息！"});
+                      subbtn.attr("class","layui-btn");
+                }
 
-               }
-            );
-            return false;
-          });
+
+    /*
+            $.ajax({
+             type: "POST",
+             url: "/projectAdd",
+             contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+             data:datas,
+             dataType: "json",
+             success: function(data){
+                         if (data.sucess.length >0) {
+                             layer.alert(data.sucess, {icon: 6}, function () {
+                                 // 获得frame索引
+                                 var index = parent.layer.getFrameIndex(window.name);
+                                 //关闭当前frame
+                                 parent.layer.close(index);
+                                 //window.location.href ='/api/projectManage/0'
+                             });
+                         }
+                      },
+             error:function(e){
+                         alert(e);
+             }
+         });*/
 
 
         });
+
 
     </script>
 {% endblock content %}

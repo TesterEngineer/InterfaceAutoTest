@@ -1,4 +1,6 @@
 #coding:utf-8
+
+
 from django.core.paginator import Paginator
 from django.shortcuts import render,redirect
 from InterfaceTestManage.models import userInfo,project
@@ -126,23 +128,44 @@ def projectManager(request,id):
 @login_check
 def projectAdd(request):
     if request.method == 'GET':
-        return  render(request,'project-add.html')
+        context={'title':'增加项目','btn':'增加'}
+        return  render(request,'project-add.html',context)
     if request.method == 'POST':
-        projectName = request.POST.get('projectName')
-        projectdesc = request.POST.get('projectdesc')
-        username = request.session.get("username")
+        projectName = request.POST.get('projectName','')
+        projectdesc = request.POST.get('projectdesc','')
+        username = request.session.get("username",'')
         project_info = project.objects
         if projectName:
             project_info.create(projectName=projectName,projectdesc=projectdesc,username=username)
-            return HttpResponseRedirect('/api/projectManager/0')
+            #return HttpResponseRedirect('/api/projectManager/0')
+            #context = ''
+            context={'sucess':'添加成功啦'}
+            return  JsonResponse(context)
+            #return HttpResponseRedirect('/api/projectManager/0')
         else:
             context = '添加失败了，请重新添加'
-            return JsonResponse({'context1':context})
-        # print("s输出了什么？")
-        # context1 = '添加失败了，请重新添加'
-        # flag = False
-        # return JsonResponse({'context1': context1,'flag':flag})
-        #print('xxx')
+            return JsonResponse({'error':context})
+
+
+@login_check
+def projectEdit(request,id):
+    if request.method == 'GET':
+        project_obj = project.objects
+        project_info = project_obj.get(id=id)
+        context = {'projectName':project_info.projectName,'projectdesc':project_info.projectdesc,'btn':'编辑'}
+        return render(request,'project-add.html',context)
+    elif request.is_ajax():
+        projectName = request.POST.get('projectName')
+        projectdesc = request.POST.get('projectdesc')
+        if int(id):
+            project_obj = project.objects
+            project_info = project_obj.get(id=id)
+            project_info.projectName = projectName
+            project_info.projectdesc = projectdesc
+            project_obj.update(project_info)
+        return HttpResponseRedirect('/api/projectManager/0')
+
+
 
 @login_check
 def logout(request):

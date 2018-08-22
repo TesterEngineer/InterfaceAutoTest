@@ -1,9 +1,11 @@
 #coding=utf-8
+import django.utils.timezone as timezone
+
 from django.db import models
 
 # Create your models here.
 class BaseTable(models.Model):
-    create_time = models.DateTimeField('创建时间', auto_now_add=True)
+    create_time = models.DateTimeField('创建时间', default=timezone.now())
     update_time = models.DateTimeField('更新时间', auto_now=True)
 
     class Meta:
@@ -25,7 +27,7 @@ class userInfo(BaseTable):
 
 class project(BaseTable):
     projectName = models.CharField('项目名称',max_length=10)
-    projectdesc = models.TextField('项目说明')
+    projectdesc = models.TextField('项目说明',null=False)
     username = models.CharField('操作人',max_length=10,null=False)
     class Meta:
         verbose_name = '项目表'
