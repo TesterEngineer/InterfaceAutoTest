@@ -65,9 +65,9 @@
                     }
 
                     $.post(url,datas,function (data) {
-                         if (data.sucess.length >0) {
+                         if (data.success.length >0) {
                              window.parent.location.href ='/api/projectManager/0';
-                                     layer.alert(data.sucess, {icon: 6}, function () {
+                                     layer.alert(data.success, {icon: 6}, function () {
                                          // 获得frame索引
                                          var index = parent.layer.getFrameIndex(window.name);
                                          //关闭当前frame
@@ -78,7 +78,8 @@
                                  }
                          }
 
-                     )
+                     );
+                    layer.load(2);
                 }else {
                      layer.open({title: '出错提示啦！！', content:"请按照要求填写信息！"});
                       subbtn.attr("class","layui-btn");

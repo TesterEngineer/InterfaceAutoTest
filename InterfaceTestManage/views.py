@@ -1,9 +1,9 @@
 #coding:utf-8
-
+import  time
 
 from django.core.paginator import Paginator
 from django.shortcuts import render,redirect
-from InterfaceTestManage.models import userInfo,project
+from InterfaceTestManage.models import userInfo, project, Environment
 from django.http import HttpResponseRedirect,JsonResponse,HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
 
@@ -109,7 +109,7 @@ def register(request):
 def projectManager(request,id):
     if request.method == 'GET':
         projects = project.objects
-        projectList = projects.all()
+        projectList = projects.all().order_by('id')
         paginator = Paginator(projectList, 8)
         firstPage =id
         #默认id的值传递为0
@@ -139,7 +139,7 @@ def projectAdd(request):
             project_info.create(projectName=projectName,projectdesc=projectdesc,username=username)
             #return HttpResponseRedirect('/api/projectManager/0')
             #context = ''
-            context={'sucess':'添加成功啦'}
+            context={'success':'添加成功啦'}
             return  JsonResponse(context)
             #return HttpResponseRedirect('/api/projectManager/0')
         else:
@@ -160,9 +160,10 @@ def projectEdit(request,id):
         if int(id):
             project_obj = project.objects
             project_info = project_obj.filter(id=id)
+            update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
             try:
-                project_info.update(projectName=projectName,projectdesc=projectdesc)
-                context = {'sucess': '编辑项目成功咯'}
+                project_info.update(projectName=projectName,projectdesc=projectdesc,update_time=update_time)
+                context = {'success': '编辑项目成功咯'}
             except:
                 context = {'success':'编辑失败了'}
         return JsonResponse(context)
@@ -185,6 +186,68 @@ def logout(request):
             print(KeyError)
     return  HttpResponseRedirect('/login')
 
-#关键字参数，key-value映射关系，与位置无关，所以当位置改变，值不变
-def name(request,month,year):
-    return HttpResponse('name:%s--%s' %(year,month))
+'''环境管理'''
+@login_check
+def EnviromentManager(request,id):
+    if request.method == 'GET':
+        environ = Environment.objects
+        environList = environ.all().order_by('id')
+        paginator = Paginator(environList, 8)
+        firstPage =id
+        #默认id的值传递为0
+        if int(firstPage) > 0:
+            pages = paginator.page(int(firstPage))
+        else:
+            firstPage =1
+            pages = paginator.page(1)
+        environList =pages.object_list
+        context = {'environList':environList,'pageList':paginator,'currentPag':int(firstPage),"pages":pages,"title":"测试环境管理"}
+        return  render(request,'environ-list.html',context)
+
+
+'''项目新增'''
+@login_check
+def environmentAdd(request):
+    if request.method == 'GET':
+        context={'title':'环境添加','btn':'增加'}
+        return  render(request,'environ-add.html',context)
+    if request.method == 'POST':
+        path_name = request.POST.get('path_name','')
+        host = request.POST.get('host','')
+        port = request.POST.get('port', '')
+        envir_descript = request.POST.get('envir_descript', '')
+        username = request.session.get("username",'')
+        environment = Environment.objects
+        if len(path_name) >0:
+            environment.create(path_name=path_name,host=host,port=port,envir_descript=envir_descript,username=username)
+            context={'sucess':'添加成功啦'}
+            return  JsonResponse(context)
+            #return HttpResponseRedirect('/api/projectManager/0')
+        else:
+            context = '添加失败了，请重新添加'
+            return JsonResponse({'error':context})
+
+@login_check
+def environmentEdit(request,id):
+    if request.method == 'GET':
+        environ_obj = Environment.objects
+        environ_info = environ_obj.get(id=id)
+        #context = {'path_name':project_info.path_name,'envir_descript':environ_info.envir_descript,'btn':'编辑','id':id}
+        context = {'environ_info': environ_info, 'btn': '编辑','id': id}
+        return render(request,'environ-add.html',context)
+    elif request.is_ajax():
+        path_name = request.POST.get('path_name', '')
+        host = request.POST.get('host', '')
+        port = request.POST.get('port', '')
+        envir_descript = request.POST.get('envir_descript', '')
+
+        if int(id):
+            environ_obj = Environment.objects
+            environ_info = environ_obj.filter(id=id)
+            update_time=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+            try:
+                environ_info.update(path_name=path_name,host=host,port=port,envir_descript=envir_descript,update_time=update_time)
+                context = {'success': '编辑环境成功咯！'}
+            except:
+                context = {'success':'编辑失败了'}
+        return JsonResponse(context)

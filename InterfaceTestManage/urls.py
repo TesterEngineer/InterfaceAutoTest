@@ -17,6 +17,5 @@ urlpatterns = [
    url(r'^welcome$',views.welcome),
    url(r'^projectList$',views.projectManager),
    url(r'^projectAdd$',views.projectAdd),
-   url(r'^name/(?P<year>\d{4})/(?P<month>\d{2})/$',views.name),
 ]
 
