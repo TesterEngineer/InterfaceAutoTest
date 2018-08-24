@@ -3,17 +3,7 @@
 {% block cssboy%} class="layui-anim layui-anim-up" {% endblock cssboy %}
 
 {% block content %}
-    <div class="x-nav">
-     <form class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
-          <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-          <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
-        </form>
 
-    </div>
     <div class="x-body">
     {% comment %}  <div class="layui-row">
 
@@ -41,6 +31,7 @@
         {% for project in projectList %}
 
             <tr>
+                <input type="hidden" name="id" value={{ project.id }}></input>
                 <td>
                   <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
                 </td>
@@ -61,7 +52,7 @@
                   <a onclick="x_admin_show('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
                     <i class="layui-icon">&#xe631;</i>
                   </a>
-                  <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                  <a title="删除" onclick="member_del(this,'{{ project.id }}')" href="javascript:;">
                     <i class="layui-icon">&#xe640;</i>
                   </a>
                 </td>
@@ -134,9 +125,22 @@
       /*用户-删除*/
       function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
-              //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
+
+              var id = $("input:hidden[name='id']").val();
+              var url = '/api/projectDelete/'+id+'/';
+              $.get(url,function (data) {
+
+                  if(data.success.length >0){
+                      //发异步删除数据
+                      $(obj).parents("tr").remove();
+                      layer.msg(data.success,{icon:1,time:1000});
+                      window.location.href = '/api/projectManager/0/';
+                      return;
+                  }
+
+              });
+              //遮罩层，让用户无法点击
+              layer.load(2);
           });
       }
 
@@ -147,6 +151,8 @@
         var data = tableCheck.getData();
   
         layer.confirm('确认要删除吗？'+data,function(index){
+
+
             //捉到所有被选中的，发异步进行删除
             layer.msg('删除成功', {icon: 1});
             $(".layui-form-checked").not('.header').parents('tr').remove();

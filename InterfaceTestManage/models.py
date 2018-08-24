@@ -1,11 +1,11 @@
 #coding=utf-8
-import django.utils.timezone as timezone
+
 
 from django.db import models
 
 # Create your models here.
 class BaseTable(models.Model):
-    create_time = models.DateTimeField('创建时间', default=timezone.now())
+    create_time = models.DateTimeField('创建时间', auto_now_add=True)
     update_time = models.DateTimeField('更新时间', auto_now=True)
 
     class Meta:

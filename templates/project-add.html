@@ -7,7 +7,7 @@
 {% block content %}
     <div class="x-body layui-anim layui-anim-up">
 
-       {% comment %} class="layui-form"{% endcomment %}
+          <input type="hidden" name="id" value="{{ id }}">
           <div class="layui-form-item">
               <label for="L_email" class="layui-form-label">
                   <span class="x-red">*</span>项目名称
@@ -33,7 +33,7 @@
 
               <label for="L_repass" class="layui-form-label">
               </label>
-{% comment %}lay-filter="add"   lay-submit=""{% endcomment %}
+
               <button id="project_add_edit" class="layui-btn"  >
                  {{ btn }}
               </button>
@@ -57,7 +57,14 @@
                      var datas ={};
                      datas['projectName'] = projectname;
                     datas['projectdesc'] = projectdesc;
-                    $.post('/projectAdd',datas,function (data) {
+                    var url="/api/projectAdd/"
+                    var id=$("input:hidden[name='id']").val();
+                    if(id.length >0){
+                        url="/api/projectEdit/"+id+"/";
+
+                    }
+
+                    $.post(url,datas,function (data) {
                          if (data.sucess.length >0) {
                              window.parent.location.href ='/api/projectManager/0';
                                      layer.alert(data.sucess, {icon: 6}, function () {
@@ -76,31 +83,6 @@
                      layer.open({title: '出错提示啦！！', content:"请按照要求填写信息！"});
                       subbtn.attr("class","layui-btn");
                 }
-
-
-    /*
-            $.ajax({
-             type: "POST",
-             url: "/projectAdd",
-             contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-             data:datas,
-             dataType: "json",
-             success: function(data){
-                         if (data.sucess.length >0) {
-                             layer.alert(data.sucess, {icon: 6}, function () {
-                                 // 获得frame索引
-                                 var index = parent.layer.getFrameIndex(window.name);
-                                 //关闭当前frame
-                                 parent.layer.close(index);
-                                 //window.location.href ='/api/projectManage/0'
-                             });
-                         }
-                      },
-             error:function(e){
-                         alert(e);
-             }
-         });*/
-
 
         });
 

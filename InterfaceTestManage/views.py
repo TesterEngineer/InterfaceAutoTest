@@ -152,19 +152,27 @@ def projectEdit(request,id):
     if request.method == 'GET':
         project_obj = project.objects
         project_info = project_obj.get(id=id)
-        context = {'projectName':project_info.projectName,'projectdesc':project_info.projectdesc,'btn':'编辑'}
+        context = {'projectName':project_info.projectName,'projectdesc':project_info.projectdesc,'btn':'编辑','id':id}
         return render(request,'project-add.html',context)
     elif request.is_ajax():
         projectName = request.POST.get('projectName')
         projectdesc = request.POST.get('projectdesc')
         if int(id):
             project_obj = project.objects
-            project_info = project_obj.get(id=id)
-            project_info.projectName = projectName
-            project_info.projectdesc = projectdesc
-            project_obj.update(project_info)
-        return HttpResponseRedirect('/api/projectManager/0')
+            project_info = project_obj.filter(id=id)
+            try:
+                project_info.update(projectName=projectName,projectdesc=projectdesc)
+                context = {'sucess': '编辑项目成功咯'}
+            except:
+                context = {'success':'编辑失败了'}
+        return JsonResponse(context)
 
+@login_check
+def projectDelete(request,id):
+    if len(id) > 0:
+        project.objects.filter(id=id).delete()
+        context={"success":"删除成功！"}
+        return  JsonResponse(context)
 
 
 @login_check
