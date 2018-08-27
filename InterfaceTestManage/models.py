@@ -41,8 +41,23 @@ class Environment(BaseTable):
     host = models.CharField('主机名称',null=True,max_length=50)
     port = models.CharField('端口号',null=False,max_length=8)
     envir_descript = models.TextField('环境简介',null=False)
+    status=models.IntegerField('启用状态码',default=1) #1 启用 2不启用
     username = models.CharField('操作人', max_length=10, null=False)
 
     class Meta:
         verbose_name = '环境配置表'
         db_table = 'enviroment'
+
+class TestCase:
+    case_name=models.CharField('用例名称',null=True,max_length=50)
+    req_path=models.CharField('请求路径',null=True,max_length=15)
+    req_method=models.CharField('请求方式',null=True,max_length=8)
+    req_param = models.CharField('请求参数',null=True,max_length=200)
+
+    resp_code=models.CharField('响应的状态码',null=True,max_length=10)
+    resp_result = models.CharField('响应结果',null=True,max_length=200)
+    test_result = models.CharField('测试结果',null=True,max_length=20)
+
+    class Meta:
+        verbose_name = '测试用例'
+        db_table = 'TestCase'

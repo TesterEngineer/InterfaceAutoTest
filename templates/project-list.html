@@ -33,7 +33,7 @@
             <tr>
                 <input type="hidden" name="id" value={{ project.id }}></input>
                 <td>
-                  <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+                  <div class="layui-unselect layui-form-checkbox" lay-skin="primary"  data-id='{{ project.id }}'><i class="layui-icon">&#xe605;</i></div>
                 </td>
                 <td>{{ project.id }}</td>
                 <td>{{ project.projectName }}</td>
@@ -126,7 +126,6 @@
       function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
 
-              var id = $("input:hidden[name='id']").val();
               var url = '/api/projectDelete/'+id+'/';
               $.get(url,function (data) {
 
@@ -148,14 +147,27 @@
 
       function delAll (argument) {
 
+        var select_checked=$(".layui-form-checked");
+        var ids=[];
+        for (var i=1;i<select_checked.length;i++){
+            ids.push($(select_checked[i]).attr('data-id'));
+        }
+
         var data = tableCheck.getData();
   
-        layer.confirm('确认要删除吗？'+data,function(index){
-
-
+        layer.confirm('确认要删除吗？',function(){
+            var data ={"ids":ids.join()};
             //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
+            $.post("/api/projectDelete/0/",data,function (data) {
+                if (data.success.length > 0){
+                      layer.msg(data.success, {icon: 1});
+                     $(".layui-form-checked").not('.header').parents('tr').remove();
+                }
+                layer.close();
+                window.location.href = '/api/projectManager/0/';
+            });
+
+             layer.load(2);
         });
       }
     </script>

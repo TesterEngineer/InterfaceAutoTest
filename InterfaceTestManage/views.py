@@ -3,7 +3,7 @@ import  time
 
 from django.core.paginator import Paginator
 from django.shortcuts import render,redirect
-from InterfaceTestManage.models import userInfo, project, Environment
+from InterfaceTestManage.models import userInfo, project, Environment, TestCase
 from django.http import HttpResponseRedirect,JsonResponse,HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
 
@@ -170,10 +170,19 @@ def projectEdit(request,id):
 
 @login_check
 def projectDelete(request,id):
-    if len(id) > 0:
-        project.objects.filter(id=id).delete()
-        context={"success":"删除成功！"}
-        return  JsonResponse(context)
+    if request.method == "GET":
+        if len(id) > 0:
+            project.objects.filter(id=id).delete()
+            context={"success":"删除成功！"}
+            return  JsonResponse(context)
+    elif request.is_ajax():
+        ##删除所有
+        ids = request.POST.get("ids")
+        ids = eval(ids)
+        for id in ids:
+            project.objects.filter(id=id).delete()
+        context = {"success": "删除成功！"}
+        return JsonResponse(context)
 
 
 @login_check
@@ -220,7 +229,7 @@ def environmentAdd(request):
         environment = Environment.objects
         if len(path_name) >0:
             environment.create(path_name=path_name,host=host,port=port,envir_descript=envir_descript,username=username)
-            context={'sucess':'添加成功啦'}
+            context={'success':'添加成功啦'}
             return  JsonResponse(context)
             #return HttpResponseRedirect('/api/projectManager/0')
         else:
@@ -249,5 +258,50 @@ def environmentEdit(request,id):
                 environ_info.update(path_name=path_name,host=host,port=port,envir_descript=envir_descript,update_time=update_time)
                 context = {'success': '编辑环境成功咯！'}
             except:
-                context = {'success':'编辑失败了'}
+                context = {'success':'编辑环境失败了'}
         return JsonResponse(context)
+
+@login_check
+def environDelete(request,id):
+    if request.method =='GET':
+        if len(id) > 0:
+            Environment.objects.filter(id=id).delete()
+            context={"success":"删除成功！"}
+            return  JsonResponse(context)
+    elif request.is_ajax():
+        ##删除所有
+        ids =request.POST.get("ids")
+        ids = eval(ids)
+        for id in ids:
+            Environment.objects.filter(id=id).delete()
+        context = {"success": "删除成功！"}
+        return JsonResponse(context)
+
+@login_check
+def isEnable(request,id):
+    if len(id) > 0:
+        environ = Environment.objects.filter(id=id)
+        if environ[0].status == 1:
+            environ.update(status=2)
+            context = {"success": "已停用！","icon":5}
+        else:
+            environ.update(status=1)
+            context = {"success": "已启用！","icon":6}
+        return  JsonResponse(context)
+
+
+def testCaseManager(request):
+    if request.method == 'GET':
+        testCase = TestCase.objects
+        testCaseList = testCase.all().order_by('id')
+        paginator = Paginator(testCaseList, 8)
+        firstPage =id
+        #默认id的值传递为0
+        if int(firstPage) > 0:
+            pages = paginator.page(int(firstPage))
+        else:
+            firstPage =1
+            pages = paginator.page(1)
+        testCaseList =pages.object_list
+        context = {'testCaseList':testCaseList,'pageList':paginator,'currentPag':int(firstPage),"pages":pages,"title":"测试环境管理"}
+        return  render(request,'testCase-list.html',context)
