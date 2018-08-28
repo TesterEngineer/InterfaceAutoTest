@@ -58,6 +58,8 @@ class TestCase(BaseTable):
     resp_result = models.CharField('响应结果',null=True,max_length=200)
     test_result = models.CharField('测试结果',null=True,max_length=20)
 
+    username = models.CharField('操作人', max_length=10, null=False)
+
     class Meta:
         verbose_name = '测试用例'
         db_table = 'testcase'

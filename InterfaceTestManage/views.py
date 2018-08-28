@@ -315,17 +315,21 @@ def TestcaseAdd(request):
         context={'title':'测试用例新增','btn':'增加'}
         return  render(request,'testcase-add.html',context)
     if request.method == 'POST':
-        path_name = request.POST.get('path_name','')
-        host = request.POST.get('host','')
-        port = request.POST.get('port', '')
-        envir_descript = request.POST.get('envir_descript', '')
+        params= eval(request.body)
+        case_name = params.get('case_name','')
+        req_path = params.get('req_path','')
+        req_method =params.get('req_method', '')
+        req_param = params.get('req_param', '')
+
+
         username = request.session.get("username",'')
-        environment = Environment.objects
-        if len(path_name) >0:
-            environment.create(path_name=path_name,host=host,port=port,envir_descript=envir_descript,username=username)
+        testcase = TestCase.objects
+        if len(case_name) >0 and len(req_path) and len(req_method):
+            testcase.create(case_name=case_name,req_path=req_path,req_method=req_method,req_param=req_param,
+                            username=username)
             context={'success':'添加成功啦'}
             return  JsonResponse(context)
-            #return HttpResponseRedirect('/api/projectManager/0')
+
         else:
             context = '添加失败了，请重新添加'
-            return JsonResponse({'error':context})
+            return JsonResponse({'success':context})

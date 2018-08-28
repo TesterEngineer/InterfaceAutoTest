@@ -31,23 +31,23 @@
    <div class="layui-form-item">
     <label class="layui-form-label">用例名称</label>
     <div class="layui-input-block">
-      <input type="text" name="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+      <input type="text" name="case_name" autocomplete="off" placeholder="请输入标题" class="layui-input">
     </div>
   </div>
   <div class="layui-form-item">
     <label class="layui-form-label">接口地址</label>
     <div class="layui-input-block">
-      <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+      <input type="text" name="req_path" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
     </div>
   </div>
 
   <div class="layui-form-item">
     <label class="layui-form-label">请求方式</label>
     <div class="layui-inline">
-      <select name="interest" lay-filter="aihao">
-        <option value="0" selected="">POST</option>
-        <option value="1">GET</option>
-        <option value="2" >DELETE</option>
+      <select name="req_method"  id="method">
+        <option value="POST" selected="">POST</option>
+        <option value="GET">GET</option>
+        <option value="DELETE" >DELETE</option>
       </select>
     </div>
     <div class="layui-inline">
@@ -66,10 +66,10 @@
     <div class="layui-form-item">
         <label class="layui-form-label">请求参数:</label>
         <div class="layui-inline">
-             <input type="text" name="username" lay-verify="required" placeholder="请输入key：value形式" autocomplete="off" class="layui-input">
+             <input type="text" name="req_param" lay-verify="required" placeholder="请输入key：value形式" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-inline">
-             <input type="text" name="username" lay-verify="required" placeholder="请输入key：value形式" autocomplete="off" class="layui-input">
+             <input type="text" name="req_param" lay-verify="required" placeholder="请输入key：value形式" autocomplete="off" class="layui-input">
         </div>
         <div class="layui-inline">
             <button class="layui-btn" id="layui-btn"><i class="layui-icon"></i>添加参数</button>
@@ -79,6 +79,13 @@
 </div>
 
 
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn"  id="commit">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+</div>
 
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
@@ -167,8 +174,7 @@ $(document).ready(function() {
         var input = document.createElement("input");
         input.type = "text";
         input.setAttribute('class','layui-input');
-        input.name = "title1[" + count + "].name";
-        input.autocomplete="title1[" + count + "].name";
+        input.name = "req_param";
         divin.appendChild(input);                                     //向元素增加子节点 最为最后一个子节点
 
         //创建第2个div
@@ -180,8 +186,7 @@ $(document).ready(function() {
         var input = document.createElement("input");
         input.type = "text";
         input.setAttribute('class','layui-input');
-        input.name = "title2[" + count + "].name";
-        input.autocomplete="title2[" + count + "].name";
+        input.name = "req_param";
         divin2.appendChild(input);
 
         //创建删除按钮
@@ -207,6 +212,77 @@ $(document).ready(function() {
     });
 
 });
+
+//提交请求到后台
+$("#commit").click(function(){
+    var case_name=$("input[name='case_name']").val();
+   var req_path=$("input[name='req_path']").val();
+   var req_method=$("#method option:selected").val();
+
+   if(case_name.length>0 && req_path.length >0 && req_method.length > 0){
+        var req1 = {};
+        req1['case_name']=case_name;
+        req1['req_path'] = req_path;
+        req1['req_method']=req_method;
+
+
+       //获取参数的取值
+        var params = $("input[name='req_param']");
+        var req = {};
+
+         var req_params="";
+        if(params.length > 0){
+             for(var i=0;i<params.length;i++){
+                var key = $(params[i]).val();
+                var value = $(params[i+1]).val();
+                req[key]=value;
+                i = i+1;
+            }
+            req1['req_param']=req;
+            //js对象转化成字符串
+            req_params = JSON.stringify(req1);
+        }
+        $.ajax({
+            'url':'/api/TestcaseAdd/',
+            'contentType': "application/json; charset=utf-8",
+            'type':'POST',
+            'data':req_params,
+            //'data':req,
+            'dataType': "json",
+            'success':function (data) {
+                layer.alert(data.success, {icon: 6}, function () {
+                                         // 获得frame索引
+                                         var index = parent.layer.getFrameIndex(window.name);
+                                         //关闭当前frame
+                                         parent.layer.close(index);
+                                         //window.location.href ='/api/EnviromentManager/0'
+                                     });
+                layer.close();
+            },
+            'error':function(data){
+                layer.open({'title':'错误提交信息','content':data.error});
+                layer.close();
+            }
+
+
+
+
+        });
+          layer.load(2);
+
+
+
+   }else {
+       layer.open({'title':'错误提交信息','content':'请按要求填写信息'});
+       return;
+   }
+
+
+
+
+
+});
+
 </script>
 
 </body>
