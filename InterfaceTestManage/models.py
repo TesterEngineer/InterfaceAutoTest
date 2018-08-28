@@ -48,7 +48,7 @@ class Environment(BaseTable):
         verbose_name = '环境配置表'
         db_table = 'enviroment'
 
-class TestCase:
+class TestCase(BaseTable):
     case_name=models.CharField('用例名称',null=True,max_length=50)
     req_path=models.CharField('请求路径',null=True,max_length=15)
     req_method=models.CharField('请求方式',null=True,max_length=8)
@@ -60,4 +60,4 @@ class TestCase:
 
     class Meta:
         verbose_name = '测试用例'
-        db_table = 'TestCase'
+        db_table = 'testcase'

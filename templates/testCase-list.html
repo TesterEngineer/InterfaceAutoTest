@@ -8,7 +8,7 @@
 
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('新增测试所需的运行环境','/api/environmentAdd',600,400)"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('新增测试用例','/api/TestcaseAdd',800,600)"><i class="layui-icon"></i>添加</button>
 
       </xblock>
       <table class="layui-table">
@@ -17,15 +17,16 @@
             <th>
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>序号</th>
-            <th>环境名称</th>
-            <th>环境路径</th>
-            <th>环境端口</th>
-            <th>环境简介</th>
+            <th>用例序号</th>
+            <th>测试用例名称</th>
+            <th>接口路径</th>
+            <th>接口请求方式</th>
+            <th>参数</th>
             <th>操作人</th>
             <th>操作时间</th>
             <th>状态</th>
-            <th>操作</th></tr>
+            <th>操作</th>
+          </tr>
         </thead>
         <tbody>
         {% for environ in environList %}

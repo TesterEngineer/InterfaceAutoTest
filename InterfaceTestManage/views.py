@@ -290,7 +290,8 @@ def isEnable(request,id):
         return  JsonResponse(context)
 
 
-def testCaseManager(request):
+'''测试用例管理'''
+def testCaseManager(request,id):
     if request.method == 'GET':
         testCase = TestCase.objects
         testCaseList = testCase.all().order_by('id')
@@ -305,3 +306,26 @@ def testCaseManager(request):
         testCaseList =pages.object_list
         context = {'testCaseList':testCaseList,'pageList':paginator,'currentPag':int(firstPage),"pages":pages,"title":"测试环境管理"}
         return  render(request,'testCase-list.html',context)
+
+
+'''项目新增'''
+@login_check
+def TestcaseAdd(request):
+    if request.method == 'GET':
+        context={'title':'测试用例新增','btn':'增加'}
+        return  render(request,'testcase-add.html',context)
+    if request.method == 'POST':
+        path_name = request.POST.get('path_name','')
+        host = request.POST.get('host','')
+        port = request.POST.get('port', '')
+        envir_descript = request.POST.get('envir_descript', '')
+        username = request.session.get("username",'')
+        environment = Environment.objects
+        if len(path_name) >0:
+            environment.create(path_name=path_name,host=host,port=port,envir_descript=envir_descript,username=username)
+            context={'success':'添加成功啦'}
+            return  JsonResponse(context)
+            #return HttpResponseRedirect('/api/projectManager/0')
+        else:
+            context = '添加失败了，请重新添加'
+            return JsonResponse({'error':context})

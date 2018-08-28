@@ -1,0 +1,213 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="{% static '/lib/layui/css/layui.css' %}"  media="all">
+  <script type="text/javascript" src="{% static '/lib/layui/layui.js' %}"></script>
+
+        <title>{% block title  %} {% endblock %}</title>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+        {% block style %}{% endblock style %}
+
+        <link rel="stylesheet" href="{% static '/css/font.css' %}">
+        <link rel="stylesheet" href={% static "/css/xadmin.css" %}>
+        <script type="text/javascript" src="   {% block script %}{% endblock script %}"></script>
+        <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+        <script src={% static "./lib/layui/layui.js" %} charset="utf-8"></script>
+  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+
+<div class="layui-form  layui-form-pane  x-body layui-anim layui-anim-up" action="">
+   <div class="layui-form-item">
+    <label class="layui-form-label">用例名称</label>
+    <div class="layui-input-block">
+      <input type="text" name="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">接口地址</label>
+    <div class="layui-input-block">
+      <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">请求方式</label>
+    <div class="layui-inline">
+      <select name="interest" lay-filter="aihao">
+        <option value="0" selected="">POST</option>
+        <option value="1">GET</option>
+        <option value="2" >DELETE</option>
+      </select>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">依赖的模块</label>
+      <div class="layui-input-inline">
+        <select name="modules" lay-verify="required" lay-search="">
+          <option value="">直接搜索模块名称</option>
+          <option value="1">layer</option>
+          <option value="2">form</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+   <div id="body">
+    <div class="layui-form-item">
+        <label class="layui-form-label">请求参数:</label>
+        <div class="layui-inline">
+             <input type="text" name="username" lay-verify="required" placeholder="请输入key：value形式" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-inline">
+             <input type="text" name="username" lay-verify="required" placeholder="请输入key：value形式" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn" id="layui-btn"><i class="layui-icon"></i>添加参数</button>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+ layui.use(['form', 'layedit', 'laydate'], function(){
+  var form = layui.form
+  ,layer = layui.layer
+  ,layedit = layui.layedit
+  ,laydate = layui.laydate;
+
+  //日期
+  laydate.render({
+    elem: '#date'
+  });
+  laydate.render({
+    elem: '#date1'
+  });
+
+  //创建一个编辑器
+  var editIndex = layedit.build('LAY_demo_editor');
+
+  //自定义验证规则
+  form.verify({
+    title: function(value){
+      if(value.length < 5){
+        return '标题至少得5个字符啊';
+      }
+    }
+    ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+    ,content: function(value){
+      layedit.sync(editIndex);
+    }
+  });
+
+  //监听指定开关
+  form.on('switch(switchTest)', function(data){
+    layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+      offset: '6px'
+    });
+    layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+  });
+
+  //监听提交
+  form.on('submit(demo1)', function(data){
+    layer.alert(JSON.stringify(data.field), {
+      title: '最终的提交信息'
+    })
+    return false;
+  });
+
+
+
+
+});
+
+
+$(document).ready(function() {
+    var count = 1;
+    //用来判断是删除 还是增加按钮 以便count值进行计算
+    function checkCount(boolOK, coun) {
+        if (boolOK == true) {
+            return count++;
+        }
+        else {
+            count--;
+        }
+    }
+    //添加一个input标签 同时也对它的ID和Name进行赋值。
+   $("#layui-btn").click(function(){
+        countAA = checkCount(true, count);
+        var body = document.getElementById("body");
+        //创建div盒子用于包裹input+删除按钮
+        var div = document.createElement("div");
+        div.id = "bodys[" + count + "]";
+        div.setAttribute('class','layui-form-item')
+        body.appendChild(div);
+
+        var label = document.createElement("label");
+        label.setAttribute('class','layui-form-label');
+        div.appendChild(label);
+
+        var divin = document.createElement("div");
+        divin.setAttribute('class','layui-inline');
+        div.appendChild(divin);
+
+        //创建input
+        var input = document.createElement("input");
+        input.type = "text";
+        input.setAttribute('class','layui-input');
+        input.name = "title1[" + count + "].name";
+        input.autocomplete="title1[" + count + "].name";
+        divin.appendChild(input);                                     //向元素增加子节点 最为最后一个子节点
+
+        //创建第2个div
+        var divin2 = document.createElement("div");
+        divin2.setAttribute('class','layui-inline');
+        div.appendChild(divin2);
+
+        //创建input
+        var input = document.createElement("input");
+        input.type = "text";
+        input.setAttribute('class','layui-input');
+        input.name = "title2[" + count + "].name";
+        input.autocomplete="title2[" + count + "].name";
+        divin2.appendChild(input);
+
+        //创建删除按钮
+        var input = document.createElement("button");
+       // input.type = "button";
+        //input.value="删除";
+        input.setAttribute('class','layui-btn layui-btn-delete layui-btn-danger');
+        var i= document.createElement("i");
+        i.setAttribute('class','layui-icon layui-icon-delete');
+        //i.innerText="删除";
+        input.appendChild(i);
+        div.appendChild(input);
+
+        //创建一个空格
+        var br = document.createElement("br");
+        div.appendChild(br);
+
+
+    });
+
+    $("body").on("click",".layui-btn-delete",function(){
+         $(this).parent('div').remove()
+    });
+
+});
+</script>
+
+</body>
+</html>
