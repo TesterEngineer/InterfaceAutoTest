@@ -132,3 +132,78 @@ USE_TZ = False
 STATIC_URL = '/static/'
 # 这个必须有，要不然Django是找不到文件夹的位置的
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s [%(name)s:%(lineno)d] [%(module)s:%(funcName)s] [%(levelname)s]- %(message)s'}
+        # 日志格式
+    },
+    'filters': {
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,
+        },
+        'default': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/all.log'),
+            'maxBytes': 1024 * 1024 * 100,
+            'backupCount': 5,
+            'formatter': 'standard',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard'
+        },
+        'request_handler': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/script.log'),
+            'maxBytes': 1024 * 1024 * 100,
+            'backupCount': 5,
+            'formatter': 'standard',
+        },
+        'scprits_handler': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/script.log'),
+            'maxBytes': 1024 * 1024 * 100,
+            'backupCount': 5,
+            'formatter': 'standard',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['default', 'console'],
+            'level': 'INFO',
+            'propagate': True
+        },
+        'HttpRunnerManager.app': {
+            'handlers': ['default', 'console'],
+            'level': 'DEBUG',
+            'propagate': True
+        },
+        'django.request': {
+            'handlers': ['request_handler'],
+            'level': 'DEBUG',
+            'propagate': True
+        },
+        'HttpRunnerManager': {
+            'handlers': ['scprits_handler', 'console'],
+            'level': 'DEBUG',
+            'propagate': True
+        },
+        'scripts': {
+            'handlers': ['scprits_handler', 'console'],
+            'level': 'DEBUG',
+            'propagate': True
+        },
+    }
+}

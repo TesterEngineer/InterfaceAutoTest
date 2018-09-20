@@ -1,13 +1,15 @@
 #coding:utf-8
+import logging
 import  time
 
+import requests
 from django.core.paginator import Paginator
 from django.shortcuts import render,redirect
 from InterfaceTestManage.models import userInfo, project, Environment, TestCase
 from django.http import HttpResponseRedirect,JsonResponse,HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
 
-
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 
@@ -62,12 +64,14 @@ def login(request):
                 redirect_index.set_cookie('username',username)
                 redirect_index.set_cookie('password',password)
 
+            logger.info('{username} 登录成功'.format(username=username))
             return redirect_index
             #return  request.getRequestDispatcher().forward('/index')
 
         else:
             print('用户名或密码错误')
             context = {'message':'用户名或密码错误'}
+            logger.info('用户名:{username}和密码:{password}存在错误啊！ '.format(username=username,password=password))
             return JsonResponse(context)
 
 
@@ -320,16 +324,36 @@ def TestcaseAdd(request):
         req_path = params.get('req_path','')
         req_method =params.get('req_method', '')
         req_param = params.get('req_param', '')
-
+        req_exceptResult = params.get('except_result','')
 
         username = request.session.get("username",'')
         testcase = TestCase.objects
         if len(case_name) >0 and len(req_path) and len(req_method):
             testcase.create(case_name=case_name,req_path=req_path,req_method=req_method,req_param=req_param,
-                            username=username)
+                            username=username,except_result=req_exceptResult)
             context={'success':'添加成功啦'}
             return  JsonResponse(context)
 
         else:
             context = '添加失败了，请重新添加'
             return JsonResponse({'success':context})
+
+
+def runCase(url,method,params,except_result,*args):
+    if method == 'GET':
+      response = requests.get(url,params=params)
+      if response.status_code == 200:
+          try:
+            assert except_result in response.text
+          except AssertionError as e:
+              print(e)
+
+def test_bet(request):
+    if request.method == 'GET':
+        return render(request,"testbet_add.html")
+    elif request.is_ajax():
+        url = request.POST.get('url')
+        username = request.POST.get('username')
+        passsword = request.POST.get('password')
+
+        return

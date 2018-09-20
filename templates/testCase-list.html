@@ -23,28 +23,30 @@
             <th>接口请求方式</th>
             <th>参数</th>
             <th>操作人</th>
+            <th>期望结果</th>
             <th>操作时间</th>
             <th>状态</th>
             <th>操作</th>
           </tr>
         </thead>
         <tbody>
-        {% for environ in environList %}
+        {% for testcase in testCaseList %}
 
             <tr>
                 <input type="hidden" name="id" value={{ environ.id }}></input>
                 <td>
                   <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='{{ environ.id }}' ><i class="layui-icon">&#xe605;</i></div>
                 </td>
-                <td>{{ environ.id }}</td>
-                <td>{{ environ.path_name }}</td>
-                <td>{{ environ.host }}</td>
-                <td>{{environ.port  }}</td>
-                <td>{{ environ.envir_descript }}</td>
-                <td>{{ environ.username }}</td>
-                <td>{{ environ.update_time|date:"Y-m-d H:i:s" }}</td>
+                <td>{{ testcase.id }}</td>
+                <td>{{ testcase.case_name}}</td>
+                <td>{{ testcase.req_path }}</td>
+                <td>{{testcase.req_method  }}</td>
+                <td>{{ testcase.req_param }}  <button class="layui-btn layui-btn-xs" id="showJson" onclick="showJson({{ testcase.req_param }} )" >格式化查看</button></td>
+                <td>{{ testcase.username }}</td>
+                <td>{{ testcase.except_result }}</td>
+                <td>{{ testcase.update_time|date:"Y-m-d H:i:s" }}</td>
                 <td class="td-status">
-                    {% if environ.status == 1 %}
+                    {% if testcase.status == 1 %}
                       <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
                     {% else %}
                       <span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>
@@ -52,16 +54,16 @@
 
                 </td>
                 <td class="td-manage">
-                  <a onclick="member_stop(this,'{{ environ.id }}')" href="javascript:;"  title="启用">
+                  <a onclick="member_stop(this,'{{ testcase.id }}')" href="javascript:;"  title="启用">
                     <i class="layui-icon">&#xe601;</i>
                   </a>
-                  <a title="编辑"  onclick="x_admin_show('测试环境编辑','/api/environmentEdit/{{ environ.id }}',600,400)" href="javascript:;">
+                  <a title="编辑"  onclick="x_admin_show('测试环境编辑','/api/environmentEdit/{{ testcase.id }}',600,400)" href="javascript:;">
                     <i class="layui-icon">&#xe642;</i>
                   </a>
                   <a onclick="x_admin_show('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
                     <i class="layui-icon">&#xe631;</i>
                   </a>
-                  <a title="删除" onclick="member_del(this,'{{ environ.id }}')" href="javascript:;">
+                  <a title="删除" onclick="member_del(this,'{{ testcase.id }}')" href="javascript:;">
                     <i class="layui-icon">&#xe640;</i>
                   </a>
                 </td>
@@ -213,5 +215,21 @@
              layer.load(2);
         });
       }
+
+
+{% comment %}       $(function  () {
+            $('#showJson').click(function () {
+                //alert("asdfsd");
+                layer.open({'title':'错误提交信息','content':'请按要求填写信息'});
+            });
+       });{% endcomment %}
+
+    function showJson(data) {
+        var data = JSON.stringify(data,null,4);
+       // layer.open({'title':'错误提交信息','content':data});
+        alert(data);
+    }
+
     </script>
+
 {% endblock content %}

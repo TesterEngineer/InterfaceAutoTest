@@ -57,6 +57,7 @@ class TestCase(BaseTable):
     resp_code=models.CharField('响应的状态码',null=True,max_length=10)
     resp_result = models.CharField('响应结果',null=True,max_length=200)
     test_result = models.CharField('测试结果',null=True,max_length=20)
+    except_result = models.CharField('期望结果',null=True,max_length=200)
 
     username = models.CharField('操作人', max_length=10, null=False)
 

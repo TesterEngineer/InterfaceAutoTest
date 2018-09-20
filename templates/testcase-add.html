@@ -77,6 +77,12 @@
 
     </div>
 </div>
+     <div class="layui-form-item">
+    <label class="layui-form-label">期望结果</label>
+    <div class="layui-input-block">
+      <input type="text" name="except_result" lay-verify="required" placeholder="请输入期望结果" autocomplete="off" class="layui-input">
+    </div>
+  </div>
 
 
   <div class="layui-form-item">
@@ -218,13 +224,14 @@ $("#commit").click(function(){
     var case_name=$("input[name='case_name']").val();
    var req_path=$("input[name='req_path']").val();
    var req_method=$("#method option:selected").val();
+   var req_exceptRsult=$("input[name='except_result']").val();
 
    if(case_name.length>0 && req_path.length >0 && req_method.length > 0){
         var req1 = {};
         req1['case_name']=case_name;
         req1['req_path'] = req_path;
         req1['req_method']=req_method;
-
+        req1['except_result']=req_exceptRsult;
 
        //获取参数的取值
         var params = $("input[name='req_param']");
@@ -250,6 +257,7 @@ $("#commit").click(function(){
             //'data':req,
             'dataType': "json",
             'success':function (data) {
+                 window.parent.location.href='/api/testCaseManager/0/';
                 layer.alert(data.success, {icon: 6}, function () {
                                          // 获得frame索引
                                          var index = parent.layer.getFrameIndex(window.name);
@@ -258,6 +266,7 @@ $("#commit").click(function(){
                                          //window.location.href ='/api/EnviromentManager/0'
                                      });
                 layer.close();
+
             },
             'error':function(data){
                 layer.open({'title':'错误提交信息','content':data.error});
