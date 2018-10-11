@@ -21,6 +21,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="HttpRunnerManager" />
     <orderEntry type="module" module-name="HttpRunnerManager" />
+    <orderEntry type="module" module-name="appSpecialtest" />
+    <orderEntry type="module" module-name="spider" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />

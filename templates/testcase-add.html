@@ -51,16 +51,24 @@
       </select>
     </div>
     <div class="layui-inline">
-      <label class="layui-form-label">依赖的模块</label>
+      <label class="layui-form-label">用例id</label>
       <div class="layui-input-inline">
-        <select name="modules" lay-verify="required" lay-search="">
-          <option value="">直接搜索模块名称</option>
-          <option value="1">layer</option>
-          <option value="2">form</option>
+        <select id= "caseId" name="case_id" lay-verify="required" lay-search="">
+          <option value="">直接搜索用例id或用例名称</option>
+            {% for testcase in testcaseInfo %}
+                <option value="{{ testcase.id }}">{{ testcase.id }}--{{ testcase.case_name }}</option>
+            {% endfor %}
         </select>
       </div>
     </div>
   </div>
+
+   <div  class="layui-form-item">
+      <label class="layui-form-pane">依赖数据</label>
+        <div class="layui-input-block">
+            <input type="text" name="resp_data" lay-verify="required" placeholder="请输入需要依赖上一个接口的数据匹配" autocomplete="off" class="layui-input">
+        </div>
+   </div>
 
    <div id="body">
     <div class="layui-form-item">
@@ -226,12 +234,19 @@ $("#commit").click(function(){
    var req_method=$("#method option:selected").val();
    var req_exceptRsult=$("input[name='except_result']").val();
 
+   var case_id = $("#caseId option:selected").val();
+   var resp_data = $("input[name='resp_data']").val();
+
    if(case_name.length>0 && req_path.length >0 && req_method.length > 0){
         var req1 = {};
         req1['case_name']=case_name;
         req1['req_path'] = req_path;
         req1['req_method']=req_method;
         req1['except_result']=req_exceptRsult;
+        req1['case_id'] = case_id.length > 0?case_id:'';
+        req1['resp_data'] = resp_data.length > 0?resp_data:'';
+
+
 
        //获取参数的取值
         var params = $("input[name='req_param']");

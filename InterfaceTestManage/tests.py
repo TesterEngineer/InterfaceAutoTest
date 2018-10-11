@@ -47,3 +47,4 @@ print(str.find('java')) #没找到返回-1，查找字符串，找到了就不�
 str1=str.join({'name':'张三','value':18})
 print(str1)
 print("   ".isspace())
+

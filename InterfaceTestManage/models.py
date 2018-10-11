@@ -48,6 +48,7 @@ class Environment(BaseTable):
         verbose_name = '环境配置表'
         db_table = 'enviroment'
 
+'''用例'''
 class TestCase(BaseTable):
     case_name=models.CharField('用例名称',null=True,max_length=50)
     req_path=models.CharField('请求路径',null=True,max_length=15)
@@ -60,6 +61,8 @@ class TestCase(BaseTable):
     except_result = models.CharField('期望结果',null=True,max_length=200)
 
     username = models.CharField('操作人', max_length=10, null=False)
+    case_id = models.CharField('用例id',null=True,max_length=30)
+    resp_data = models.CharField('提前依赖的json数据',null=True,max_length=50)
 
     class Meta:
         verbose_name = '测试用例'

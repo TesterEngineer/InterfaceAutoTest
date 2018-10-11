@@ -308,15 +308,20 @@ def testCaseManager(request,id):
             firstPage =1
             pages = paginator.page(1)
         testCaseList =pages.object_list
-        context = {'testCaseList':testCaseList,'pageList':paginator,'currentPag':int(firstPage),"pages":pages,"title":"测试环境管理"}
+        environ = Environment.objects
+        environList = environ.all()
+        context = {'testCaseList':testCaseList,'pageList':paginator,'currentPag':int(firstPage),"pages":pages,"title":"测试环境管理","environList":environList}
         return  render(request,'testCase-list.html',context)
 
 
-'''项目新增'''
+'''用例新增'''
 @login_check
 def TestcaseAdd(request):
     if request.method == 'GET':
-        context={'title':'测试用例新增','btn':'增加'}
+        #testcaseIds = TestCase.objects.all().values("id")
+        testcaseInfo = TestCase.objects.all()
+
+        context={'title':'测试用例新增','btn':'增加','testcaseInfo':testcaseInfo}
         return  render(request,'testcase-add.html',context)
     if request.method == 'POST':
         params= eval(request.body)
@@ -325,12 +330,14 @@ def TestcaseAdd(request):
         req_method =params.get('req_method', '')
         req_param = params.get('req_param', '')
         req_exceptResult = params.get('except_result','')
+        case_id = params.get('case_id')
+        resp_data = params.get('resp_data')
 
         username = request.session.get("username",'')
         testcase = TestCase.objects
         if len(case_name) >0 and len(req_path) and len(req_method):
             testcase.create(case_name=case_name,req_path=req_path,req_method=req_method,req_param=req_param,
-                            username=username,except_result=req_exceptResult)
+                            username=username,except_result=req_exceptResult,case_id=case_id,resp_data=resp_data)
             context={'success':'添加成功啦'}
             return  JsonResponse(context)
 
@@ -339,6 +346,9 @@ def TestcaseAdd(request):
             return JsonResponse({'success':context})
 
 
+
+
+'''执行测试用例'''
 def runCase(url,method,params,except_result,*args):
     if method == 'GET':
       response = requests.get(url,params=params)
@@ -347,6 +357,22 @@ def runCase(url,method,params,except_result,*args):
             assert except_result in response.text
           except AssertionError as e:
               print(e)
+
+
+
+'''页面跑用例的方法'''
+login_check
+def execute_cases(request):
+    if request.method =="POST":
+        method = request.POST.get("method","")
+        params = request.POST.get("params","")
+        except_result = request.POST.get("except_result","")
+        #执行测试用例
+        runCase(method,params,except_result)
+
+
+
+
 
 def test_bet(request):
     if request.method == 'GET':

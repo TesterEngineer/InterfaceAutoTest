@@ -5,6 +5,8 @@
       <module fileurl="file://E:/HttpRunnerManager/.idea/HttpRunnerManager.iml" filepath="E:/HttpRunnerManager/.idea/HttpRunnerManager.iml" />
       <module fileurl="file://$USER_HOME$/PycharmProjects/HttpRunnerManager/.idea/HttpRunnerManager.iml" filepath="$USER_HOME$/PycharmProjects/HttpRunnerManager/.idea/HttpRunnerManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/InterfaceAutoTest.iml" filepath="$PROJECT_DIR$/.idea/InterfaceAutoTest.iml" />
+      <module fileurl="file://E:/appSpecialtest/.idea/appSpecialtest.iml" filepath="E:/appSpecialtest/.idea/appSpecialtest.iml" />
+      <module fileurl="file://D:/spider/.idea/spider.iml" filepath="D:/spider/.idea/spider.iml" />
     </modules>
   </component>
 </project>

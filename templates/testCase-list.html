@@ -54,7 +54,7 @@
 
                 </td>
                 <td class="td-manage">
-                  <a onclick="member_stop(this,'{{ testcase.id }}')" href="javascript:;"  title="启用">
+                  <a onclick="member_stop(this,'{{ testcase.id }}')" href="javascript:;"  title="运行测试用例">
                     <i class="layui-icon">&#xe601;</i>
                   </a>
                   <a title="编辑"  onclick="x_admin_show('测试环境编辑','/api/environmentEdit/{{ testcase.id }}',600,400)" href="javascript:;">
@@ -111,58 +111,19 @@
 
        /*用户-停用*/
       function member_stop(obj,id){
-          var statu_text=$(obj).parents("tr").find(".td-status").find('span').text();
-          if(statu_text =="已启用"){
-               var status=1;
-              var confirm_info ="确认要停用吗？";
-          }else{
-              var status =2;
-              var confirm_info ="确认要启用吗？";
-          }
-          layer.confirm(confirm_info,function(index){
-                  layer.load(2);
-              if($(obj).attr('title')=='启用'){
-
-                //发异步把用户状态进行更改
-                var url = '/api/isEnable/'+id+'/';
-                $.get(url,function (data) {
-                  if(data.success.length >0){
-                       {#$(obj).attr('title','停用')#}
-                       {#$(obj).find('i').html('&#xe62f;');#}
-                       {##}
-                       {# $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');#}
-                        layer.msg(data.success,{icon: data.icon,time:1000});
-                        layer.close();
-                       window.location.href ='/api/EnviromentManager/0/';
-                      return;
-                  }
-
-                });
-                 //layer.load(2);
-
-              }else{
-
-                     //发异步把用户状态进行更改
-                var url = '/api/isEnable/'+id+'/';
-                $.get(url,function (data) {
-                   // layer.load(2);
-                  if(data.success.length >0){
-                     {#$(obj).attr('title','启用')#}
-                     {#$(obj).find('i').html('&#xe601;');#}
-                     {##}
-                     {#$(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');#}
-                        layer.msg(data.success,{icon: data.icon,time:1000});
-                        layer.close();
-                         window.location.href ='/api/EnviromentManager/0/';
-                      return;
-                  }
-
-                });
+        layer.open({
+            title: '选择运行环境'
+            ,content: '       <select id= "environId" name="case_id" lay-verify="required" lay-search="">\n' +
+            '            {% for environ in environList %}\n'+
+                '                <option value="{{ environ.id }}">{{ environ.id }}--{{ environ.path_name }}</option>\n'
+                +
+                '            {% endfor %}\n' +
+            '        </select>'
+            });
+        var  value = $("#environId option:selected").val();
+        alert(value);
 
 
-              }
-              
-          });
 
       }
 
