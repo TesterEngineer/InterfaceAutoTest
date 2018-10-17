@@ -346,6 +346,12 @@ def TestcaseAdd(request):
             return JsonResponse({'success':context})
 
 
+'''新增'''
+login_check
+def getTestCaseInfo(request,id):
+    testcaseInfo = TestCase.objects.filter(id=id)
+    context = {'testcaseInfo': testcaseInfo}
+    return  JsonResponse(context)
 
 
 '''执行测试用例'''

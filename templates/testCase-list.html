@@ -122,6 +122,10 @@
             });
         var  value = $("#environId option:selected").val();
         alert(value);
+        //根据id，将url+data+method获取到传到后台
+        $.get("/api/getTestCaseInfo/"+id+"/",function (data) {
+            alert(data)
+        });
 
 
 

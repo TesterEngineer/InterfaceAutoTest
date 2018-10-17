@@ -7196,3 +7196,272 @@ Traceback (most recent call last):
   File "C:\Users\Sam\AppData\Local\Programs\Python\Python36\lib\site-packages\django\views\debug.py", line 332, in get_traceback_html
     t = DEBUG_ENGINE.from_string(fh.read())
 UnicodeDecodeError: 'gbk' codec can't decode byte 0xf0 in position 17277: illegal multibyte sequence
+2018-10-17 22:19:24,987 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /register
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\utils\datastructures.py", line 77, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'username'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 85, in register
+    username= request.POST['username']
+  File "C:\python\lib\site-packages\django\utils\datastructures.py", line 79, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'username'
+2018-10-17 22:21:00,841 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /register
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\utils\datastructures.py", line 77, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'username'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 85, in register
+    username= request.POST['username']
+  File "C:\python\lib\site-packages\django\utils\datastructures.py", line 79, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'username'
+2018-10-17 22:25:05,514 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /register
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\mysql\base.py", line 71, in execute
+    return self.cursor.execute(query, args)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 250, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 247, in execute
+    res = self._query(query)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 412, in _query
+    rowcount = self._do_query(q)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 375, in _do_query
+    db.query(q)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 276, in query
+    _mysql.connection.query(self, query)
+_mysql_exceptions.IntegrityError: (1062, "Duplicate entry 'test' for key 'username'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 97, in register
+    user_info.create(username=username,password=password,phone=phone)
+  File "C:\python\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\python\lib\site-packages\django\db\models\query.py", line 413, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 717, in save
+    force_update=force_update, update_fields=update_fields)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 747, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 830, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 868, in _do_insert
+    using=using, raw=raw)
+  File "C:\python\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\python\lib\site-packages\django\db\models\query.py", line 1133, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "C:\python\lib\site-packages\django\db\models\sql\compiler.py", line 1285, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\utils.py", line 89, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\mysql\base.py", line 71, in execute
+    return self.cursor.execute(query, args)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 250, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 247, in execute
+    res = self._query(query)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 412, in _query
+    rowcount = self._do_query(q)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 375, in _do_query
+    db.query(q)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 276, in query
+    _mysql.connection.query(self, query)
+django.db.utils.IntegrityError: (1062, "Duplicate entry 'test' for key 'username'")
+2018-10-17 23:14:00,993 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/testCaseManager/0/api/getTestCaseInfo
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 111, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\python\lib\site-packages\django\urls\resolvers.py", line 520, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLPattern '^favicon.ico$'>], [<URLResolver <module 'InterfaceTestManage.urls' from 'E:\\InterfaceAutoTest\\InterfaceTestManage\\urls.py'> (None:None) '^'>, <URLPattern '^login$'>], [<URLResolver <module 'InterfaceTestManage.urls' from 'E:\\InterfaceAutoTest\\InterfaceTestManage\\urls.py'> (None:None) '^'>, <URLPattern '^register$'>], [<URLResolver <module 'InterfaceTestManage.urls' from 'E:\\InterfaceAutoTest\\InterfaceTestManage\\urls.py'> (None:None) '^'>, <URLPattern '^index$'>], [<URLResolver <module 'InterfaceTestManage.urls' from 'E:\\InterfaceAutoTest\\InterfaceTestManage\\urls.py'> (None:None) '^'>, <URLPattern '^welcome$'>], [<URLResolver <module 'InterfaceTestManage.urls' from 'E:\\InterfaceAutoTest\\InterfaceTestManage\\urls.py'> (None:None) '^'>, <URLPattern '^projectList$'>], [<URLResolver <module 'InterfaceTestManage.urls' from 'E:\\InterfaceAutoTest\\InterfaceTestManage\\urls.py'> (None:None) '^'>, <URLPattern '^projectAdd$'>], [<URLPattern '^(?P<app>(\w+))/(?P<function>(\w+))/$'>], [<URLPattern '^(?P<app>(\w+))/(?P<function>(\w+))/(?P<id>(\w+))/$'>]], 'path': 'api/testCaseManager/0/api/getTestCaseInfo'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\utils\deprecation.py", line 91, in __call__
+    response = response or self.get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 36, in inner
+    response = response_for_exception(request, exc)
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 44, in response_for_exception
+    response = debug.technical_404_response(request, exc)
+  File "C:\python\lib\site-packages\django\views\debug.py", line 498, in technical_404_response
+    t = DEBUG_ENGINE.from_string(fh.read())
+UnicodeDecodeError: 'gbk' codec can't decode byte 0xd1 in position 2457: illegal multibyte sequence
+2018-10-17 23:15:07,623 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/testCaseManager/0/api/getTestCaseInfo
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 111, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\python\lib\site-packages\django\urls\resolvers.py", line 520, in resolve
+    raise Resolver404({'tried': tried, 'path': new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLPattern '^favicon.ico$'>], [<URLResolver <module 'InterfaceTestManage.urls' from 'E:\\InterfaceAutoTest\\InterfaceTestManage\\urls.py'> (None:None) '^'>, <URLPattern '^login$'>], [<URLResolver <module 'InterfaceTestManage.urls' from 'E:\\InterfaceAutoTest\\InterfaceTestManage\\urls.py'> (None:None) '^'>, <URLPattern '^register$'>], [<URLResolver <module 'InterfaceTestManage.urls' from 'E:\\InterfaceAutoTest\\InterfaceTestManage\\urls.py'> (None:None) '^'>, <URLPattern '^index$'>], [<URLResolver <module 'InterfaceTestManage.urls' from 'E:\\InterfaceAutoTest\\InterfaceTestManage\\urls.py'> (None:None) '^'>, <URLPattern '^welcome$'>], [<URLResolver <module 'InterfaceTestManage.urls' from 'E:\\InterfaceAutoTest\\InterfaceTestManage\\urls.py'> (None:None) '^'>, <URLPattern '^projectList$'>], [<URLResolver <module 'InterfaceTestManage.urls' from 'E:\\InterfaceAutoTest\\InterfaceTestManage\\urls.py'> (None:None) '^'>, <URLPattern '^projectAdd$'>], [<URLPattern '^(?P<app>(\w+))/(?P<function>(\w+))/$'>], [<URLPattern '^(?P<app>(\w+))/(?P<function>(\w+))/(?P<id>(\w+))/$'>]], 'path': 'api/testCaseManager/0/api/getTestCaseInfo'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\utils\deprecation.py", line 91, in __call__
+    response = response or self.get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 36, in inner
+    response = response_for_exception(request, exc)
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 44, in response_for_exception
+    response = debug.technical_404_response(request, exc)
+  File "C:\python\lib\site-packages\django\views\debug.py", line 498, in technical_404_response
+    t = DEBUG_ENGINE.from_string(fh.read())
+UnicodeDecodeError: 'gbk' codec can't decode byte 0xd1 in position 2457: illegal multibyte sequence
+2018-10-17 23:15:48,532 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/getTestCaseInfo/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceAutoTest\activator.py", line 14, in process
+    result = fun(request, index) if index else fun(request)
+TypeError: getTestCaseInfo() missing 1 required positional argument: 'id'
+2018-10-17 23:16:04,723 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/getTestCaseInfo/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceAutoTest\activator.py", line 14, in process
+    result = fun(request, index) if index else fun(request)
+TypeError: getTestCaseInfo() missing 1 required positional argument: 'id'
+2018-10-17 23:20:37,414 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/getTestCaseInfo/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceAutoTest\activator.py", line 14, in process
+    result = fun(request, index) if index else fun(request)
+TypeError: getTestCaseInfo() missing 1 required positional argument: 'id'
+2018-10-17 23:20:54,594 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/getTestCaseInfo/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceAutoTest\activator.py", line 14, in process
+    result = fun(request, index) if index else fun(request)
+TypeError: getTestCaseInfo() missing 1 required positional argument: 'id'
+2018-10-17 23:21:59,481 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/getTestCaseInfo/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceAutoTest\activator.py", line 14, in process
+    result = fun(request, index) if index else fun(request)
+TypeError: getTestCaseInfo() missing 1 required positional argument: 'id'
+2018-10-17 23:23:20,961 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/getTestCaseInfo/1/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceAutoTest\activator.py", line 14, in process
+    result = fun(request, index) if index else fun(request)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 354, in getTestCaseInfo
+    return  JsonResponse(context)
+  File "C:\python\lib\site-packages\django\http\response.py", line 558, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "C:\python\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\python\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\python\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\python\lib\site-packages\django\core\serializers\json.py", line 104, in default
+    return super().default(o)
+  File "C:\python\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type QuerySet is not JSON serializable
+2018-10-17 23:23:36,856 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/getTestCaseInfo/1/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceAutoTest\activator.py", line 14, in process
+    result = fun(request, index) if index else fun(request)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 354, in getTestCaseInfo
+    return  JsonResponse(context)
+  File "C:\python\lib\site-packages\django\http\response.py", line 558, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "C:\python\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\python\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\python\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\python\lib\site-packages\django\core\serializers\json.py", line 104, in default
+    return super().default(o)
+  File "C:\python\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type QuerySet is not JSON serializable
