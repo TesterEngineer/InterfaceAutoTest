@@ -104,7 +104,7 @@
                 console.log(data);
                 //发异步，把数据提交给python
                 //'数据字段 '
-            /*    $.post("/register",data.field,function (data,status) {
+             $.post("/register",data.field,function (data,status) {
                           console.log(data.field);
                           console.log(status)
                              layer.alert(info, {icon: 6},function () {
@@ -116,12 +116,13 @@
 
 
                     }
-                )*/
+                )
 
-                 $.ajax({
+                /* $.ajax({
                        type:"POST",
                        url: "/register",
                        contentType: "application/json",
+                       data:data.field,
                        success:function (data) {
                               layer.alert("注册成功", {icon: 6},function () {
                              // 获得frame索引
@@ -140,7 +141,7 @@
                             });
                        }
                      }
-                 )
+                 )*/
                 return false;
               });
 
