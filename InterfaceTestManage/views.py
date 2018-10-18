@@ -109,8 +109,8 @@ def register(request):
             except MultiValueDictKeyError as error:
                 #如果想html页面通知发生错误了？比如500之内的。。
                 print("用户名重复了啊")
-                context = {"success": "注册出现异常了，请查看日志哦"}
-                return JsonResponse(context);
+                context = {"success": "注册出现异常了，请查看日志哦"+str(error)}
+                return JsonResponse(context)
 
             # user_info.create(username=username,password=password,phone=phone)
             # return HttpResponseRedirect('/login')
