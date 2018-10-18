@@ -61,7 +61,7 @@
 
                     </td>
                     <td class="td-manage">
-                        <a onclick="member_stop(this,'{{ testcase.id }}')" href="javascript:;" title="运行测试用例">
+                        <a onclick="run_testcase(this,'{{ testcase.id }}')" href="javascript:;" title="运行测试用例">
                             <i class="layui-icon">&#xe601;</i>
                         </a>
                         <a title="编辑" onclick="x_admin_show('测试环境编辑','/api/environmentEdit/{{ testcase.id }}',600,400)"
@@ -140,37 +140,43 @@
         }
 
 
-        /*用户-停用*/
-        function member_stop(obj, id) {
+        /*运行测试用例*/
+        function run_testcase(obj, id) {
             layer.open({
-                title: '选择运行环境'
-                , content: '       <select id= "environId" name="case_id" lay-verify="required" lay-search="">\n' +
+                type: 1,
+                title: '请选择运行环境',
+                area: ['450px', '300px'],
+                btn: ['确定', '取消'],
+                content: '       <select id= "environId" name="case_id" lay-verify="required" lay-search="">\n' +
                 '            {% for environ in environList %}\n'+
                     '                <option value="{{ environ.id }}">{{ environ.id }}--{{ environ.path_name }}</option>\n'
                     +
                     '            {% endfor %}\n' +
-                '        </select>'
-            });
-            var value = $("#environId option:selected").val();
+                '        </select>',
+                yes: function (index) {
+                    alert("这是点击确定按钮走的回调");
+                    var value = $("#environId option:selected").val();
 
-            //根据id，将url+data+method获取到传到后台
-            $.get("/api/getTestCaseInfo/" + id + "/", function (data) {
+                    //根据id，将url+data+method获取到传到后台
+                    $.get("/api/getTestCaseInfo/" + id + "/", function (data) {
 
-                var testcaseInfo = JSON.parse(data.testcaseInfo);
-                var fields = testcaseInfo[0].fields;
+                        var testcaseInfo = JSON.parse(data.testcaseInfo);
+                        var fields = testcaseInfo[0].fields;
 
-                console.log(fields)
-                //
-                var params = {};
-                params['req_method']=fields.req_method;
-                params['req_path']=fields.req_path;
-                params['req_param']=fields.req_param;
-                params['except_result']=fields.except_result;
-
-
-                ajax_request(JSON.stringify(params));
-
-
+                        console.log(fields)
+                        //
+                        var params = {};
+                        params['req_method'] = fields.req_method;
+                        params['req_path'] = fields.req_path;
+                        params['req_param'] = fields.req_param;
+                        params['except_result'] = fields.except_result;
+                        ajax_request(JSON.stringify(params));
+                    });
+                  layer.close(index);
+                },
+                btn2: function () {
+                    alert("这是点击取消按钮走的回调");
+                },
             });
 
 
