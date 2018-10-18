@@ -8557,3 +8557,481 @@ ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpRe
 2018-10-18 22:42:37,449 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10880
 2018-10-18 22:42:41,091 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
 2018-10-18 22:42:41,206 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
+2018-10-18 22:44:14,905 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10888
+2018-10-18 22:44:25,005 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:44:25,108 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
+2018-10-18 22:44:36,417 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/projectManager/0/ HTTP/1.1" 200 4642
+2018-10-18 22:44:44,897 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/EnviromentManager/0/ HTTP/1.1" 200 5702
+2018-10-18 22:44:56,979 [django.server:124] [basehttp:log_message] [ERROR]- "GET /cate.html HTTP/1.1" 500 59
+2018-10-18 22:45:36,573 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:45:36,678 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
+2018-10-18 22:49:24,245 [django.server:124] [basehttp:log_message] [INFO]- "GET /login HTTP/1.1" 200 3495
+2018-10-18 22:49:27,141 [django.server:124] [basehttp:log_message] [INFO]- "POST /login HTTP/1.1" 302 0
+2018-10-18 22:49:27,197 [django.server:124] [basehttp:log_message] [INFO]- "GET /index HTTP/1.1" 200 11604
+2018-10-18 22:49:27,240 [django.server:124] [basehttp:log_message] [INFO]- "GET /index HTTP/1.1" 200 11604
+2018-10-18 22:49:27,318 [django.server:124] [basehttp:log_message] [INFO]- "GET /welcome HTTP/1.1" 200 7932
+2018-10-18 22:49:31,423 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10888
+2018-10-18 22:49:33,196 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/projectManager/0/ HTTP/1.1" 200 4642
+2018-10-18 22:50:41,798 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/logout HTTP/1.1" 301 0
+2018-10-18 22:50:41,874 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/logout/ HTTP/1.1" 302 0
+2018-10-18 22:50:41,884 [django.server:124] [basehttp:log_message] [INFO]- "GET /login HTTP/1.1" 200 3495
+2018-10-18 22:50:43,152 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 7066
+2018-10-18 22:51:03,496 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /register
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\mysql\base.py", line 71, in execute
+    return self.cursor.execute(query, args)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 250, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 247, in execute
+    res = self._query(query)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 412, in _query
+    rowcount = self._do_query(q)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 375, in _do_query
+    db.query(q)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 276, in query
+    _mysql.connection.query(self, query)
+_mysql_exceptions.IntegrityError: (1062, "Duplicate entry 'test' for key 'username'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 99, in register
+    user_info.create(username=username,password=password,phone=phone)
+  File "C:\python\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\python\lib\site-packages\django\db\models\query.py", line 413, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 717, in save
+    force_update=force_update, update_fields=update_fields)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 747, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 830, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 868, in _do_insert
+    using=using, raw=raw)
+  File "C:\python\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\python\lib\site-packages\django\db\models\query.py", line 1133, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "C:\python\lib\site-packages\django\db\models\sql\compiler.py", line 1285, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\utils.py", line 89, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\mysql\base.py", line 71, in execute
+    return self.cursor.execute(query, args)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 250, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 247, in execute
+    res = self._query(query)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 412, in _query
+    rowcount = self._do_query(q)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 375, in _do_query
+    db.query(q)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 276, in query
+    _mysql.connection.query(self, query)
+django.db.utils.IntegrityError: (1062, "Duplicate entry 'test' for key 'username'")
+2018-10-18 22:51:03,508 [django.server:124] [basehttp:log_message] [ERROR]- "POST /register HTTP/1.1" 500 20035
+2018-10-18 22:51:08,288 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /register
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\mysql\base.py", line 71, in execute
+    return self.cursor.execute(query, args)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 250, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 247, in execute
+    res = self._query(query)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 412, in _query
+    rowcount = self._do_query(q)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 375, in _do_query
+    db.query(q)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 276, in query
+    _mysql.connection.query(self, query)
+_mysql_exceptions.IntegrityError: (1062, "Duplicate entry 'test' for key 'username'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 99, in register
+    user_info.create(username=username,password=password,phone=phone)
+  File "C:\python\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\python\lib\site-packages\django\db\models\query.py", line 413, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 717, in save
+    force_update=force_update, update_fields=update_fields)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 747, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 830, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 868, in _do_insert
+    using=using, raw=raw)
+  File "C:\python\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\python\lib\site-packages\django\db\models\query.py", line 1133, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "C:\python\lib\site-packages\django\db\models\sql\compiler.py", line 1285, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\utils.py", line 89, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\mysql\base.py", line 71, in execute
+    return self.cursor.execute(query, args)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 250, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 247, in execute
+    res = self._query(query)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 412, in _query
+    rowcount = self._do_query(q)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 375, in _do_query
+    db.query(q)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 276, in query
+    _mysql.connection.query(self, query)
+django.db.utils.IntegrityError: (1062, "Duplicate entry 'test' for key 'username'")
+2018-10-18 22:51:08,294 [django.server:124] [basehttp:log_message] [ERROR]- "POST /register HTTP/1.1" 500 20035
+2018-10-18 22:51:26,541 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /register
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\mysql\base.py", line 71, in execute
+    return self.cursor.execute(query, args)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 250, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 247, in execute
+    res = self._query(query)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 412, in _query
+    rowcount = self._do_query(q)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 375, in _do_query
+    db.query(q)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 276, in query
+    _mysql.connection.query(self, query)
+_mysql_exceptions.IntegrityError: (1062, "Duplicate entry 'test' for key 'username'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 99, in register
+    user_info.create(username=username,password=password,phone=phone)
+  File "C:\python\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\python\lib\site-packages\django\db\models\query.py", line 413, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 717, in save
+    force_update=force_update, update_fields=update_fields)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 747, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 830, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 868, in _do_insert
+    using=using, raw=raw)
+  File "C:\python\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\python\lib\site-packages\django\db\models\query.py", line 1133, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "C:\python\lib\site-packages\django\db\models\sql\compiler.py", line 1285, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\utils.py", line 89, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\mysql\base.py", line 71, in execute
+    return self.cursor.execute(query, args)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 250, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 247, in execute
+    res = self._query(query)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 412, in _query
+    rowcount = self._do_query(q)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 375, in _do_query
+    db.query(q)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 276, in query
+    _mysql.connection.query(self, query)
+django.db.utils.IntegrityError: (1062, "Duplicate entry 'test' for key 'username'")
+2018-10-18 22:51:26,546 [django.server:124] [basehttp:log_message] [ERROR]- "POST /register HTTP/1.1" 500 20035
+2018-10-18 22:51:43,064 [django.server:124] [basehttp:log_message] [INFO]- "POST /register HTTP/1.1" 302 0
+2018-10-18 22:51:43,074 [django.server:124] [basehttp:log_message] [INFO]- "GET /login HTTP/1.1" 200 3495
+2018-10-18 22:52:32,817 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /register
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\mysql\base.py", line 71, in execute
+    return self.cursor.execute(query, args)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 250, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 247, in execute
+    res = self._query(query)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 412, in _query
+    rowcount = self._do_query(q)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 375, in _do_query
+    db.query(q)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 276, in query
+    _mysql.connection.query(self, query)
+_mysql_exceptions.IntegrityError: (1062, "Duplicate entry 'test222' for key 'username'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 99, in register
+    user_info.create(username=username,password=password,phone=phone)
+  File "C:\python\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\python\lib\site-packages\django\db\models\query.py", line 413, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 717, in save
+    force_update=force_update, update_fields=update_fields)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 747, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 830, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 868, in _do_insert
+    using=using, raw=raw)
+  File "C:\python\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\python\lib\site-packages\django\db\models\query.py", line 1133, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "C:\python\lib\site-packages\django\db\models\sql\compiler.py", line 1285, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\utils.py", line 89, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\mysql\base.py", line 71, in execute
+    return self.cursor.execute(query, args)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 250, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 247, in execute
+    res = self._query(query)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 412, in _query
+    rowcount = self._do_query(q)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 375, in _do_query
+    db.query(q)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 276, in query
+    _mysql.connection.query(self, query)
+django.db.utils.IntegrityError: (1062, "Duplicate entry 'test222' for key 'username'")
+2018-10-18 22:52:32,835 [django.server:124] [basehttp:log_message] [ERROR]- "POST /register HTTP/1.1" 500 20047
+2018-10-18 22:53:27,295 [django.server:124] [basehttp:log_message] [INFO]- "POST /register HTTP/1.1" 302 0
+2018-10-18 22:53:27,309 [django.server:124] [basehttp:log_message] [INFO]- "GET /login HTTP/1.1" 200 3495
+2018-10-18 22:54:40,327 [django.server:124] [basehttp:log_message] [INFO]- "POST /register HTTP/1.1" 302 0
+2018-10-18 22:54:40,339 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 7119
+2018-10-18 22:54:44,468 [django.server:124] [basehttp:log_message] [INFO]- "GET /login HTTP/1.1" 200 3495
+2018-10-18 22:54:44,692 [django.server:124] [basehttp:log_message] [INFO]- "GET /favicon.ico HTTP/1.1" 302 0
+2018-10-18 22:54:44,734 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/favicon.ico HTTP/1.1" 200 1424
+2018-10-18 22:54:45,817 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 7119
+2018-10-18 22:54:55,675 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 7119
+2018-10-18 22:55:19,534 [django.server:124] [basehttp:log_message] [INFO]- "POST /register HTTP/1.1" 302 0
+2018-10-18 22:55:19,543 [django.server:124] [basehttp:log_message] [INFO]- "GET /login HTTP/1.1" 200 3495
+2018-10-18 22:55:29,765 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 22:56:06,057 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 6937
+2018-10-18 22:56:24,298 [django.server:124] [basehttp:log_message] [INFO]- "POST /register HTTP/1.1" 302 0
+2018-10-18 22:56:24,309 [django.server:124] [basehttp:log_message] [INFO]- "GET /login HTTP/1.1" 200 3495
+2018-10-18 22:56:46,186 [django.server:124] [basehttp:log_message] [INFO]- "POST /register HTTP/1.1" 302 0
+2018-10-18 22:56:46,195 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 6937
+2018-10-18 22:59:56,359 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 6871
+2018-10-18 23:00:16,564 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /register
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\utils\datastructures.py", line 77, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'username'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 87, in register
+    username= request.POST['username']
+  File "C:\python\lib\site-packages\django\utils\datastructures.py", line 79, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'username'
+2018-10-18 23:00:16,567 [django.server:124] [basehttp:log_message] [ERROR]- "POST /register HTTP/1.1" 500 16026
+2018-10-18 23:00:19,415 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 6871
+2018-10-18 23:00:58,428 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /register
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\utils\datastructures.py", line 77, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'username'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 87, in register
+    username= request.POST['username']
+  File "C:\python\lib\site-packages\django\utils\datastructures.py", line 79, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'username'
+2018-10-18 23:00:58,430 [django.server:124] [basehttp:log_message] [ERROR]- "POST /register HTTP/1.1" 500 16027
+2018-10-18 23:01:49,182 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /register
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\utils\datastructures.py", line 77, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'username'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 87, in register
+    username= request.POST['username']
+  File "C:\python\lib\site-packages\django\utils\datastructures.py", line 79, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'username'
+2018-10-18 23:01:49,185 [django.server:124] [basehttp:log_message] [ERROR]- "POST /register HTTP/1.1" 500 16027
+2018-10-18 23:01:54,885 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 6871
+2018-10-18 23:02:11,123 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /register
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\utils\datastructures.py", line 77, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'username'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 87, in register
+    username= request.POST['username']
+  File "C:\python\lib\site-packages\django\utils\datastructures.py", line 79, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'username'
+2018-10-18 23:02:11,125 [django.server:124] [basehttp:log_message] [ERROR]- "POST /register HTTP/1.1" 500 16026
+2018-10-18 23:02:25,993 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 6871
+2018-10-18 23:05:12,774 [django.server:124] [basehttp:log_message] [INFO]- "GET /login HTTP/1.1" 200 3442
+2018-10-18 23:05:12,989 [django.server:124] [basehttp:log_message] [INFO]- "GET /favicon.ico HTTP/1.1" 302 0
+2018-10-18 23:05:13,001 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/favicon.ico HTTP/1.1" 200 1424
+2018-10-18 23:05:14,624 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 6936
+2018-10-18 23:05:32,528 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /register
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\utils\datastructures.py", line 77, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'username'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 87, in register
+    username= request.POST['username']
+  File "C:\python\lib\site-packages\django\utils\datastructures.py", line 79, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'username'
+2018-10-18 23:05:32,530 [django.server:124] [basehttp:log_message] [ERROR]- "POST /register HTTP/1.1" 500 16084
+2018-10-18 23:08:12,129 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 6976
+2018-10-18 23:08:12,210 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 23:12:02,592 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 6976
+2018-10-18 23:12:02,869 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 23:12:35,574 [django.server:124] [basehttp:log_message] [INFO]- "POST /register HTTP/1.1" 302 0
+2018-10-18 23:12:35,659 [django.server:124] [basehttp:log_message] [INFO]- "GET /login HTTP/1.1" 200 3442
+2018-10-18 23:13:05,745 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 6976
+2018-10-18 23:13:05,910 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 23:13:31,439 [django.server:124] [basehttp:log_message] [INFO]- "POST /register HTTP/1.1" 302 0
+2018-10-18 23:13:31,520 [django.server:124] [basehttp:log_message] [INFO]- "GET /login HTTP/1.1" 200 3442
+2018-10-18 23:14:44,679 [django.server:124] [basehttp:log_message] [INFO]- "POST /register HTTP/1.1" 302 0
+2018-10-18 23:14:47,365 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 6976
+2018-10-18 23:15:00,316 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 6976
+2018-10-18 23:15:00,471 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 23:16:00,684 [django.server:124] [basehttp:log_message] [INFO]- "POST /register HTTP/1.1" 302 0
+2018-10-18 23:16:00,762 [django.server:124] [basehttp:log_message] [INFO]- "GET /login HTTP/1.1" 200 3442
+2018-10-18 23:21:00,920 [django.server:124] [basehttp:log_message] [INFO]- "GET /register HTTP/1.1" 200 6974
+2018-10-18 23:21:01,130 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 23:21:37,134 [django.server:124] [basehttp:log_message] [INFO]- "POST /register HTTP/1.1" 200 39

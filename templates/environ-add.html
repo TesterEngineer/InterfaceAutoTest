@@ -1,115 +1,114 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title%} {{ title }} {% endblock %}
+{% block title %} {{ title }} {% endblock %}
 {% block script %}
     {% static '/lib/layui/layui.js' %}
 {% endblock script %}
 {% block content %}
     <div class="x-body layui-anim layui-anim-up">
 
-          <input type="hidden" name="id" value="{{ environ_info.id }}">
-          <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red">*</span>环境名称
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="path_name" required="" lay-verify="projectName"
-                  autocomplete="off" class="layui-input" value="{{ environ_info.path_name }}">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red">*</span>主机头地址
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="host" required="" lay-verify="projectName"
-                  autocomplete="off" class="layui-input" value="{{ environ_info.host }}">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red"></span>端口号
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="port" required="" lay-verify="projectName"
-                  autocomplete="off" class="layui-input" value="{{ environ_info.port }}">
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_username" class="layui-form-label">
-                  <span class="x-red"></span>环境简介
-              </label>
-              <div class="layui-input-inline">
-                   <textarea name="envir_descript" placeholder="请输入环境描述" class="layui-textarea" >{{ environ_info.envir_descript }}</textarea>
-              </div>
-          </div>
+        <input type="hidden" name="id" value="{{ environ_info.id }}">
+        <div class="layui-form-item">
+            <label for="L_email" class="layui-form-label">
+                <span class="x-red">*</span>环境名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_email" name="path_name" required="" lay-verify="projectName"
+                       autocomplete="off" class="layui-input" value="{{ environ_info.path_name }}">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_email" class="layui-form-label">
+                <span class="x-red">*</span>主机头地址
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_email" name="host" required="" lay-verify="projectName"
+                       autocomplete="off" class="layui-input" value="{{ environ_info.host }}">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_email" class="layui-form-label">
+                <span class="x-red"></span>端口号
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_email" name="port" required="" lay-verify="projectName"
+                       autocomplete="off" class="layui-input" value="{{ environ_info.port }}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_username" class="layui-form-label">
+                <span class="x-red"></span>环境简介
+            </label>
+            <div class="layui-input-inline">
+                <textarea name="envir_descript" placeholder="请输入环境描述"
+                          class="layui-textarea">{{ environ_info.envir_descript }}</textarea>
+            </div>
+        </div>
 
 
+        <label for="L_repass" class="layui-form-label">
+        </label>
 
-              <label for="L_repass" class="layui-form-label">
-              </label>
-
-              <button id="environ_add_edit" class="layui-btn"  >
-                 {{ btn }}
-              </button>
-              <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        <button id="environ_add_edit" class="layui-btn">
+            {{ btn }}
+        </button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
 
 
     </div>
     <script>
-        $('#environ_add_edit').on('click',function(){
+        $('#environ_add_edit').on('click', function () {
 
-                var  subbtn = $("#environ_add_edit");
-                subbtn.attr("class","layui-btn layui-btn-disabled");
+            var subbtn = $("#environ_add_edit");
+            subbtn.attr("class", "layui-btn layui-btn-disabled");
 
-                //获取表单信息
-                var path_name = $("input[name='path_name']").val();
-                var host = $("input[name='host']").val();
-                var port = $("input[name='port']").val();
-                var envir_descript = $("textarea[name='envir_descript']").val();
-
-
-                if(path_name.length >0){
-                     var datas ={};
-                     datas.path_name=path_name;
-                     datas.host=host;
-                     datas.port=port;
-                     datas.envir_descript=envir_descript;
-                        
-                    var url="/api/environmentAdd/"
-                    var id=$("input:hidden[name='id']").val();
-                    if(id.length >0){
-                        url="/api/environmentEdit/"+id+"/";
-
-                    }
+            //获取表单信息
+            var path_name = $("input[name='path_name']").val();
+            var host = $("input[name='host']").val();
+            var port = $("input[name='port']").val();
+            var envir_descript = $("textarea[name='envir_descript']").val();
 
 
-                    $.post(url,datas,function (data) {
-                         if (data.success.length >0) {
-                             window.parent.location.href ='/api/EnviromentManager/0/';
-                                     layer.alert(data.success, {icon: 6}, function () {
-                                         // 获得frame索引
-                                         var index = parent.layer.getFrameIndex(window.name);
-                                         //关闭当前frame
-                                         parent.layer.close(index);
-                                         //window.location.href ='/api/EnviromentManager/0'
-                                     });
-                                    //window.location.href ='/api/EnviromentManager/0' 会加在这个iframe里面
-                                 }
-                         }
+            if (path_name.length > 0) {
+                var datas = {};
+                datas.path_name = path_name;
+                datas.host = host;
+                datas.port = port;
+                datas.envir_descript = envir_descript;
 
-                     )
-                     layer.load(2);
-                }else {
-                     layer.open({title: '出错提示啦！！', content:"请按照要求填写信息！"});
-                      subbtn.attr("class","layui-btn");
+                var url = "/api/environmentAdd/"
+                var id = $("input:hidden[name='id']").val();
+                if (id.length > 0) {
+                    url = "/api/environmentEdit/" + id + "/";
+
                 }
+
+
+                $.post(url, datas, function (data) {
+                        if (data.success.length > 0) {
+                            window.parent.location.href = '/api/EnviromentManager/0/';
+                            layer.alert(data.success, {icon: 6}, function () {
+                                // 获得frame索引
+                                var index = parent.layer.getFrameIndex(window.name);
+                                //关闭当前frame
+                                parent.layer.close(index);
+                                //window.location.href ='/api/EnviromentManager/0'
+                            });
+                            //window.location.href ='/api/EnviromentManager/0' 会加在这个iframe里面
+                        }
+                    }
+                )
+                layer.load(2);
+            } else {
+                layer.open({title: '出错提示啦！！', content: "请按照要求填写信息！"});
+                subbtn.attr("class", "layui-btn");
+            }
 
         });
 

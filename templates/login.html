@@ -1,62 +1,65 @@
 {% extends 'base.html' %}
 {% block title %} {{ title }}  {% endblock title %}
-{% block cssboy%} class="login-bg" {% endblock cssboy %}
+{% block cssboy %} class="login-bg" {% endblock cssboy %}
 
 {% block content %}
     <div class="login layui-anim layui-anim-up">
         <div class="message">API接口自动化测试系统登录</div>
         <div id="darkbannerwrap"></div>
-        
-        <form method="post" class="layui-form" >
-            <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input"  value="{{ username }}">
+
+        <form method="post" class="layui-form">
+            <input name="username" placeholder="用户名" type="text" lay-verify="required" class="layui-input"
+                   value="{{ username }}">
             <hr class="hr15">
-            <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input" value="{{ password }}">
+            <input name="password" lay-verify="required" placeholder="密码" type="password" class="layui-input"
+                   value="{{ password }}">
             <hr class="hr15">
             <input type="checkbox" name="remeberPw" lay-skin="primary" title="记住密码">
-            <span  style="float:right " lay-size="20px" onclick="x_admin_show('注册用户','/register')"> <a href="javascript:void(0)">注册</a></span>
+            <span style="float:right " lay-size="20px" onclick="x_admin_show('注册用户','/register')"> <a
+                    href="javascript:void(0)">注册</a></span>
 
             <hr class="hr15">
             <input id="login" value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
-            <hr class="hr20" >
+            <hr class="hr20">
         </form>
     </div>
 
     <script>
-        $(function  () {
+        $(function () {
             $('#login').click(function () {
                 var username = $("input[name='username']").val();
                 var password = $("input[name='password']").val();
-                 if (username.length <=0 || password.length <=0){
-                      layer.open({
-                            title: '登录出错！！',
-                            content:"用户名或密码不能为空！"
-                            });
-                     return false;
-                 }
-                 if(username.length >10 || password.length >15) {
-                         layer.open({
-                            title: '出错了!!',
-                            content:"用户名或密码的长度不符合要求呢！"
-                            });
-                         return false;
+                if (username.length <= 0 || password.length <= 0) {
+                    layer.open({
+                        title: '登录出错！！',
+                        content: "用户名或密码不能为空！"
+                    });
+                    return false;
+                }
+                if (username.length > 10 || password.length > 15) {
+                    layer.open({
+                        title: '出错了!!',
+                        content: "用户名或密码的长度不符合要求呢！"
+                    });
+                    return false;
                 }
 
-                if (username.length > 0 && password.length > 0){
-                    var object ={};
+                if (username.length > 0 && password.length > 0) {
+                    var object = {};
                     object['username'] = username;
                     object['password'] = password;
                 }
 
-                $.post('/login',object,function (data) {
-                    if (data.message){
-                       // alert(data.message)
-                       layer.open({
+                $.post('/login', object, function (data) {
+                    if (data.message) {
+                        // alert(data.message)
+                        layer.open({
                             title: '出错了，错误信息如下',
                             content: data.message
-                            });
-                       return false;
-                    }else {
-                        window.location.href='/index';
+                        });
+                        return false;
+                    } else {
+                        window.location.href = '/index';
                     }
                 });
                 return false;
@@ -64,7 +67,7 @@
 
         })
 
-        
+
     </script>
-<!-- 底部结束 -->
+    <!-- 底部结束 -->
 {% endblock content %}

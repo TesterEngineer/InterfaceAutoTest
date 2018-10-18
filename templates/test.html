@@ -2,17 +2,16 @@
 {% block title %} {{ title }}  {% endblock title %}
 
 {% block content %}
-<input id="bt" value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+    <input id="bt" value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
 
-<script>
-    $('#bt').click(function () {
-         $.post('/ajaxtest','',function (data) {
-             alert(data)
-    });
+    <script>
+        $('#bt').click(function () {
+                $.post('/ajaxtest', '', function (data) {
+                    alert(data)
+                });
 
-        }
+            }
+        );
 
-    );
-
-</script>
+    </script>
 {% endblock content %}

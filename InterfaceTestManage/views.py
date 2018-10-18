@@ -84,11 +84,17 @@ def register(request):
         content={'title':'注册账号'}
         return render(request,'user-add.html',content)
     else:
-        username= request.POST['username']
-        phone = request.POST['phone']
-        email = request.POST['email']
-        #TODO 角色这块后面再做
-        password = request.POST['password']
+        reqParams = eval(request.body)
+        username=reqParams.get('username','')
+        phone=reqParams.get('phone','')
+        email=reqParams.get('email','')
+        password=reqParams.get('password','')
+
+        # username= request.POST['username']
+        # phone = request.POST['phone']
+        # email = request.POST['email']
+        # #TODO 角色这块后面再做
+        # password = request.POST['password']
 
         user_info = userInfo.objects
         #将数据进行注册
@@ -97,18 +103,20 @@ def register(request):
             and  len(password)<=16 ):
             try:
                 user_info.create(username=username,password=password,phone=phone)
-                return HttpResponseRedirect('/login')
+                #return HttpResponseRedirect('/login')
+                context = {"success":"注册成功"}
+                return JsonResponse(context);
             except MultiValueDictKeyError as error:
                 #如果想html页面通知发生错误了？比如500之内的。。
                 print("用户名重复了啊")
-                return HttpResponseRedirect('/register')
+                context = {"success": "注册出现异常了，请查看日志哦"}
+                return JsonResponse(context);
 
             # user_info.create(username=username,password=password,phone=phone)
             # return HttpResponseRedirect('/login')
         else:
-            fail='注册失败,请重新注册'
-            print("注册失败")
-            return  HttpResponseRedirect('/register')
+            context = {"success": "注册出现其他问题"}
+            return JsonResponse(context);
 
 '''项目管理'''
 @login_check

@@ -1,89 +1,87 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title%} {{ title }} {% endblock %}
+{% block title %} {{ title }} {% endblock %}
 {% block script %}
     {% static '/lib/layui/layui.js' %}
 {% endblock script %}
 {% block content %}
     <div class="x-body layui-anim layui-anim-up">
 
-          <input type="hidden" name="id" value="{{ id }}">
-          <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red">*</span>项目名称
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="projectName" required="" lay-verify="projectName"
-                  autocomplete="off" class="layui-input" value="{{ projectName }}">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_username" class="layui-form-label">
-                  <span class="x-red">*</span>项目描述
-              </label>
-              <div class="layui-input-inline">
-                   <textarea name="projectdesc" placeholder="请输入项目描述" class="layui-textarea" >{{ projectdesc }}</textarea>
-              </div>
-          </div>
+        <input type="hidden" name="id" value="{{ id }}">
+        <div class="layui-form-item">
+            <label for="L_email" class="layui-form-label">
+                <span class="x-red">*</span>项目名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_email" name="projectName" required="" lay-verify="projectName"
+                       autocomplete="off" class="layui-input" value="{{ projectName }}">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_username" class="layui-form-label">
+                <span class="x-red">*</span>项目描述
+            </label>
+            <div class="layui-input-inline">
+                <textarea name="projectdesc" placeholder="请输入项目描述" class="layui-textarea">{{ projectdesc }}</textarea>
+            </div>
+        </div>
 
 
+        <label for="L_repass" class="layui-form-label">
+        </label>
 
-              <label for="L_repass" class="layui-form-label">
-              </label>
-
-              <button id="project_add_edit" class="layui-btn"  >
-                 {{ btn }}
-              </button>
-               <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        <button id="project_add_edit" class="layui-btn">
+            {{ btn }}
+        </button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
 
 
     </div>
     <script>
-        $('#project_add_edit').on('click',function(){
+        $('#project_add_edit').on('click', function () {
 
-                var  subbtn = $("#project_add_edit");
-                subbtn.attr("class","layui-btn layui-btn-disabled");
+            var subbtn = $("#project_add_edit");
+            subbtn.attr("class", "layui-btn layui-btn-disabled");
 
-                //如果你想关闭最新弹出的层，直接获取layer.index即可
-                //layer.close(layer.index); //它获取的始终是最新弹出的某个层，值是由layer内部动态递增计算的
+            //如果你想关闭最新弹出的层，直接获取layer.index即可
+            //layer.close(layer.index); //它获取的始终是最新弹出的某个层，值是由layer内部动态递增计算的
 
-                //发异步
-                var projectname = $("input[name='projectName']").val();
-                var projectdesc = $("textarea[name='projectdesc']").val();
-                if(projectname.length >0){
-                     var datas ={};
-                     datas['projectName'] = projectname;
-                    datas['projectdesc'] = projectdesc;
-                    var url="/api/projectAdd/"
-                    var id=$("input:hidden[name='id']").val();
-                    if(id.length >0){
-                        url="/api/projectEdit/"+id+"/";
+            //发异步
+            var projectname = $("input[name='projectName']").val();
+            var projectdesc = $("textarea[name='projectdesc']").val();
+            if (projectname.length > 0) {
+                var datas = {};
+                datas['projectName'] = projectname;
+                datas['projectdesc'] = projectdesc;
+                var url = "/api/projectAdd/"
+                var id = $("input:hidden[name='id']").val();
+                if (id.length > 0) {
+                    url = "/api/projectEdit/" + id + "/";
 
-                    }
-
-                    $.post(url,datas,function (data) {
-                         if (data.success.length >0) {
-                             window.parent.location.href ='/api/projectManager/0';
-                                     layer.alert(data.success, {icon: 6}, function () {
-                                         // 获得frame索引
-                                         var index = parent.layer.getFrameIndex(window.name);
-                                         //关闭当前frame
-                                         parent.layer.close(index);
-                                         //window.location.href ='/api/projectManager/0'
-                                     });
-                                    //window.location.href ='/api/projectManager/0' 会加在这个iframe里面
-                                 }
-                         }
-
-                     );
-                    layer.load(2);
-                }else {
-                     layer.open({title: '出错提示啦！！', content:"请按照要求填写信息！"});
-                      subbtn.attr("class","layui-btn");
                 }
+
+                $.post(url, datas, function (data) {
+                        if (data.success.length > 0) {
+                            window.parent.location.href = '/api/projectManager/0';
+                            layer.alert(data.success, {icon: 6}, function () {
+                                // 获得frame索引
+                                var index = parent.layer.getFrameIndex(window.name);
+                                //关闭当前frame
+                                parent.layer.close(index);
+                                //window.location.href ='/api/projectManager/0'
+                            });
+                            //window.location.href ='/api/projectManager/0' 会加在这个iframe里面
+                        }
+                    }
+                );
+                layer.load(2);
+            } else {
+                layer.open({title: '出错提示啦！！', content: "请按照要求填写信息！"});
+                subbtn.attr("class", "layui-btn");
+            }
 
         });
 

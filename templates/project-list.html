@@ -1,174 +1,180 @@
 {% extends 'base.html' %}
 {% block title %} {{ title }}  {% endblock title %}
-{% block cssboy%} class="layui-anim layui-anim-up" {% endblock cssboy %}
+{% block cssboy %} class="layui-anim layui-anim-up" {% endblock cssboy %}
 
 {% block content %}
 
     <div class="x-body">
-    {% comment %}  <div class="layui-row">
+        {% comment %}  <div class="layui-row">
 
       </div>{% endcomment %}
-      <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('项目添加','/api/projectAdd',600,400)"><i class="layui-icon"></i>添加</button>
+        <xblock>
+            <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+            <button class="layui-btn" onclick="x_admin_show('项目添加','/api/projectAdd',600,400)"><i
+                    class="layui-icon"></i>添加
+            </button>
 
-      </xblock>
-      <table class="layui-table">
-        <thead>
-          <tr>
-            <th>
-              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
-            <th>ID</th>
-            <th>项目名称</th>
-            <th>项目描述</th>
-            <th>操作人</th>
-            <th>操作时间</th>
-            <th>状态</th>
-            <th>操作</th></tr>
-        </thead>
-        <tbody>
-        {% for project in projectList %}
-
+        </xblock>
+        <table class="layui-table">
+            <thead>
             <tr>
-                <input type="hidden" name="id" value={{ project.id }}></input>
-                <td>
-                  <div class="layui-unselect layui-form-checkbox" lay-skin="primary"  data-id='{{ project.id }}'><i class="layui-icon">&#xe605;</i></div>
-                </td>
-                <td>{{ project.id }}</td>
-                <td>{{ project.projectName }}</td>
-                <td>{{ project.projectdesc }}</td>
-                <td>{{ project.username }}</td>
-                <td>{{ project.create_time|date:"Y-m-d H:i:s" }}</td>
-                <td class="td-status">
-                  <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
-                <td class="td-manage">
-                  <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                    <i class="layui-icon">&#xe601;</i>
-                  </a>
-                  <a title="编辑"  onclick="x_admin_show('项目编辑','/api/projectEdit/{{ project.id }}',600,400)" href="javascript:;">
-                    <i class="layui-icon">&#xe642;</i>
-                  </a>
-                  <a onclick="x_admin_show('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
-                    <i class="layui-icon">&#xe631;</i>
-                  </a>
-                  <a title="删除" onclick="member_del(this,'{{ project.id }}')" href="javascript:;">
-                    <i class="layui-icon">&#xe640;</i>
-                  </a>
-                </td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-      <div class="page">
-        <div>
-         {% if pages.has_previous  %}
-             <a class="prev" href="/api/projectManager/{{ pages.previous_page_number }} ">&lt;&lt;</a>
-         {% endif %}
+                <th>
+                    <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i>
+                    </div>
+                </th>
+                <th>ID</th>
+                <th>项目名称</th>
+                <th>项目描述</th>
+                <th>操作人</th>
+                <th>操作时间</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for project in projectList %}
 
-          {% for num in  pageList.page_range  %}
-              {%  if num == currentPag %}
-                  <span class="current">{{ num }}</span>
-               {% else %}
-                   <a class="num" href="/api/projectManager/{{ num }}">{{ num}}</a>
-              {% endif %}
+                <tr>
+                    <input type="hidden" name="id" value={{ project.id }}></input>
+                    <td>
+                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='{{ project.id }}'><i
+                                class="layui-icon">&#xe605;</i></div>
+                    </td>
+                    <td>{{ project.id }}</td>
+                    <td>{{ project.projectName }}</td>
+                    <td>{{ project.projectdesc }}</td>
+                    <td>{{ project.username }}</td>
+                    <td>{{ project.create_time|date:"Y-m-d H:i:s" }}</td>
+                    <td class="td-status">
+                        <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+                    <td class="td-manage">
+                        <a onclick="member_stop(this,'10001')" href="javascript:;" title="启用">
+                            <i class="layui-icon">&#xe601;</i>
+                        </a>
+                        <a title="编辑" onclick="x_admin_show('项目编辑','/api/projectEdit/{{ project.id }}',600,400)"
+                           href="javascript:;">
+                            <i class="layui-icon">&#xe642;</i>
+                        </a>
+                        <a onclick="x_admin_show('修改密码','member-password.html',600,400)" title="修改密码"
+                           href="javascript:;">
+                            <i class="layui-icon">&#xe631;</i>
+                        </a>
+                        <a title="删除" onclick="member_del(this,'{{ project.id }}')" href="javascript:;">
+                            <i class="layui-icon">&#xe640;</i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="page">
+            <div>
+                {% if pages.has_previous %}
+                    <a class="prev" href="/api/projectManager/{{ pages.previous_page_number }} ">&lt;&lt;</a>
+                {% endif %}
 
-          {% endfor %}
+                {% for num in  pageList.page_range %}
+                    {% if num == currentPag %}
+                        <span class="current">{{ num }}</span>
+                    {% else %}
+                        <a class="num" href="/api/projectManager/{{ num }}">{{ num }}</a>
+                    {% endif %}
+
+                {% endfor %}
 
 
-            {% if pages.has_next %}
-                <a href="/api/projectManager/{{ pages.next_page_number }}">下一页</a>
-             {% endif %}
+                {% if pages.has_next %}
+                    <a href="/api/projectManager/{{ pages.next_page_number }}">下一页</a>
+                {% endif %}
+            </div>
         </div>
-      </div>
 
     </div>
     <script>
-      layui.use('laydate', function(){
-        var laydate = layui.laydate;
-        
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#start' //指定元素
-        });
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
 
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#end' //指定元素
-        });
-      });
-
-       /*用户-停用*/
-      function member_stop(obj,id){
-          layer.confirm('确认要停用吗？',function(index){
-
-              if($(obj).attr('title')=='启用'){
-
-                //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
-
-              }else{
-                $(obj).attr('title','启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
-              }
-              
-          });
-      }
-
-      /*用户-删除*/
-      function member_del(obj,id){
-          layer.confirm('确认要删除吗？',function(index){
-
-              var url = '/api/projectDelete/'+id+'/';
-              $.get(url,function (data) {
-
-                  if(data.success.length >0){
-                      //发异步删除数据
-                      $(obj).parents("tr").remove();
-                      layer.msg(data.success,{icon:1,time:1000});
-                      window.location.href = '/api/projectManager/0/';
-                      return;
-                  }
-
-              });
-              //遮罩层，让用户无法点击
-              layer.load(2);
-          });
-      }
-
-
-
-      function delAll (argument) {
-
-        var select_checked=$(".layui-form-checked");
-        var ids=[];
-        for (var i=1;i<select_checked.length;i++){
-            ids.push($(select_checked[i]).attr('data-id'));
-        }
-
-        var data = tableCheck.getData();
-  
-        layer.confirm('确认要删除吗？',function(){
-            var data ={"ids":ids.join()};
-            //捉到所有被选中的，发异步进行删除
-            $.post("/api/projectDelete/0/",data,function (data) {
-                if (data.success.length > 0){
-                      layer.msg(data.success, {icon: 1});
-                     $(".layui-form-checked").not('.header').parents('tr').remove();
-                }
-                layer.close();
-                window.location.href = '/api/projectManager/0/';
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#start' //指定元素
             });
 
-             layer.load(2);
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#end' //指定元素
+            });
         });
-      }
+
+        /*用户-停用*/
+        function member_stop(obj, id) {
+            layer.confirm('确认要停用吗？', function (index) {
+
+                if ($(obj).attr('title') == '启用') {
+
+                    //发异步把用户状态进行更改
+                    $(obj).attr('title', '停用')
+                    $(obj).find('i').html('&#xe62f;');
+
+                    $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
+                    layer.msg('已停用!', {icon: 5, time: 1000});
+
+                } else {
+                    $(obj).attr('title', '启用')
+                    $(obj).find('i').html('&#xe601;');
+
+                    $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
+                    layer.msg('已启用!', {icon: 5, time: 1000});
+                }
+
+            });
+        }
+
+        /*用户-删除*/
+        function member_del(obj, id) {
+            layer.confirm('确认要删除吗？', function (index) {
+
+                var url = '/api/projectDelete/' + id + '/';
+                $.get(url, function (data) {
+
+                    if (data.success.length > 0) {
+                        //发异步删除数据
+                        $(obj).parents("tr").remove();
+                        layer.msg(data.success, {icon: 1, time: 1000});
+                        window.location.href = '/api/projectManager/0/';
+                        return;
+                    }
+
+                });
+                //遮罩层，让用户无法点击
+                layer.load(2);
+            });
+        }
+
+
+        function delAll(argument) {
+
+            var select_checked = $(".layui-form-checked");
+            var ids = [];
+            for (var i = 1; i < select_checked.length; i++) {
+                ids.push($(select_checked[i]).attr('data-id'));
+            }
+
+            var data = tableCheck.getData();
+
+            layer.confirm('确认要删除吗？', function () {
+                var data = {"ids": ids.join()};
+                //捉到所有被选中的，发异步进行删除
+                $.post("/api/projectDelete/0/", data, function (data) {
+                    if (data.success.length > 0) {
+                        layer.msg(data.success, {icon: 1});
+                        $(".layui-form-checked").not('.header').parents('tr').remove();
+                    }
+                    layer.close();
+                    window.location.href = '/api/projectManager/0/';
+                });
+
+                layer.load(2);
+            });
+        }
     </script>
 {% endblock content %}
