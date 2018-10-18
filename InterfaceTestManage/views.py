@@ -3,11 +3,13 @@ import logging
 import  time
 
 import requests
+from django.contrib.gis import serializers
 from django.core.paginator import Paginator
 from django.shortcuts import render,redirect
 from InterfaceTestManage.models import userInfo, project, Environment, TestCase
 from django.http import HttpResponseRedirect,JsonResponse,HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
+from django.core   import serializers
 
 logger = logging.getLogger(__name__)
 
@@ -347,11 +349,13 @@ def TestcaseAdd(request):
 
 
 '''新增'''
-login_check
+@login_check
 def getTestCaseInfo(request,id):
     testcaseInfo = TestCase.objects.filter(id=id)
-    context = {'testcaseInfo': testcaseInfo}
-    return  JsonResponse(context)
+    json_data = serializers.serialize("json", testcaseInfo)
+    context = {'testcaseInfo': json_data}
+    return JsonResponse(context)
+
 
 
 '''执行测试用例'''
@@ -360,21 +364,29 @@ def runCase(url,method,params,except_result,*args):
       response = requests.get(url,params=params)
       if response.status_code == 200:
           try:
-            assert except_result in response.text
+            #assert except_result in response.text
+            info1="恭喜你用例执行成功了"
+            content={"info":info1}
+            return JsonResponse(content)
           except AssertionError as e:
-              print(e)
+             print(e)
+             content = {"info": str(e)}
+             return JsonResponse(content)
 
 
 
 '''页面跑用例的方法'''
-login_check
+@login_check
 def execute_cases(request):
     if request.method =="POST":
-        method = request.POST.get("method","")
-        params = request.POST.get("params","")
-        except_result = request.POST.get("except_result","")
+        postdataDic = eval(request.body)
+        method =postdataDic.get("req_method","")
+        requestPath = postdataDic.get("req_path","")
+        params = postdataDic.get("req_param","")
+        except_result = postdataDic.get("except_result","")
+
         #执行测试用例
-        runCase(method,params,except_result)
+        return runCase(url=requestPath,method=method,params=params,except_result=except_result)
 
 
 

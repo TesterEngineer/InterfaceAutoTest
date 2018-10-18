@@ -1,4 +1,4 @@
-#-*- coding:utf-8 _*-
+# -*- coding:utf-8 _*-
 """
 @author:Duan jun ming
 @file: runmain.py 处理请求运行
@@ -6,11 +6,13 @@
 qq:1032241157
 """
 import requests
+
+
 class runcase:
 
-    def request_send(self,method,url,data):
+    def request_send(self, method, url, data):
         if method == 'POST':
-            response = requests.post(url=url,data=data)
+            response = requests.post(url=url, data=data)
         elif method == 'GET':
-            response=requests.get(url=url)
-        return  response
+            response = requests.get(url=url)
+        return response

@@ -1,199 +1,243 @@
 {% extends 'base.html' %}
 {% block title %} {{ title }}  {% endblock title %}
-{% block cssboy%} class="layui-anim layui-anim-up" {% endblock cssboy %}
+{% block cssboy %} class="layui-anim layui-anim-up" {% endblock cssboy %}
 
 {% block content %}
 
     <div class="x-body">
 
-      <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('新增测试用例','/api/TestcaseAdd',800,600)"><i class="layui-icon"></i>添加</button>
+        <xblock>
+            <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+            <button class="layui-btn" onclick="x_admin_show('新增测试用例','/api/TestcaseAdd',800,600)"><i class="layui-icon"></i>添加
+            </button>
 
-      </xblock>
-      <table class="layui-table">
-        <thead>
-          <tr>
-            <th>
-              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
-            <th>用例序号</th>
-            <th>测试用例名称</th>
-            <th>接口路径</th>
-            <th>接口请求方式</th>
-            <th>参数</th>
-            <th>操作人</th>
-            <th>期望结果</th>
-            <th>操作时间</th>
-            <th>状态</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <tbody>
-        {% for testcase in testCaseList %}
-
+        </xblock>
+        <table class="layui-table">
+            <thead>
             <tr>
-                <input type="hidden" name="id" value={{ environ.id }}></input>
-                <td>
-                  <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='{{ environ.id }}' ><i class="layui-icon">&#xe605;</i></div>
-                </td>
-                <td>{{ testcase.id }}</td>
-                <td>{{ testcase.case_name}}</td>
-                <td>{{ testcase.req_path }}</td>
-                <td>{{testcase.req_method  }}</td>
-                <td>{{ testcase.req_param }}  <button class="layui-btn layui-btn-xs" id="showJson" onclick="showJson({{ testcase.req_param }} )" >格式化查看</button></td>
-                <td>{{ testcase.username }}</td>
-                <td>{{ testcase.except_result }}</td>
-                <td>{{ testcase.update_time|date:"Y-m-d H:i:s" }}</td>
-                <td class="td-status">
-                    {% if testcase.status == 1 %}
-                      <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
+                <th>
+                    <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i>
+                    </div>
+                </th>
+                <th>用例序号</th>
+                <th>测试用例名称</th>
+                <th>接口路径</th>
+                <th>接口请求方式</th>
+                <th>参数</th>
+                <th>操作人</th>
+                <th>期望结果</th>
+                <th>操作时间</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for testcase in testCaseList %}
+
+                <tr>
+                    <input type="hidden" name="id" value={{ environ.id }}></input>
+                    <td>
+                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='{{ environ.id }}'><i
+                                class="layui-icon">&#xe605;</i></div>
+                    </td>
+                    <td>{{ testcase.id }}</td>
+                    <td>{{ testcase.case_name }}</td>
+                    <td>{{ testcase.req_path }}</td>
+                    <td>{{ testcase.req_method }}</td>
+                    <td>{{ testcase.req_param }}
+                        <button class="layui-btn layui-btn-xs" id="showJson"
+                                onclick="showJson({{ testcase.req_param }} )">格式化查看
+                        </button>
+                    </td>
+                    <td>{{ testcase.username }}</td>
+                    <td>{{ testcase.except_result }}</td>
+                    <td>{{ testcase.update_time|date:"Y-m-d H:i:s" }}</td>
+                    <td class="td-status">
+                        {% if testcase.status == 1 %}
+                            <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
+                        {% else %}
+                            <span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>
+                        {% endif %}
+
+                    </td>
+                    <td class="td-manage">
+                        <a onclick="member_stop(this,'{{ testcase.id }}')" href="javascript:;" title="运行测试用例">
+                            <i class="layui-icon">&#xe601;</i>
+                        </a>
+                        <a title="编辑" onclick="x_admin_show('测试环境编辑','/api/environmentEdit/{{ testcase.id }}',600,400)"
+                           href="javascript:;">
+                            <i class="layui-icon">&#xe642;</i>
+                        </a>
+                        <a onclick="x_admin_show('修改密码','member-password.html',600,400)" title="修改密码"
+                           href="javascript:;">
+                            <i class="layui-icon">&#xe631;</i>
+                        </a>
+                        <a title="删除" onclick="member_del(this,'{{ testcase.id }}')" href="javascript:;">
+                            <i class="layui-icon">&#xe640;</i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="page">
+            <div>
+                {% if pages.has_previous %}
+                    <a class="prev" href="/api/EnviromentManager/{{ pages.previous_page_number }} ">&lt;&lt;</a>
+                {% endif %}
+
+                {% for num in  pageList.page_range %}
+                    {% if num == currentPag %}
+                        <span class="current">{{ num }}</span>
                     {% else %}
-                      <span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>
+                        <a class="num" href="/api/EnviromentManager/{{ num }}">{{ num }}</a>
                     {% endif %}
 
-                </td>
-                <td class="td-manage">
-                  <a onclick="member_stop(this,'{{ testcase.id }}')" href="javascript:;"  title="运行测试用例">
-                    <i class="layui-icon">&#xe601;</i>
-                  </a>
-                  <a title="编辑"  onclick="x_admin_show('测试环境编辑','/api/environmentEdit/{{ testcase.id }}',600,400)" href="javascript:;">
-                    <i class="layui-icon">&#xe642;</i>
-                  </a>
-                  <a onclick="x_admin_show('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
-                    <i class="layui-icon">&#xe631;</i>
-                  </a>
-                  <a title="删除" onclick="member_del(this,'{{ testcase.id }}')" href="javascript:;">
-                    <i class="layui-icon">&#xe640;</i>
-                  </a>
-                </td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-      <div class="page">
-        <div>
-         {% if pages.has_previous  %}
-             <a class="prev" href="/api/EnviromentManager/{{ pages.previous_page_number }} ">&lt;&lt;</a>
-         {% endif %}
-
-          {% for num in  pageList.page_range  %}
-              {%  if num == currentPag %}
-                  <span class="current">{{ num }}</span>
-               {% else %}
-                   <a class="num" href="/api/EnviromentManager/{{ num }}">{{ num}}</a>
-              {% endif %}
-
-          {% endfor %}
+                {% endfor %}
 
 
-            {% if pages.has_next %}
-                <a href="/api/EnviromentManager/{{ pages.next_page_number }}">下一页</a>
-             {% endif %}
+                {% if pages.has_next %}
+                    <a href="/api/EnviromentManager/{{ pages.next_page_number }}">下一页</a>
+                {% endif %}
+            </div>
         </div>
-      </div>
 
     </div>
     <script>
-      layui.use('laydate', function(){
-        var laydate = layui.laydate;
-        
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#start' //指定元素
-        });
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
 
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#end' //指定元素
-        });
-      });
-
-       /*用户-停用*/
-      function member_stop(obj,id){
-        layer.open({
-            title: '选择运行环境'
-            ,content: '       <select id= "environId" name="case_id" lay-verify="required" lay-search="">\n' +
-            '            {% for environ in environList %}\n'+
-                '                <option value="{{ environ.id }}">{{ environ.id }}--{{ environ.path_name }}</option>\n'
-                +
-                '            {% endfor %}\n' +
-            '        </select>'
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#start' //指定元素
             });
-        var  value = $("#environId option:selected").val();
-        alert(value);
-        //根据id，将url+data+method获取到传到后台
-        $.get("/api/getTestCaseInfo/"+id+"/",function (data) {
-            alert(data)
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#end' //指定元素
+            });
         });
 
+        function ajax_request(req_params) {
+            $.ajax({
+                'url': '/api/execute_cases/',
+                'contentType': "application/json; charset=utf-8",
+                'type': 'POST',
+                'data': req_params,
+                'dataType': "json",
+                'success': function (data) {
+                    alert(data.info);
+                    //alert("成功了哦");
+
+                },
+                'error': function (data) {
+                    alert(data.info);
+                    alert("失败了啊");
+                }
 
 
-      }
-
-      /*用户-删除*/
-      function member_del(obj,id){
-          layer.confirm('确认要删除吗？',function(index){
-
-              //var id = $("input:hidden[name='id']").val();
-              var url = '/api/environDelete/'+id+'/';
-              $.get(url,function (data) {
-
-                  if(data.success.length >0){
-                      //发异步删除数据
-                      $(obj).parents("tr").remove();
-                      layer.msg(data.success,{icon:1,time:1000});
-                      window.location.href = '/api/EnviromentManager/0/';
-                      return;
-                  }
-
-              });
-              //遮罩层，让用户无法点击
-              layer.load(2);
-          });
-      }
+            });
+        }
 
 
+        /*用户-停用*/
+        function member_stop(obj, id) {
+            layer.open({
+                title: '选择运行环境'
+                , content: '       <select id= "environId" name="case_id" lay-verify="required" lay-search="">\n' +
+                '            {% for environ in environList %}\n'+
+                    '                <option value="{{ environ.id }}">{{ environ.id }}--{{ environ.path_name }}</option>\n'
+                    +
+                    '            {% endfor %}\n' +
+                '        </select>'
+            });
+            var value = $("#environId option:selected").val();
 
-      function delAll (argument) {
+            //根据id，将url+data+method获取到传到后台
+            $.get("/api/getTestCaseInfo/" + id + "/", function (data) {
 
-         var select_checked=$(".layui-form-checked");
-         var ids=[];
-         for (var i=1;i<select_checked.length;i++){
-            ids.push($(select_checked[i]).attr('data-id'));
+                var testcaseInfo = JSON.parse(data.testcaseInfo);
+                var fields = testcaseInfo[0].fields;
+
+                console.log(fields)
+                //
+                var params = {};
+                params['req_method']=fields.req_method;
+                params['req_path']=fields.req_path;
+                params['req_param']=fields.req_param;
+                params['except_result']=fields.except_result;
+
+
+                ajax_request(JSON.stringify(params));
+
+
+            });
+
+
+        }
+
+        /*用户-删除*/
+        function member_del(obj, id) {
+            layer.confirm('确认要删除吗？', function (index) {
+
+                //var id = $("input:hidden[name='id']").val();
+                var url = '/api/environDelete/' + id + '/';
+                $.get(url, function (data) {
+
+                    if (data.success.length > 0) {
+                        //发异步删除数据
+                        $(obj).parents("tr").remove();
+                        layer.msg(data.success, {icon: 1, time: 1000});
+                        window.location.href = '/api/EnviromentManager/0/';
+                        return;
+                    }
+
+                });
+                //遮罩层，让用户无法点击
+                layer.load(2);
+            });
+        }
+
+
+        function delAll(argument) {
+
+            var select_checked = $(".layui-form-checked");
+            var ids = [];
+            for (var i = 1; i < select_checked.length; i++) {
+                ids.push($(select_checked[i]).attr('data-id'));
             }
 
-  
-        layer.confirm('确认要删除吗？',function(){
 
-             var data ={"ids":ids.join()};
-            //捉到所有被选中的，发异步进行删除
-            $.post("/api/environDelete/0/",data,function (data) {
-                if (data.success.length > 0){
-                      layer.msg(data.success, {icon: 1});
-                     $(".layui-form-checked").not('.header').parents('tr').remove();
-                }
-                layer.close();
-                window.location.href = '/api/EnviromentManager/0/';
+            layer.confirm('确认要删除吗？', function () {
+
+                var data = {"ids": ids.join()};
+                //捉到所有被选中的，发异步进行删除
+                $.post("/api/environDelete/0/", data, function (data) {
+                    if (data.success.length > 0) {
+                        layer.msg(data.success, {icon: 1});
+                        $(".layui-form-checked").not('.header').parents('tr').remove();
+                    }
+                    layer.close();
+                    window.location.href = '/api/EnviromentManager/0/';
+                });
+
+                layer.load(2);
             });
-
-             layer.load(2);
-        });
-      }
+        }
 
 
-{% comment %}       $(function  () {
-            $('#showJson').click(function () {
-                //alert("asdfsd");
-                layer.open({'title':'错误提交信息','content':'请按要求填写信息'});
-            });
-       });{% endcomment %}
+        {% comment %}       $(function  () {
+                    $('#showJson').click(function () {
+                        //alert("asdfsd");
+                        layer.open({'title':'错误提交信息','content':'请按要求填写信息'});
+                    });
+               });{% endcomment %}
 
-    function showJson(data) {
-        var data = JSON.stringify(data,null,4);
-       // layer.open({'title':'错误提交信息','content':data});
-        alert(data);
-    }
+        function showJson(data) {
+            var data = JSON.stringify(data, null, 4);
+            // layer.open({'title':'错误提交信息','content':data});
+            alert(data);
+        }
 
     </script>
 

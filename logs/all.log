@@ -8100,3 +8100,418 @@ TypeError: Object of type QuerySet is not JSON serializable
 2018-10-17 23:23:53,496 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
 2018-10-17 23:24:33,773 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 6572
 2018-10-17 23:24:33,869 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-17 23:25:22,645 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/getTestCaseInfo/1/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceAutoTest\activator.py", line 14, in process
+    result = fun(request, index) if index else fun(request)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 354, in getTestCaseInfo
+    return  JsonResponse(context)
+  File "C:\python\lib\site-packages\django\http\response.py", line 558, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "C:\python\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\python\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\python\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\python\lib\site-packages\django\core\serializers\json.py", line 104, in default
+    return super().default(o)
+  File "C:\python\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type QuerySet is not JSON serializable
+2018-10-17 23:25:22,655 [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/getTestCaseInfo/1/ HTTP/1.1" 500 17862
+2018-10-17 23:25:43,258 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/getTestCaseInfo/1/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceAutoTest\activator.py", line 14, in process
+    result = fun(request, index) if index else fun(request)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 354, in getTestCaseInfo
+    return  JsonResponse(context)
+  File "C:\python\lib\site-packages\django\http\response.py", line 558, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "C:\python\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\python\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\python\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\python\lib\site-packages\django\core\serializers\json.py", line 104, in default
+    return super().default(o)
+  File "C:\python\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type QuerySet is not JSON serializable
+2018-10-17 23:25:43,265 [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/getTestCaseInfo/1/ HTTP/1.1" 500 17862
+2018-10-17 23:25:55,743 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/getTestCaseInfo/1/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceAutoTest\activator.py", line 14, in process
+    result = fun(request, index) if index else fun(request)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 354, in getTestCaseInfo
+    return  JsonResponse(context)
+  File "C:\python\lib\site-packages\django\http\response.py", line 558, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "C:\python\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\python\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\python\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\python\lib\site-packages\django\core\serializers\json.py", line 104, in default
+    return super().default(o)
+  File "C:\python\lib\json\encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type QuerySet is not JSON serializable
+2018-10-17 23:25:55,751 [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/getTestCaseInfo/1/ HTTP/1.1" 500 17862
+2018-10-17 23:26:59,194 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 6568
+2018-10-17 23:26:59,240 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/css/font.css HTTP/1.1" 304 0
+2018-10-17 23:26:59,244 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/css/xadmin.css HTTP/1.1" 304 0
+2018-10-17 23:26:59,251 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/layui.js HTTP/1.1" 304 0
+2018-10-17 23:26:59,255 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/js/xadmin.js HTTP/1.1" 304 0
+2018-10-17 23:26:59,270 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/css/layui.css HTTP/1.1" 304 0
+2018-10-17 23:26:59,333 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/font/iconfont.woff?v=226_rc2 HTTP/1.1" 304 0
+2018-10-17 23:26:59,367 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/lay/modules/form.js HTTP/1.1" 304 0
+2018-10-17 23:26:59,371 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/lay/modules/laydate.js HTTP/1.1" 304 0
+2018-10-17 23:26:59,406 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/lay/modules/layer.js HTTP/1.1" 304 0
+2018-10-17 23:26:59,412 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/css/modules/laydate/default/laydate.css?v=5.0.9 HTTP/1.1" 304 0
+2018-10-17 23:26:59,443 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/css/modules/layer/default/layer.css?v=3.1.1 HTTP/1.1" 304 0
+2018-10-17 23:26:59,445 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/lay/modules/element.js HTTP/1.1" 304 0
+2018-10-17 23:27:00,924 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/css/modules/layer/default/icon.png HTTP/1.1" 304 0
+2018-10-17 23:27:02,360 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/getTestCaseInfo
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\utils\deprecation.py", line 90, in __call__
+    response = self.process_request(request)
+  File "C:\python\lib\site-packages\django\middleware\common.py", line 53, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "C:\python\lib\site-packages\django\middleware\common.py", line 93, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/getTestCaseInfo/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2018-10-17 23:27:02,367 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/getTestCaseInfo HTTP/1.1" 500 17635
+2018-10-18 21:14:25,267 [django.server:124] [basehttp:log_message] [INFO]- "GET /login HTTP/1.1" 200 3631
+2018-10-18 21:14:25,281 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/css/font.css HTTP/1.1" 304 0
+2018-10-18 21:14:25,283 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/css/xadmin.css HTTP/1.1" 304 0
+2018-10-18 21:14:25,308 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/layui.js HTTP/1.1" 304 0
+2018-10-18 21:14:25,313 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/js/xadmin.js HTTP/1.1" 304 0
+2018-10-18 21:14:25,557 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/css/layui.css HTTP/1.1" 304 0
+2018-10-18 21:14:25,623 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/lay/modules/form.js HTTP/1.1" 304 0
+2018-10-18 21:14:25,633 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/images/bg.png HTTP/1.1" 304 0
+2018-10-18 21:14:25,656 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/images/aiwrap.png HTTP/1.1" 304 0
+2018-10-18 21:14:25,683 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/lay/modules/layer.js HTTP/1.1" 304 0
+2018-10-18 21:14:25,696 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/css/modules/layer/default/layer.css?v=3.1.1 HTTP/1.1" 304 0
+2018-10-18 21:14:25,704 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/font/iconfont.woff?v=226_rc2 HTTP/1.1" 304 0
+2018-10-18 21:14:25,767 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/lay/modules/element.js HTTP/1.1" 304 0
+2018-10-18 21:14:28,523 [django.server:124] [basehttp:log_message] [INFO]- "POST /login HTTP/1.1" 302 0
+2018-10-18 21:14:28,576 [django.server:124] [basehttp:log_message] [INFO]- "GET /index HTTP/1.1" 200 11740
+2018-10-18 21:14:28,623 [django.server:124] [basehttp:log_message] [INFO]- "GET /index HTTP/1.1" 200 11740
+2018-10-18 21:14:28,690 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/fonts/iconfont.woff HTTP/1.1" 304 0
+2018-10-18 21:14:28,706 [django.server:124] [basehttp:log_message] [INFO]- "GET /welcome HTTP/1.1" 200 8068
+2018-10-18 21:14:31,806 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 6707
+2018-10-18 21:14:31,849 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/lay/modules/laydate.js HTTP/1.1" 304 0
+2018-10-18 21:14:31,898 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/css/modules/laydate/default/laydate.css?v=5.0.9 HTTP/1.1" 304 0
+2018-10-18 21:14:36,032 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/css/modules/layer/default/icon.png HTTP/1.1" 304 0
+2018-10-18 21:14:37,110 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/getTestCaseInfo
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\utils\deprecation.py", line 90, in __call__
+    response = self.process_request(request)
+  File "C:\python\lib\site-packages\django\middleware\common.py", line 53, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "C:\python\lib\site-packages\django\middleware\common.py", line 93, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/getTestCaseInfo/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2018-10-18 21:14:37,149 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/getTestCaseInfo HTTP/1.1" 500 16333
+2018-10-18 21:14:45,673 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/getTestCaseInfo
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\utils\deprecation.py", line 90, in __call__
+    response = self.process_request(request)
+  File "C:\python\lib\site-packages\django\middleware\common.py", line 53, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "C:\python\lib\site-packages\django\middleware\common.py", line 93, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/getTestCaseInfo/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2018-10-18 21:14:45,674 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/getTestCaseInfo HTTP/1.1" 500 16333
+2018-10-18 21:15:06,662 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 21:15:39,260 [django.server:124] [basehttp:log_message] [INFO]- "GET /index HTTP/1.1" 200 11604
+2018-10-18 21:15:39,329 [django.server:124] [basehttp:log_message] [INFO]- "GET /welcome HTTP/1.1" 200 7932
+2018-10-18 21:15:39,439 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 21:15:39,561 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 21:15:43,114 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 6571
+2018-10-18 21:15:43,179 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 21:15:46,305 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/getTestCaseInfo
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\utils\deprecation.py", line 90, in __call__
+    response = self.process_request(request)
+  File "C:\python\lib\site-packages\django\middleware\common.py", line 53, in process_request
+    path = self.get_full_path_with_slash(request)
+  File "C:\python\lib\site-packages\django\middleware\common.py", line 93, in get_full_path_with_slash
+    'url': request.get_host() + new_path,
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/getTestCaseInfo/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+2018-10-18 21:15:46,308 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/getTestCaseInfo HTTP/1.1" 500 16333
+2018-10-18 21:17:02,747 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 6575
+2018-10-18 21:17:02,817 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 21:17:10,363 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/1/ HTTP/1.1" 200 477
+2018-10-18 21:17:54,927 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/1/ HTTP/1.1" 200 477
+2018-10-18 21:18:33,992 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 6608
+2018-10-18 21:18:34,052 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 21:18:36,851 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/1/ HTTP/1.1" 200 477
+2018-10-18 21:19:20,325 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 6608
+2018-10-18 21:19:20,416 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 21:48:22,245 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/css/modules/layer/default/loading-1.gif HTTP/1.1" 304 0
+2018-10-18 21:48:22,315 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/TestcaseAdd/ HTTP/1.1" 200 11416
+2018-10-18 21:48:27,777 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/lay/modules/layedit.js HTTP/1.1" 304 0
+2018-10-18 21:48:46,093 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/css/modules/layer/default/loading-2.gif HTTP/1.1" 304 0
+2018-10-18 21:48:46,484 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/TestcaseAdd/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\mysql\base.py", line 71, in execute
+    return self.cursor.execute(query, args)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 250, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 247, in execute
+    res = self._query(query)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 412, in _query
+    rowcount = self._do_query(q)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 375, in _do_query
+    db.query(q)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 276, in query
+    _mysql.connection.query(self, query)
+_mysql_exceptions.DataError: (1406, "Data too long for column 'req_path' at row 1")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceAutoTest\activator.py", line 14, in process
+    result = fun(request, index) if index else fun(request)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 22, in wrapper
+    return func(request, *args, **kwargs)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 342, in TestcaseAdd
+    username=username,except_result=req_exceptResult,case_id=case_id,resp_data=resp_data)
+  File "C:\python\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\python\lib\site-packages\django\db\models\query.py", line 413, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 717, in save
+    force_update=force_update, update_fields=update_fields)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 747, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 830, in _save_table
+    result = self._do_insert(cls._base_manager, using, fields, update_pk, raw)
+  File "C:\python\lib\site-packages\django\db\models\base.py", line 868, in _do_insert
+    using=using, raw=raw)
+  File "C:\python\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\python\lib\site-packages\django\db\models\query.py", line 1133, in _insert
+    return query.get_compiler(using=using).execute_sql(return_id)
+  File "C:\python\lib\site-packages\django\db\models\sql\compiler.py", line 1285, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\utils.py", line 89, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\python\lib\site-packages\django\db\backends\utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\python\lib\site-packages\django\db\backends\mysql\base.py", line 71, in execute
+    return self.cursor.execute(query, args)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 250, in execute
+    self.errorhandler(self, exc, value)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 50, in defaulterrorhandler
+    raise errorvalue
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 247, in execute
+    res = self._query(query)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 412, in _query
+    rowcount = self._do_query(q)
+  File "C:\python\lib\site-packages\MySQLdb\cursors.py", line 375, in _do_query
+    db.query(q)
+  File "C:\python\lib\site-packages\MySQLdb\connections.py", line 276, in query
+    _mysql.connection.query(self, query)
+django.db.utils.DataError: (1406, "Data too long for column 'req_path' at row 1")
+2018-10-18 21:48:46,497 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/TestcaseAdd/ HTTP/1.1" 500 20319
+2018-10-18 21:50:22,463 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 8293
+2018-10-18 21:50:22,600 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 21:50:24,457 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/TestcaseAdd/ HTTP/1.1" 200 11416
+2018-10-18 21:50:33,735 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/TestcaseAdd/ HTTP/1.1" 200 45
+2018-10-18 21:50:33,774 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10390
+2018-10-18 21:50:33,853 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 21:50:40,364 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 21:50:42,515 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
+2018-10-18 21:50:42,517 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/ HTTP/1.1" 500 15666
+2018-10-18 21:51:32,167 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 21:51:34,605 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
+2018-10-18 21:51:34,615 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/ HTTP/1.1" 500 16968
+2018-10-18 21:52:06,440 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 21:52:59,870 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10420
+2018-10-18 21:52:59,992 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 21:53:03,647 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 21:53:43,287 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 21:56:48,864 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10438
+2018-10-18 21:56:48,985 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 21:56:52,502 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:01:39,335 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:02:37,199 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10438
+2018-10-18 22:02:37,340 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 22:02:46,198 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:02:49,292 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
+2018-10-18 22:02:49,306 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/ HTTP/1.1" 500 16968
+2018-10-18 22:03:19,270 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:04:02,501 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:04:30,941 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
+2018-10-18 22:04:30,959 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
+2018-10-18 22:04:31,015 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/ HTTP/1.1" 500 16968
+2018-10-18 22:04:31,027 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/ HTTP/1.1" 500 16968
+2018-10-18 22:04:30,964 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
+2018-10-18 22:04:31,081 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/ HTTP/1.1" 500 59
+2018-10-18 22:04:31,085 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/ HTTP/1.1" 500 16969
+2018-10-18 22:04:56,946 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:05:17,610 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
+2018-10-18 22:05:17,622 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/ HTTP/1.1" 500 16968
+2018-10-18 22:05:35,100 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:05:37,552 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
+2018-10-18 22:05:37,566 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/ HTTP/1.1" 500 16968
+2018-10-18 22:05:56,382 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:07:11,097 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 22:07:59,410 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10477
+2018-10-18 22:07:59,533 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 22:08:04,054 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:08:32,280 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
+2018-10-18 22:08:32,295 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/ HTTP/1.1" 500 16968
+2018-10-18 22:08:32,330 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
+2018-10-18 22:08:32,353 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/ HTTP/1.1" 500 16968
+2018-10-18 22:08:32,367 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/ HTTP/1.1" 500 59
+2018-10-18 22:11:06,172 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:11:15,877 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 30
+2018-10-18 22:11:42,120 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:11:44,067 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 30
+2018-10-18 22:11:49,791 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:11:54,567 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 30
+2018-10-18 22:11:54,643 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 22:13:15,402 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10477
+2018-10-18 22:13:15,484 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 22:13:26,614 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:13:35,349 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 30
+2018-10-18 22:14:42,277 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:14:46,782 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 30
+2018-10-18 22:15:38,994 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:15:41,471 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
+2018-10-18 22:15:48,009 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10478
+2018-10-18 22:15:50,183 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:15:51,727 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
+2018-10-18 22:16:25,267 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/1/ HTTP/1.1" 200 477
+2018-10-18 22:18:43,754 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
+2018-10-18 22:18:43,764 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/ HTTP/1.1" 500 16967
+2018-10-18 22:18:47,632 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10365
+2018-10-18 22:18:49,234 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:18:49,314 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
+2018-10-18 22:18:57,098 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:18:57,180 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
+2018-10-18 22:19:09,217 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:19:09,296 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
+2018-10-18 22:19:17,607 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:19:17,683 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
+2018-10-18 22:20:47,072 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10365
+2018-10-18 22:20:48,600 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:20:48,731 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
+2018-10-18 22:20:52,767 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:20:52,881 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
