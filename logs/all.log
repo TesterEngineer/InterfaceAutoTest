@@ -8515,3 +8515,45 @@ ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpRe
 2018-10-18 22:20:48,731 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
 2018-10-18 22:20:52,767 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
 2018-10-18 22:20:52,881 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
+2018-10-18 22:29:35,524 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10003
+2018-10-18 22:29:46,764 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 22:30:22,629 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10003
+2018-10-18 22:30:22,717 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 22:35:25,390 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10842
+2018-10-18 22:35:45,170 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:35:45,257 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
+2018-10-18 22:35:51,377 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:35:51,461 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
+2018-10-18 22:37:27,342 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10898
+2018-10-18 22:37:30,954 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:37:31,044 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
+2018-10-18 22:38:31,589 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 11106
+2018-10-18 22:38:35,124 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:38:35,206 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
+2018-10-18 22:38:40,045 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 22:38:47,511 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/1/ HTTP/1.1" 200 477
+2018-10-18 22:38:49,968 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
+2018-10-18 22:38:49,977 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/ HTTP/1.1" 500 16967
+2018-10-18 22:38:56,000 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/1/ HTTP/1.1" 200 477
+2018-10-18 22:39:10,006 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
+2018-10-18 22:39:10,014 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/ HTTP/1.1" 500 16967
+2018-10-18 22:39:33,961 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 22:39:55,696 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 11148
+2018-10-18 22:39:55,819 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-18 22:40:19,939 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:42:27,027 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72
+2018-10-18 22:42:37,449 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 10880
+2018-10-18 22:42:41,091 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 478
+2018-10-18 22:42:41,206 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/ HTTP/1.1" 200 72

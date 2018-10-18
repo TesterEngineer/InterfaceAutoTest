@@ -7741,3 +7741,17 @@ Traceback (most recent call last):
   File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
     "returned None instead." % (callback.__module__, view_name)
 ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
+2018-10-18 22:38:49,968 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
+2018-10-18 22:39:10,006 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
