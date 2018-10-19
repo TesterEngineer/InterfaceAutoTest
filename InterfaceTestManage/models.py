@@ -61,7 +61,6 @@ class Environment(BaseTable):
 
 '''用例'''
 
-
 class TestCase(BaseTable):
     case_name = models.CharField('用例名称', null=True, max_length=50)
     req_path = models.CharField('请求路径', null=True, max_length=200)
