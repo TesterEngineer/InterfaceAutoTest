@@ -83,21 +83,21 @@
         <div class="page">
             <div>
                 {% if pages.has_previous %}
-                    <a class="prev" href="/api/EnviromentManager/{{ pages.previous_page_number }} ">&lt;&lt;</a>
+                    <a class="prev" href="/api/testCaseManager/{{ pages.previous_page_number }} ">&lt;&lt;</a>
                 {% endif %}
 
                 {% for num in  pageList.page_range %}
                     {% if num == currentPag %}
                         <span class="current">{{ num }}</span>
                     {% else %}
-                        <a class="num" href="/api/EnviromentManager/{{ num }}">{{ num }}</a>
+                        <a class="num" href="/api/testCaseManager/{{ num }}">{{ num }}</a>
                     {% endif %}
 
                 {% endfor %}
 
 
                 {% if pages.has_next %}
-                    <a href="/api/EnviromentManager/{{ pages.next_page_number }}">下一页</a>
+                    <a href="/api/testCaseManager/{{ pages.next_page_number }}">下一页</a>
                 {% endif %}
             </div>
         </div>
@@ -194,7 +194,7 @@
                         //发异步删除数据
                         $(obj).parents("tr").remove();
                         layer.msg(data.success, {icon: 1, time: 1000});
-                        window.location.href = '/api/EnviromentManager/0/';
+                        window.location.href = '/api/testCaseManager/0/';
                         return;
                     }
 
@@ -224,7 +224,7 @@
                         $(".layui-form-checked").not('.header').parents('tr').remove();
                     }
                     layer.close();
-                    window.location.href = '/api/EnviromentManager/0/';
+                    window.location.href = '/api/testCaseManager/0/';
                 });
 
                 layer.load(2);
