@@ -119,6 +119,7 @@
         });
 
         function ajax_request(req_params) {
+            layer.msg('用例执行中,请稍后哦！', {icon: 16});
             $.ajax({
                 'url': '/api/execute_cases/',
                 'contentType': "application/json; charset=utf-8",
@@ -126,9 +127,14 @@
                 'data': req_params,
                 'dataType': "json",
                 'success': function (data) {
-                    alert(data.info);
+                   // alert(data.info);
                     //alert("成功了哦");
+                    layer.open({
+                        title: '在线调试'
+                        , content: data.info
+                    });
 
+                   // layer.closeAll();
                 },
                 'error': function (data) {
                     alert(data.info);
@@ -170,8 +176,9 @@
                         params['req_path'] = fields.req_path;
                         params['req_param'] = fields.req_param;
                         params['except_result'] = fields.except_result;
-                        ajax_request(JSON.stringify(params));
+                        ajax_request(JSON.stringify(params),index);
                     });
+
                     layer.close(index);
                 },
                 btn2: function () {
