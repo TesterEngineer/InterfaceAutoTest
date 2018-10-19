@@ -381,6 +381,9 @@ def runCase(url,method,params,except_result,*args):
              content = {"info": str(e)}
              return JsonResponse(content)
 
+      else:
+          content = {"info": "请求返回的状态不是200,尽快查看日志看看错误信息！"}
+          return JsonResponse(content)
 
 
 '''页面跑用例的方法'''
