@@ -47,7 +47,7 @@
                     <td>{{ testcase.req_method }}</td>
                     <td>
                         <span class="req_param">{{ testcase.req_param }}</span>
-                        <button class="layui-btn layui-btn-xs" id="showJson"
+                        <button class="layui-btn layui-btn-xs show"  id="showJson" style="display: none;"
                                 onclick="showJson({{ testcase.req_param }} )">格式化查看
                         </button>
                     </td>
@@ -120,11 +120,17 @@
             var req = $(".req_param");
             for(var i=0;i<req.length;i++){
                var text =  req.get(i).innerText
-                if(text.length>30){
-                   var index =  find(text,",",1);
-                   var hiddenText =  text.substring(0,index)+".....";
-                 req.get(i).innerText = hiddenText;
+                if(text.length >0){
+                   debugger
+                   $(".show").get(i).style = "display:inline"
+                    debugger
+                    if(text.length>30){
+                       var index =  find(text,",",1);
+                       var hiddenText =  text.substring(0,index)+".....";
+                     req.get(i).innerText = hiddenText;
+                    }
                 }
+
             }
 
         });
