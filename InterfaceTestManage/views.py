@@ -322,25 +322,6 @@ def testCaseManager(request,id):
         environ = Environment.objects
         environList = environ.all()
 
-        # #截取参数，方便前端显示
-        # for testCase in testCaseList:
-        #
-        #     req_param = testCase.req_param
-        #     if  len(req_param) >0:
-        #         req_params = json.loads(req_param)
-        #         if len(req_params.keys()) >2:
-        #             i=0
-        #             req={}
-        #             for key,value in req_params.items():
-        #                 if i<2:
-        #                     req[key]=value
-        #                     i = i+1
-        #                 else:
-        #                     break
-        #             req['..']=".."
-        #             testCase.req_param = req
-
-
         context = {'testCaseList':testCaseList,'pageList':paginator,'currentPag':int(firstPage),"pages":pages,"title":"测试环境管理","environList":environList}
         return  render(request,'testCase-list.html',context)
 
@@ -388,28 +369,42 @@ def getTestCaseInfo(request,id):
 
 
 '''执行测试用例'''
-def runCase(url,method,params,except_result,*args):
+def runCase(id,url,method,params,except_result,*args):
     if method == 'GET':
-      response = requests.get(url,params=params)
-      if response.status_code == 200:
-          try:
-            #assert except_result in response.text
-            info1="恭喜你用例执行成功了"
-            content={"info":info1}
+        try:
+          response = requests.get(url,params=params)
+          if response.status_code == 200:
+              try:
+                assert except_result in response.text
+                info1="恭喜,用例执行成功了"
+                content={"info":info1,"statu":"success"}
+                testcaseInfo = TestCase.objects.filter(id=id)
+                update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+                testcaseInfo.update(resp_result=response.text,update_time=update_time,test_result=1)
+                return JsonResponse(content)
+              except AssertionError as e:
+                 print(e)
+                 content = {"info": "用例执行失败,预期结果和响应结果不一致！","statu":"error"}
+                 testcaseInfo = TestCase.objects.filter(id=id)
+                 update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+                 testcaseInfo.update(resp_result=response.text, update_time=update_time, test_result=2)
+                 return JsonResponse(content)
+          else:
+              content = {"info": "请求返回的状态不是200,尽快查看日志看看错误信息！","statu":"error"}
+              testcaseInfo = TestCase.objects.filter(id=id)
+              update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+              testcaseInfo.update(resp_result=response.text, update_time=update_time, test_result=2)
+              return JsonResponse(content)
+        except:
+            content = {"info": "请检测请求地址是否正确,执行发送请求出现异常了！","statu":"error"}
+            testcaseInfo = TestCase.objects.filter(id=id)
+            update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+            testcaseInfo.update(update_time=update_time, test_result=2)
             return JsonResponse(content)
-          except AssertionError as e:
-             print(e)
-             content = {"info": str(e)}
-             return JsonResponse(content)
-
-      else:
-          content = {"info": "请求返回的状态不是200,尽快查看日志看看错误信息！"}
-          return JsonResponse(content)
-
 
 '''页面跑用例的方法'''
 @login_check
-def execute_cases(request):
+def execute_cases(request,id):
     if request.method =="POST":
         postdataDic = eval(request.body)
         method =postdataDic.get("req_method","")
@@ -418,7 +413,7 @@ def execute_cases(request):
         except_result = postdataDic.get("except_result","")
 
         #执行测试用例
-        return runCase(url=requestPath,method=method,params=params,except_result=except_result)
+        return runCase(id=id,url=requestPath,method=method,params=params,except_result=except_result)
 
 
 

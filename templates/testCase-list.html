@@ -10,8 +10,9 @@
             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
             <button class="layui-btn" onclick="x_admin_show('新增测试用例','/api/TestcaseAdd',800,600)"><i class="layui-icon"></i>添加
             </button>
-            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:2px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-        <i class="layui-icon" style="line-height:40px">ဂ</i></a>
+            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:2px;float:right"
+               href="javascript:location.replace(location.href);" title="刷新">
+                <i class="layui-icon" style="line-height:40px">ဂ</i></a>
         </xblock>
         <table class="layui-table">
             <thead>
@@ -47,7 +48,7 @@
                     <td>{{ testcase.req_method }}</td>
                     <td>
                         <span class="req_param">{{ testcase.req_param }}</span>
-                        <button class="layui-btn layui-btn-xs show"  id="showJson" style="display: none;"
+                        <button class="layui-btn layui-btn-xs show" id="showJson" style="display: none;"
                                 onclick="showJson({{ testcase.req_param }} )">格式化查看
                         </button>
                     </td>
@@ -55,12 +56,15 @@
                     <td>{{ testcase.except_result }}</td>
                     <td>{{ testcase.update_time|date:"Y-m-d H:i:s" }}</td>
                     <td class="td-status">
-                        {% if testcase.status == 1 %}
-                            <span class="layui-btn layui-btn-normal layui-btn-mini"
-                                  onclick="show_result(this,'{{ testcase.id }}')">已启用</span>
-                        {% else %}
-                            <span id="btnResult_{{ testcase.id }}" class="layui-btn layui-btn-disabled layui-btn-mini"
+                        {% if testcase.test_result == "0" %}
+                           <span id="btnResult_{{ testcase.id }}" class="layui-btn layui-btn-disabled layui-btn-mini"
                                   onclick="show_result(this,'{{ testcase.id }}')">结果</span>
+                        {% elif testcase.test_result == "1" %}
+                             <span id="btnResult_{{ testcase.id }}" class="layui-btn layui-btn-normal layui-btn-mini"
+                                  onclick="show_result(this,'{{ testcase.id }}')">成功</span>
+                        {% else %}
+                            <span id="btnResult_{{ testcase.id }}" class="   layui-btn layui-btn-danger layui-btn-mini"
+                                  onclick="show_result(this,'{{ testcase.id }}')">失败</span>
                         {% endif %}
 
                     </td>
@@ -108,35 +112,33 @@
 
     </div>
     <script>
-       $( document ).ready(function() {
+        $(document).ready(function () {
 
-                function find(str,cha,num){
-             var x=str.indexOf(cha);
-            for(var i=0;i<num;i++){
-               x=str.indexOf(cha,x+1);
-             }
-             return x;
+            function find(str, cha, num) {
+                var x = str.indexOf(cha);
+                for (var i = 0; i < num; i++) {
+                    x = str.indexOf(cha, x + 1);
+                }
+                return x;
             }
+
             var req = $(".req_param");
-            for(var i=0;i<req.length;i++){
-               var text =  req.get(i).innerText
-                if(text.length >0){
-                   debugger
-                   $(".show").get(i).style = "display:inline"
+            for (var i = 0; i < req.length; i++) {
+                var text = req.get(i).innerText
+                if (text.length > 0) {
                     debugger
-                    if(text.length>30){
-                       var index =  find(text,",",1);
-                       var hiddenText =  text.substring(0,index)+".....";
-                     req.get(i).innerText = hiddenText;
+                    $(".show").get(i).style = "display:inline"
+                    debugger
+                    if (text.length > 30) {
+                        var index = find(text, ",", 1);
+                        var hiddenText = text.substring(0, index) + ".....";
+                        req.get(i).innerText = hiddenText;
                     }
                 }
 
             }
 
         });
-
-
-
 
 
         layui.use('laydate', function () {
@@ -154,35 +156,46 @@
         });
 
         function ajax_request(req_params, id) {
-
             $.ajax({
-                'url': '/api/execute_cases/',
+                'url': '/api/execute_cases/'+id+"/",
                 'contentType': "application/json; charset=utf-8",
                 'type': 'POST',
                 'data': req_params,
                 'dataType': "json",
-                async : true,
-                'beforeSend':function (XMLHttpRequest) {
-                       layer.msg('用例执行中,请稍后哦！', {icon: 16});
+                async: false,
+                'beforeSend': function (XMLHttpRequest) {
+                    layer.msg('用例执行中,请稍后哦！', {icon: 16});
                     //layer.load(1);
                 },
-                'timeout':15000,
+                'timeout': 15000,
                 'success': function (data) {
                     // alert(data.info);
                     //alert("成功了哦");
-                    //layer.closeAll();
-                    layer.open({
-                        title: '执行用例结果'
-                        , content: data.info
-                    });
-                    $("#btnResult_" + id).attr("class", "layui-btn layui-btn-normal layui-btn-mini");
-                    $("#btnResult_" + id).text("成功");
+                    layer.closeAll();
+                    if (data.statu == "error") {
+                        layer.open({
+                            title: '执行用例结果'
+                            , content:"<i class='layui-layer-ico layui-layer-ico5'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;<span style='color:red'>"+data.info+"</span>"
+                        });
+                        $("#btnResult_" + id).attr("class", "layui-btn layui-btn-danger layui-btn-mini");
+                        $("#btnResult_" + id).text("失败");
+                    } else if( data.statu == "success"){
+                        layer.open({
+                            title: '执行用例结果'
+                            , content:"<i class='layui-layer-ico layui-layer-ico6'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;<span style='color:green'>"+data.info+"</span>"
+                        });
+                        $("#btnResult_" + id).attr("class", "layui-btn layui-btn-normal layui-btn-mini");
+                        $("#btnResult_" + id).text("成功");
+                    }
+
                     // layer.closeAll();
                 },
                 'error': function (data) {
-                    layer.closeAll();
-                    alert(data.info);
-                    alert("失败了啊");
+                    debugger
+                   layer.open({
+                            title: '执行用例结果'
+                            , content:"<i class='layui-layer-ico layui-layer-ico5'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;<span style='color:red'>"+data.info+"</span>"
+                        });
                     $("#btnResult_" + id).attr("class", "layui-btn layui-btn-danger layui-btn-mini");
                     $("#btnResult_" + id).text("失败");
                 }
@@ -244,7 +257,7 @@
                             title: '运行结果',
                             area: ['450px', '300px'],
                             btn: ['确定', '取消'],
-                            content: "<i class='layui-layer-ico layui-layer-ico6'></i>执行成功服务器返回结果:"
+                            content: "<i class='layui-layer-ico layui-layer-ico6'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>执行成功服务器返回结果:</span>",
                         }
                     )
                 } else {
@@ -252,7 +265,7 @@
                             title: '运行结果',
                             area: ['450px', '300px'],
                             btn: ['确定', '取消'],
-                            content: "<i class='layui-layer-ico layui-layer-ico5'></i>执行失败的信息是:"
+                            content: "<i class='layui-layer-ico layui-layer-ico5'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:red'>执行成功服务器返回结果:</span>",
 
                         }
                     )

@@ -68,8 +68,9 @@ class TestCase(BaseTable):
     req_param = models.CharField('请求参数', null=True, max_length=200)
 
     resp_code = models.CharField('响应的状态码', null=True, max_length=10)
-    resp_result = models.CharField('响应结果', null=True, max_length=200)
-    test_result = models.CharField('测试结果', null=True, max_length=20)
+    resp_result = models.TextField('响应结果', null=True)
+    #0是未执行过用例  1是执行成功   2是执行失败
+    test_result = models.CharField('测试结果', null=True, max_length=20,default=0)
     except_result = models.CharField('期望结果', null=True, max_length=200)
 
     username = models.CharField('操作人', max_length=10, null=False)
