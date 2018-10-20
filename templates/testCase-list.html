@@ -66,7 +66,7 @@
                             <span id="btnResult_{{ testcase.id }}" class="   layui-btn layui-btn-danger layui-btn-mini"
                                   onclick="show_result(this,'{{ testcase.id }}')">失败</span>
                         {% endif %}
-
+                    <p style="display: none" id="resp_result_{{ testcase.id }}">{{ testcase.resp_result }}'</p>
                     </td>
                     <td class="td-manage">
                         <a onclick="run_testcase(this,'{{ testcase.id }}')" href="javascript:;" title="运行测试用例">
@@ -248,24 +248,33 @@
         }
 
         function show_result(obj, id) {
+            function html2Escape(sHtml) {
+                return sHtml.replace(/[<>&"]/g,function(c){return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c];});
+            }
+
             if ($('#btnResult_' + id).attr("class").indexOf(" layui-btn-disabled ") != -1) {
                 return;
             } else {
                 if ($('#btnResult_' + id).text() == "成功") {
+                    debugger
+                    var resp_result = $('#resp_result_'+id).text();
+                    var result  = html2Escape(resp_result);
                     layer.open({
                             skin: 'layui-layer-molv',
                             title: '运行结果',
                             area: ['450px', '300px'],
                             btn: ['确定', '取消'],
-                            content: "<i class='layui-layer-ico layui-layer-ico6'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>执行成功服务器返回结果:</span>",
+                            content: "<i class='layui-layer-ico layui-layer-ico6'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>执行成功服务器返回结果:</span><p>"+result+"</p>",
                         }
                     )
                 } else {
+                     var resp_result = $('#resp_result_'+id).text();
+                      resp_result  =html2Escape(resp_result);
                     layer.open({
                             title: '运行结果',
                             area: ['450px', '300px'],
                             btn: ['确定', '取消'],
-                            content: "<i class='layui-layer-ico layui-layer-ico5'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:red'>执行成功服务器返回结果:</span>",
+                            content: "<i class='layui-layer-ico layui-layer-ico5'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:red'>执行成功服务器返回结果:</span><p>"+resp_result+"</p>",
 
                         }
                     )

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3238f872-1a70-48d5-b7f5-f9a451af5cbb" name="Default" comment="注册信息弹框问题修复">
+    <list default="true" id="3238f872-1a70-48d5-b7f5-f9a451af5cbb" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InterfaceTestManage/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/InterfaceTestManage/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InterfaceTestManage/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/InterfaceTestManage/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/all.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/all.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/script.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/script.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/testCase-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/testCase-list.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,6 +24,20 @@
     <SUITE FILE_PATH="coverage/InterfaceAutoTest$tests.coverage" NAME="tests Coverage Results" MODIFIED="1535074581348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/InterfaceTestManage" />
     <SUITE FILE_PATH="coverage/InterfaceAutoTest$lauchTime.coverage" NAME="lauchTime Coverage Results" MODIFIED="1538282307461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="E:/appSpecialtest" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
@@ -43,20 +55,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testCase-list.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="testCase-list.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/testCase-list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="563">
-              <caret line="190" column="38" lean-forward="true" selection-start-line="190" selection-start-column="38" selection-end-line="190" selection-end-column="38" />
+            <state relative-caret-position="375">
+              <caret line="253" column="12" selection-start-line="253" selection-start-column="12" selection-end-line="253" selection-end-column="12" />
+              <folding>
+                <element signature="e#3440#3461#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="jquery.js" pinned="false" current-in-tab="false">
+        <entry file="file://C:/python/Lib/site-packages/django/contrib/admin/static/admin/js/vendor/jquery/jquery.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="155">
+              <caret line="10342" column="8" selection-start-line="10342" selection-start-column="8" selection-end-line="10342" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/InterfaceTestManage/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="398" column="73" selection-start-line="398" selection-start-column="73" selection-end-line="398" selection-end-column="73" />
+            <state relative-caret-position="310">
+              <caret line="382" column="88" selection-start-line="382" selection-start-column="48" selection-end-line="382" selection-end-column="88" />
             </state>
           </provider>
         </entry>
@@ -73,12 +97,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>NAME</find>
-      <find>project_obj</find>
-      <find>projectManager</find>
-      <find>{{</find>
-      <find>USE_TZ</find>
-      <find>project_info</find>
       <find>project</find>
       <find>sucess</find>
       <find>environList</find>
@@ -103,6 +121,12 @@
       <find>update</find>
       <find>成功</find>
       <find>run_testcase</find>
+      <find>show</find>
+      <find>show_result</find>
+      <find>show_r</find>
+      <find>resp_result_</find>
+      <find>#btnResult</find>
+      <find>btnResult</find>
     </findStrings>
     <replaceStrings>
       <replace>environmentAdd</replace>
@@ -175,8 +199,8 @@
         <option value="$PROJECT_DIR$/templates/testcase-add.html" />
         <option value="$USER_HOME$/PycharmProjects/HttpRunnerManager/ApiManager/models.py" />
         <option value="$PROJECT_DIR$/InterfaceTestManage/models.py" />
-        <option value="$PROJECT_DIR$/templates/testCase-list.html" />
         <option value="$PROJECT_DIR$/InterfaceTestManage/views.py" />
+        <option value="$PROJECT_DIR$/templates/testCase-list.html" />
       </list>
     </option>
   </component>
@@ -634,7 +658,14 @@
       <option name="project" value="LOCAL" />
       <updated>1540016650080</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="完善用例运行，页面的情况">
+      <created>1540045376246</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1540045376246</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TodoView">
@@ -654,17 +685,17 @@
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.1860817" side_tool="true" weight="0.5693069" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.5514372" weight="0.34818482" />
-      <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.5763994" weight="0.3349835" />
+      <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.5763994" weight="0.28547856" />
       <window_info anchor="bottom" id="Run" order="14" sideWeight="0.8623298" weight="0.32013202" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.6060172" weight="0.71947193" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.6060172" weight="0.20462047" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.36956522" weight="0.19515885" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32980332" />
       <window_info anchor="bottom" id="Find" order="3" sideWeight="0.49856734" weight="0.23170732" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" sideWeight="0.6304348" side_tool="true" weight="0.22768533" />
       <window_info id="Favorites" order="2" sideWeight="0.47826087" side_tool="true" weight="0.22768533" />
-      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.8139183" weight="0.2920792" />
+      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.8139183" weight="0.19471948" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -675,6 +706,32 @@
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="0" weight="0.17491749" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.5514372" weight="0.34818482" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.36956522" weight="0.19515885" />
+      <window_info id="Structure" order="1" sideWeight="0.6304348" side_tool="true" weight="0.22768533" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.49498567" weight="0.28712872" />
+      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="14" sideWeight="0.8623298" weight="0.32013202" />
+      <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.5763994" weight="0.28547856" />
+      <window_info anchor="bottom" id="Find" order="3" sideWeight="0.49856734" weight="0.23170732" />
+      <window_info anchor="right" x="0" y="0" width="314" height="676" id="Documentation" order="5" side_tool="true" weight="0.3295129" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32980332" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.6060172" weight="0.20462047" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.1860817" side_tool="true" weight="0.5693069" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.8139183" visible="true" weight="0.19471948" />
+      <window_info anchor="bottom" id="Message" order="2" />
+      <window_info anchor="bottom" id="Messages" order="1" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="0" weight="0.17491749" />
+      <window_info id="Favorites" order="2" sideWeight="0.47826087" side_tool="true" weight="0.22768533" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -705,7 +762,8 @@
     <MESSAGE value="用例的执行成功。" />
     <MESSAGE value="注册信息弹框问题修复" />
     <MESSAGE value="修复" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复" />
+    <MESSAGE value="完善用例运行，页面的情况" />
+    <option name="LAST_COMMIT_MESSAGE" value="完善用例运行，页面的情况" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -715,11 +773,6 @@
           <line>1</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/InterfaceTestManage/views.py</url>
-          <line>399</line>
-          <option name="timeStamp" value="132" />
-        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -728,7 +781,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="133" />
+      <option name="time" value="134" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -738,62 +791,66 @@
         <watch expression="type(e)" language="Python" />
         <watch expression="len(response.text)" language="Python" />
         <watch expression="response.text" language="Python" />
-        <watch expression=" response = requests.get(url,params=params)" />
+        <watch expression="response.content.decode(&quot;utf8&quot;,&quot;ignore&quot;)" language="Python" />
         <watch expression="testcaseInfo" />
+        <watch expression="response.content" language="Python" />
+        <watch expression="args" />
+        <watch expression="response.text" />
+        <watch expression="args" />
+        <watch expression="args" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
       <expression>
-        <expression-string>response.text</expression-string>
+        <expression-string>response.content.decode(&quot;utf8&quot;,&quot;ignore&quot;)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>len(response.text)</expression-string>
+        <expression-string>response.content</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>type(e)</expression-string>
+        <expression-string>response.content.decode(&quot;utf8&quot;,&quot;ignore&quot;).encode(&quot;gbk&quot;,&quot;ignore&quot;)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>e.message</expression-string>
+        <expression-string>response.text.encode(&quot;gbk&quot;,&quot;ignore&quot;).decode(&quot;utf8&quot;,&quot;ignore&quot;)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>assert except_result in response.text</expression-string>
+        <expression-string>response.text.encode(&quot;gbk&quot;,&quot;ignore&quot;)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>req_params.items</expression-string>
+        <expression-string>response.text.encode(&quot;gbk&quot;).decode(&quot;gbk&quot;)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>json.loads(req_param)</expression-string>
+        <expression-string>response.text.encode(&quot;utf-8&quot;).decode(&quot;gbk&quot;)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>json.load(req_param)</expression-string>
+        <expression-string>response.text.encode(&quot;utf-8&quot;)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>type req_param</expression-string>
+        <expression-string>response.text.encode(&quot;gbk&quot;)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://E:/HttpRunnerManager/ApiManager/managers.py" />
     <entry file="file://$PROJECT_DIR$/InterfaceAutoTest/test.yml" />
     <entry file="file://$PROJECT_DIR$/test.yml" />
     <entry file="file://$PROJECT_DIR$/logs/script.log">
@@ -1061,13 +1118,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/testCase-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="190" column="38" lean-forward="true" selection-start-line="190" selection-start-column="38" selection-end-line="190" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/121723227/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -1075,10 +1125,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://C:/python/Lib/site-packages/django/contrib/admin/static/admin/js/vendor/jquery/jquery.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="10342" column="8" selection-start-line="10342" selection-start-column="8" selection-end-line="10342" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/InterfaceTestManage/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="398" column="73" selection-start-line="398" selection-start-column="73" selection-end-line="398" selection-end-column="73" />
+        <state relative-caret-position="310">
+          <caret line="382" column="88" selection-start-line="382" selection-start-column="48" selection-end-line="382" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/testCase-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="253" column="12" selection-start-line="253" selection-start-column="12" selection-end-line="253" selection-end-column="12" />
+          <folding>
+            <element signature="e#3440#3461#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -380,26 +380,26 @@ def runCase(id,url,method,params,except_result,*args):
                 content={"info":info1,"statu":"success"}
                 testcaseInfo = TestCase.objects.filter(id=id)
                 update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-                testcaseInfo.update(resp_result=response.text,update_time=update_time,test_result=1)
+                testcaseInfo.update(resp_result=response.content.decode("utf8","ignore"),update_time=update_time,test_result=1)
                 return JsonResponse(content)
               except AssertionError as e:
                  print(e)
                  content = {"info": "用例执行失败,预期结果和响应结果不一致！","statu":"error"}
                  testcaseInfo = TestCase.objects.filter(id=id)
                  update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-                 testcaseInfo.update(resp_result=response.text, update_time=update_time, test_result=2)
+                 testcaseInfo.update(resp_result=response.content.decode("utf8","ignore"), update_time=update_time, test_result=2)
                  return JsonResponse(content)
           else:
               content = {"info": "请求返回的状态不是200,尽快查看日志看看错误信息！","statu":"error"}
               testcaseInfo = TestCase.objects.filter(id=id)
               update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-              testcaseInfo.update(resp_result=response.text, update_time=update_time, test_result=2)
+              testcaseInfo.update(resp_result=response.content.decode("utf8","ignore"), update_time=update_time, test_result=2)
               return JsonResponse(content)
-        except:
+        except BaseException as e:
             content = {"info": "请检测请求地址是否正确,执行发送请求出现异常了！","statu":"error"}
             testcaseInfo = TestCase.objects.filter(id=id)
             update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-            testcaseInfo.update(update_time=update_time, test_result=2)
+            testcaseInfo.update(resp_result=e,update_time=update_time, test_result=2)
             return JsonResponse(content)
 
 '''页面跑用例的方法'''
