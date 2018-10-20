@@ -1,4 +1,5 @@
 #coding:utf-8
+import json
 import logging
 import  time
 
@@ -320,6 +321,26 @@ def testCaseManager(request,id):
         testCaseList =pages.object_list
         environ = Environment.objects
         environList = environ.all()
+
+        # #截取参数，方便前端显示
+        # for testCase in testCaseList:
+        #
+        #     req_param = testCase.req_param
+        #     if  len(req_param) >0:
+        #         req_params = json.loads(req_param)
+        #         if len(req_params.keys()) >2:
+        #             i=0
+        #             req={}
+        #             for key,value in req_params.items():
+        #                 if i<2:
+        #                     req[key]=value
+        #                     i = i+1
+        #                 else:
+        #                     break
+        #             req['..']=".."
+        #             testCase.req_param = req
+
+
         context = {'testCaseList':testCaseList,'pageList':paginator,'currentPag':int(firstPage),"pages":pages,"title":"测试环境管理","environList":environList}
         return  render(request,'testCase-list.html',context)
 

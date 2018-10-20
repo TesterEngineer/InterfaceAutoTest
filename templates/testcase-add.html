@@ -66,7 +66,7 @@
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-pane">依赖数据</label>
+        <label class="layui-form-label">依赖数据</label>
         <div class="layui-input-block">
             <input type="text" name="resp_data" lay-verify="required" placeholder="请输入需要依赖上一个接口的数据匹配" autocomplete="off"
                    class="layui-input">
@@ -262,10 +262,15 @@
                 for (var i = 0; i < params.length; i++) {
                     var key = $(params[i]).val();
                     var value = $(params[i + 1]).val();
-                    req[key] = value;
-                    i = i + 1;
+                     if(key && value){
+                          req[key] = value;
+                          i = i + 1;
+                    }
                 }
-                req1['req_param'] = req;
+                if(!$.isEmptyObject(req)){
+                    req1['req_param'] = req;
+
+                }
                 //js对象转化成字符串
                 req_params = JSON.stringify(req1);
             }
@@ -289,8 +294,9 @@
 
                 },
                 'error': function (data) {
+                    layer.closeAll();
                     layer.open({'title': '错误提交信息', 'content': data.error});
-                    layer.close();
+
                 }
 
 

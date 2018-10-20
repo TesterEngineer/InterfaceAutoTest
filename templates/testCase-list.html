@@ -10,7 +10,8 @@
             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
             <button class="layui-btn" onclick="x_admin_show('新增测试用例','/api/TestcaseAdd',800,600)"><i class="layui-icon"></i>添加
             </button>
-
+            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:2px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:40px">ဂ</i></a>
         </xblock>
         <table class="layui-table">
             <thead>
@@ -19,10 +20,10 @@
                     <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i>
                     </div>
                 </th>
-                <th>用例序号</th>
-                <th>测试用例名称</th>
+                <th>序号</th>
+                <th>用例名称</th>
                 <th>接口路径</th>
-                <th>接口请求方式</th>
+                <th>请求方式</th>
                 <th>参数</th>
                 <th>操作人</th>
                 <th>期望结果</th>
@@ -44,7 +45,8 @@
                     <td>{{ testcase.case_name }}</td>
                     <td>{{ testcase.req_path }}</td>
                     <td>{{ testcase.req_method }}</td>
-                    <td>{{ testcase.req_param }}
+                    <td>
+                        <span class="req_param">{{ testcase.req_param }}</span>
                         <button class="layui-btn layui-btn-xs" id="showJson"
                                 onclick="showJson({{ testcase.req_param }} )">格式化查看
                         </button>
@@ -54,9 +56,11 @@
                     <td>{{ testcase.update_time|date:"Y-m-d H:i:s" }}</td>
                     <td class="td-status">
                         {% if testcase.status == 1 %}
-                            <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
+                            <span class="layui-btn layui-btn-normal layui-btn-mini"
+                                  onclick="show_result(this,'{{ testcase.id }}')">已启用</span>
                         {% else %}
-                            <span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>
+                            <span id="btnResult_{{ testcase.id }}" class="layui-btn layui-btn-disabled layui-btn-mini"
+                                  onclick="show_result(this,'{{ testcase.id }}')">结果</span>
                         {% endif %}
 
                     </td>
@@ -104,6 +108,31 @@
 
     </div>
     <script>
+       $( document ).ready(function() {
+
+                function find(str,cha,num){
+             var x=str.indexOf(cha);
+            for(var i=0;i<num;i++){
+               x=str.indexOf(cha,x+1);
+             }
+             return x;
+            }
+            var req = $(".req_param");
+            for(var i=0;i<req.length;i++){
+               var text =  req.get(i).innerText
+                if(text.length>30){
+                   var index =  find(text,",",1);
+                   var hiddenText =  text.substring(0,index)+".....";
+                 req.get(i).innerText = hiddenText;
+                }
+            }
+
+        });
+
+
+
+
+
         layui.use('laydate', function () {
             var laydate = layui.laydate;
 
@@ -118,27 +147,38 @@
             });
         });
 
-        function ajax_request(req_params) {
-            layer.msg('用例执行中,请稍后哦！', {icon: 16});
+        function ajax_request(req_params, id) {
+
             $.ajax({
                 'url': '/api/execute_cases/',
                 'contentType': "application/json; charset=utf-8",
                 'type': 'POST',
                 'data': req_params,
                 'dataType': "json",
+                async : true,
+                'beforeSend':function (XMLHttpRequest) {
+                       layer.msg('用例执行中,请稍后哦！', {icon: 16});
+                    //layer.load(1);
+                },
+                'timeout':15000,
                 'success': function (data) {
-                   // alert(data.info);
+                    // alert(data.info);
                     //alert("成功了哦");
+                    //layer.closeAll();
                     layer.open({
-                        title: '在线调试'
+                        title: '执行用例结果'
                         , content: data.info
                     });
-
-                   // layer.closeAll();
+                    $("#btnResult_" + id).attr("class", "layui-btn layui-btn-normal layui-btn-mini");
+                    $("#btnResult_" + id).text("成功");
+                    // layer.closeAll();
                 },
                 'error': function (data) {
+                    layer.closeAll();
                     alert(data.info);
                     alert("失败了啊");
+                    $("#btnResult_" + id).attr("class", "layui-btn layui-btn-danger layui-btn-mini");
+                    $("#btnResult_" + id).text("失败");
                 }
 
 
@@ -151,6 +191,7 @@
             layer.open({
                 type: 1,
                 title: '请选择运行环境',
+                offset: '250px',
                 area: ['450px', '300px'],
                 btn: ['确定', '取消'],
                 content: '       <select id= "environId" name="case_id" lay-verify="required" lay-search="">\n' +
@@ -160,7 +201,7 @@
                     '            {% endfor %}\n' +
                 '        </select>',
                 yes: function (index) {
-                    alert("这是点击确定按钮走的回调");
+                    //alert("这是点击确定按钮走的回调");
                     var value = $("#environId option:selected").val();
 
                     //根据id，将url+data+method获取到传到后台
@@ -176,18 +217,46 @@
                         params['req_path'] = fields.req_path;
                         params['req_param'] = fields.req_param;
                         params['except_result'] = fields.except_result;
-                        ajax_request(JSON.stringify(params),index);
+                        ajax_request(JSON.stringify(params), id);
                     });
-
                     layer.close(index);
+
                 },
                 btn2: function () {
                     alert("这是点击取消按钮走的回调");
                 },
             });
+        }
+
+        function show_result(obj, id) {
+            if ($('#btnResult_' + id).attr("class").indexOf(" layui-btn-disabled ") != -1) {
+                return;
+            } else {
+                if ($('#btnResult_' + id).text() == "成功") {
+                    layer.open({
+                            skin: 'layui-layer-molv',
+                            title: '运行结果',
+                            area: ['450px', '300px'],
+                            btn: ['确定', '取消'],
+                            content: "<i class='layui-layer-ico layui-layer-ico6'></i>执行成功服务器返回结果:"
+                        }
+                    )
+                } else {
+                    layer.open({
+                            title: '运行结果',
+                            area: ['450px', '300px'],
+                            btn: ['确定', '取消'],
+                            content: "<i class='layui-layer-ico layui-layer-ico5'></i>执行失败的信息是:"
+
+                        }
+                    )
+                }
+
+            }
 
 
         }
+
 
         /*用户-删除*/
         function member_del(obj, id) {
