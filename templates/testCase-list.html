@@ -12,7 +12,8 @@
             </button>
             <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:2px;float:right"
                href="javascript:location.replace(location.href);" title="刷新">
-                <i class="layui-icon" style="line-height:40px">ဂ</i></a>
+                <i class="layui-icon" style="line-height:40px">ဂ</i>
+            </a>
         </xblock>
         <table class="layui-table">
             <thead>
@@ -214,10 +215,12 @@
                 area: ['450px', '300px'],
                 btn: ['确定', '取消'],
                 content: '       <select id= "environId" name="case_id" lay-verify="required" lay-search="">\n' +
-                '            {% for environ in environList %}\n'+
-                    '                <option value="{{ environ.id }}">{{ environ.id }}--{{ environ.path_name }}</option>\n'
-                    +
-                    '            {% endfor %}\n' +
+                 ' <option value="">-----请选择运行测试环境-----</option>\n'+
+                ' {% for environ in environList %}\n'+
+                    '{% if environ.status == 1 %} \n'+
+                      ' <option value="{{ environ.host}}">{{ environ.id }}--{{ environ.path_name }}</option>\n'+
+                    '{% endif %}\n'+
+                '{% endfor %}\n' +
                 '        </select>',
                 yes: function (index) {
                     //alert("这是点击确定按钮走的回调");
@@ -264,7 +267,7 @@
                             title: '运行结果',
                             area: ['450px', '300px'],
                             btn: ['确定', '取消'],
-                            content: "<i class='layui-layer-ico layui-layer-ico6'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>执行成功服务器返回结果:</span><p>"+result+"</p>",
+                            content: "<i class='layui-layer-ico layui-layer-ico6'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>服务器返回结果:</span><p>"+result+"</p>",
                         }
                     )
                 } else {
@@ -274,7 +277,7 @@
                             title: '运行结果',
                             area: ['450px', '300px'],
                             btn: ['确定', '取消'],
-                            content: "<i class='layui-layer-ico layui-layer-ico5'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:red'>执行成功服务器返回结果:</span><p>"+resp_result+"</p>",
+                            content: "<i class='layui-layer-ico layui-layer-ico5'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:red'>服务器返回结果:</span><p>"+resp_result+"</p>",
 
                         }
                     )
