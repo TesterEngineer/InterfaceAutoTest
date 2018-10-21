@@ -13539,3 +13539,224 @@ UnboundLocalError: local variable 'response' referenced before assignment
 2018-10-21 00:01:29,890 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 36403
 2018-10-21 00:03:24,158 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 18685
 2018-10-21 00:03:26,236 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/1/ HTTP/1.1" 200 36388
+2018-10-21 11:46:55,781 [django.server:124] [basehttp:log_message] [INFO]- "GET /login HTTP/1.1" 200 3442
+2018-10-21 11:46:55,938 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/css/font.css HTTP/1.1" 200 521
+2018-10-21 11:46:55,952 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/layui.js HTTP/1.1" 200 6543
+2018-10-21 11:46:55,965 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/css/xadmin.css HTTP/1.1" 200 10548
+2018-10-21 11:46:55,971 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/js/xadmin.js HTTP/1.1" 200 6307
+2018-10-21 11:46:56,116 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/js/jquery.min.js HTTP/1.1" 200 84359
+2018-10-21 11:46:57,115 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/css/layui.css HTTP/1.1" 200 60228
+2018-10-21 11:46:57,338 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/lay/modules/form.js HTTP/1.1" 200 7926
+2018-10-21 11:46:57,359 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/images/aiwrap.png HTTP/1.1" 200 3032
+2018-10-21 11:46:57,367 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/images/bg.png HTTP/1.1" 200 28211
+2018-10-21 11:46:57,527 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/lay/modules/layer.js HTTP/1.1" 200 22064
+2018-10-21 11:46:57,747 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/css/modules/layer/default/layer.css?v=3.1.1 HTTP/1.1" 200 14426
+2018-10-21 11:46:57,825 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/font/iconfont.woff?v=226_rc2 HTTP/1.1" 200 26840
+2018-10-21 11:46:57,841 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/lay/modules/element.js HTTP/1.1" 200 7265
+2018-10-21 11:46:58,820 [django.server:124] [basehttp:log_message] [INFO]- "POST /login HTTP/1.1" 302 0
+2018-10-21 11:46:58,963 [django.server:124] [basehttp:log_message] [INFO]- "GET /index HTTP/1.1" 200 12378
+2018-10-21 11:46:59,146 [django.server:124] [basehttp:log_message] [INFO]- "GET /index HTTP/1.1" 200 12378
+2018-10-21 11:46:59,384 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/fonts/iconfont.woff HTTP/1.1" 200 30200
+2018-10-21 11:46:59,474 [django.server:124] [basehttp:log_message] [INFO]- "GET /welcome HTTP/1.1" 200 7961
+2018-10-21 11:47:01,563 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 36376
+2018-10-21 11:47:01,760 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/lay/modules/laydate.js HTTP/1.1" 200 27338
+2018-10-21 11:47:01,828 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/css/modules/laydate/default/laydate.css?v=5.0.9 HTTP/1.1" 200 7538
+2018-10-21 11:47:03,856 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/css/modules/layer/default/icon.png HTTP/1.1" 200 11493
+2018-10-21 11:53:56,430 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 36352
+2018-10-21 11:53:57,287 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 36352
+2018-10-21 11:54:29,163 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2 HTTP/1.1" 301 0
+2018-10-21 11:54:29,405 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 18649
+2018-10-21 11:54:40,795 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/1 HTTP/1.1" 301 0
+2018-10-21 11:54:41,133 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/1/ HTTP/1.1" 200 36352
+2018-10-21 11:54:47,208 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/7/ HTTP/1.1" 200 439
+2018-10-21 11:54:47,334 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/css/modules/layer/default/loading-2.gif HTTP/1.1" 200 1787
+2018-10-21 11:54:47,379 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/7/ HTTP/1.1" 200 169
+2018-10-21 11:54:54,880 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/8/ HTTP/1.1" 200 442
+2018-10-21 11:54:55,051 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/8/ HTTP/1.1" 200 169
+2018-10-21 11:54:59,390 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/9/ HTTP/1.1" 200 439
+2018-10-21 11:54:59,570 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/9/ HTTP/1.1" 200 169
+2018-10-21 11:55:52,005 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/7/ HTTP/1.1" 200 511
+2018-10-21 11:55:53,416 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/7/
+Traceback (most recent call last):
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 375, in runCase
+    response = requests.get(url,params=params)
+  File "C:\Users\Administrator.E4QRESRDPETMYDQ\AppData\Roaming\Python\Python37\site-packages\requests\api.py", line 72, in get
+    return request('get', url, params=params, **kwargs)
+  File "C:\Users\Administrator.E4QRESRDPETMYDQ\AppData\Roaming\Python\Python37\site-packages\requests\api.py", line 58, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\Administrator.E4QRESRDPETMYDQ\AppData\Roaming\Python\Python37\site-packages\requests\sessions.py", line 498, in request
+    prep = self.prepare_request(req)
+  File "C:\Users\Administrator.E4QRESRDPETMYDQ\AppData\Roaming\Python\Python37\site-packages\requests\sessions.py", line 441, in prepare_request
+    hooks=merge_hooks(request.hooks, self.hooks),
+  File "C:\Users\Administrator.E4QRESRDPETMYDQ\AppData\Roaming\Python\Python37\site-packages\requests\models.py", line 309, in prepare
+    self.prepare_url(url, params)
+  File "C:\Users\Administrator.E4QRESRDPETMYDQ\AppData\Roaming\Python\Python37\site-packages\requests\models.py", line 383, in prepare_url
+    raise MissingSchema(error)
+requests.exceptions.MissingSchema: Invalid URL 'asdfasd': No schema supplied. Perhaps you meant http://asdfasd?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceAutoTest\activator.py", line 14, in process
+    result = fun(request, index) if index else fun(request)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 23, in wrapper
+    return func(request, *args, **kwargs)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 416, in execute_cases
+    return runCase(id=id,url=requestPath,method=method,params=params,except_result=except_result)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 399, in runCase
+    content = {"info": "请检测请求地址是否正确,执行发送请求出现异常了！"+str(e.message),"statu":"error"}
+AttributeError: 'MissingSchema' object has no attribute 'message'
+2018-10-21 11:55:53,526 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/7/ HTTP/1.1" 500 19058
+2018-10-21 11:56:16,000 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/7/ HTTP/1.1" 200 511
+2018-10-21 11:56:16,100 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/7/ HTTP/1.1" 200 245
+2018-10-21 11:56:56,725 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/4/ HTTP/1.1" 200 446
+2018-10-21 11:56:56,854 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/4/ HTTP/1.1" 200 284
+2018-10-21 11:57:35,756 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/4/ HTTP/1.1" 200 526
+2018-10-21 11:57:35,923 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/4/ HTTP/1.1" 200 284
+2018-10-21 11:57:42,019 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/4/ HTTP/1.1" 200 526
+2018-10-21 11:57:42,177 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/4/ HTTP/1.1" 200 284
+2018-10-21 11:58:31,657 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/1/ HTTP/1.1" 200 36686
+2018-10-21 11:58:31,669 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/1/ HTTP/1.1" 200 36686
+2018-10-21 11:58:31,764 [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/testCaseManager/1/ HTTP/1.1" 500 59
+2018-10-21 11:58:31,794 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/1/ HTTP/1.1" 200 36686
+2018-10-21 11:58:31,827 [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/testCaseManager/1/ HTTP/1.1" 500 59
+2018-10-21 11:58:32,639 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/1/ HTTP/1.1" 200 36686
+2018-10-21 11:58:32,704 [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/testCaseManager/1/ HTTP/1.1" 500 59
+2018-10-21 11:58:35,582 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/4/ HTTP/1.1" 200 526
+2018-10-21 11:58:35,747 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/4/ HTTP/1.1" 200 284
+2018-10-21 11:59:40,119 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/4/ HTTP/1.1" 200 526
+2018-10-21 11:59:40,280 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/4/ HTTP/1.1" 200 284
+2018-10-21 11:59:48,056 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/1/ HTTP/1.1" 200 3209
+2018-10-21 11:59:48,318 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/1/ HTTP/1.1" 200 145
+2018-10-21 12:00:13,120 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 18649
+2018-10-21 12:01:13,657 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/1/ HTTP/1.1" 200 36686
+2018-10-21 12:05:21,441 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/1/ HTTP/1.1" 200 36756
+2018-10-21 12:07:12,656 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/1/ HTTP/1.1" 200 36774
+2018-10-21 12:09:32,857 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/EnviromentManager/0/ HTTP/1.1" 200 6224
+2018-10-21 12:09:33,924 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/environmentAdd HTTP/1.1" 301 0
+2018-10-21 12:09:34,046 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/css/modules/layer/default/loading-1.gif HTTP/1.1" 200 701
+2018-10-21 12:09:34,111 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/environmentAdd/ HTTP/1.1" 200 5055
+2018-10-21 12:10:05,351 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/environmentAdd/ HTTP/1.1" 200 45
+2018-10-21 12:10:05,640 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/EnviromentManager/0/ HTTP/1.1" 200 8038
+2018-10-21 12:10:12,398 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/1/ HTTP/1.1" 200 36916
+2018-10-21 12:13:09,130 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/isEnable/1/ HTTP/1.1" 200 50
+2018-10-21 12:13:09,328 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/EnviromentManager/0/ HTTP/1.1" 200 8040
+2018-10-21 12:13:21,080 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 822
+2018-10-21 12:13:22,306 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/2/ HTTP/1.1" 200 538
+2018-10-21 12:13:29,314 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/1/ HTTP/1.1" 200 3209
+2018-10-21 12:13:29,616 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/1/ HTTP/1.1" 200 145
+2018-10-21 12:15:24,436 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/isEnable/1/ HTTP/1.1" 200 50
+2018-10-21 12:15:24,661 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/EnviromentManager/0/ HTTP/1.1" 200 8038
+2018-10-21 12:16:43,775 [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/testCaseManager/1/ HTTP/1.1" 500 59
+2018-10-21 12:16:49,396 [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/testCaseManager/0/ HTTP/1.1" 500 59
+2018-10-21 12:21:35,495 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 36907
+2018-10-21 12:21:41,886 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/isEnable/1/ HTTP/1.1" 200 50
+2018-10-21 12:21:42,219 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/EnviromentManager/0/ HTTP/1.1" 200 8040
+2018-10-21 12:21:49,782 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 36810
+2018-10-21 12:29:09,363 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/isEnable/1/ HTTP/1.1" 200 50
+2018-10-21 12:29:09,575 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/EnviromentManager/0/ HTTP/1.1" 200 8038
+2018-10-21 12:29:12,507 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 36925
+2018-10-21 12:29:18,456 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-21 14:31:16,850 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/projectManager/0 HTTP/1.1" 301 0
+2018-10-21 14:31:17,217 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/projectManager/0/ HTTP/1.1" 200 5022
+2018-10-21 14:31:18,271 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/projectAdd HTTP/1.1" 301 0
+2018-10-21 14:31:18,530 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/projectAdd/ HTTP/1.1" 200 4076
+2018-10-21 14:31:24,118 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/environmentAdd/ HTTP/1.1" 200 5119
+2018-10-21 14:31:40,207 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/environmentAdd/ HTTP/1.1" 200 5101
+2018-10-21 14:33:09,055 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/projectManager/0/ HTTP/1.1" 200 5295
+2018-10-21 14:33:10,556 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/projectManager/0/ HTTP/1.1" 200 5295
+2018-10-21 14:33:12,233 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/EnviromentManager/0/ HTTP/1.1" 200 8312
+2018-10-21 14:33:13,733 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/EnviromentManager/0/ HTTP/1.1" 200 8312
+2018-10-21 14:33:34,775 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 36938
+2018-10-21 14:33:52,447 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 36938
+2018-10-21 14:40:48,843 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 18901
+2018-10-21 14:40:56,691 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/1/ HTTP/1.1" 200 36938
+2018-10-21 14:41:09,392 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 36938
+2018-10-21 14:45:24,394 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 37061
+2018-10-21 14:45:28,765 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/1/ HTTP/1.1" 200 3209
+2018-10-21 14:45:30,084 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/1/ HTTP/1.1" 200 548
+2018-10-21 14:45:56,070 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 34400
+2018-10-21 14:46:39,731 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/1/ HTTP/1.1" 200 914
+2018-10-21 14:46:40,039 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/1/ HTTP/1.1" 200 145
+2018-10-21 14:46:44,787 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/1/ HTTP/1.1" 200 3209
+2018-10-21 14:46:44,993 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/1/ HTTP/1.1" 200 548
+2018-10-21 14:46:56,756 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 34400
+2018-10-21 14:47:32,090 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 34400
+2018-10-21 14:47:42,991 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/4/ HTTP/1.1" 200 526
+2018-10-21 14:47:46,457 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/4/ HTTP/1.1" 200 455
+2018-10-21 14:48:59,745 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/EnviromentManager/0/ HTTP/1.1" 200 8312
+2018-10-21 14:49:00,759 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/environmentAdd/ HTTP/1.1" 200 5092
+2018-10-21 14:49:18,427 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/environmentAdd/ HTTP/1.1" 200 45
+2018-10-21 14:49:18,704 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/EnviromentManager/0/ HTTP/1.1" 200 10127
+2018-10-21 14:50:12,275 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 34748
+2018-10-21 14:50:19,548 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 34748
+2018-10-21 14:50:31,660 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 34740
+2018-10-21 14:50:38,313 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/2/ HTTP/1.1" 200 814
+2018-10-21 14:50:39,294 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/2/ HTTP/1.1" 200 87
+2018-10-21 14:50:45,742 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 98097
+2018-10-21 14:51:28,587 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 19187
+2018-10-21 14:51:42,172 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 19201
+2018-10-21 14:51:49,887 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/11/ HTTP/1.1" 200 457
+2018-10-21 14:51:50,924 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/11/ HTTP/1.1" 200 87
+2018-10-21 14:52:06,454 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 82865
+2018-10-21 14:55:53,236 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/12/ HTTP/1.1" 200 545
+2018-10-21 14:55:53,634 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/12/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.
+2018-10-21 14:55:53,649 [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/execute_cases/12/ HTTP/1.1" 500 16980
+2018-10-21 14:56:03,731 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 83162
+2018-10-21 14:56:11,847 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-21 14:56:44,624 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 83196
+2018-10-21 14:56:44,833 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-21 14:56:52,988 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/11/ HTTP/1.1" 200 65162
+2018-10-21 14:56:54,222 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/11/ HTTP/1.1" 200 87
+2018-10-21 14:57:04,846 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 83196
+2018-10-21 14:57:05,274 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-21 14:58:37,775 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/10/ HTTP/1.1" 200 440
+2018-10-21 14:58:37,954 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/10/ HTTP/1.1" 200 276
+2018-10-21 14:58:39,262 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 83424
+2018-10-21 15:14:39,797 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/TestcaseAdd HTTP/1.1" 301 0
+2018-10-21 15:14:39,959 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/TestcaseAdd/ HTTP/1.1" 200 12377
+2018-10-21 15:14:40,604 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/lib/layui/lay/modules/layedit.js HTTP/1.1" 200 12636
+2018-10-21 15:25:41,553 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/11/ HTTP/1.1" 200 65162
+2018-10-21 15:25:42,582 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/11/ HTTP/1.1" 200 304
+2018-10-21 15:25:45,026 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 19871
+2018-10-21 15:25:45,038 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 19871
+2018-10-21 15:25:45,059 [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/testCaseManager/2/ HTTP/1.1" 500 59
+2018-10-21 15:25:58,507 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/11/ HTTP/1.1" 200 557
+2018-10-21 15:25:59,563 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/11/ HTTP/1.1" 200 87
+2018-10-21 15:26:00,938 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 83425
+2018-10-21 15:32:27,046 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/11/ HTTP/1.1" 200 65162
+2018-10-21 15:32:27,241 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/11/ HTTP/1.1" 200 304
+2018-10-21 15:32:30,007 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 19871
+2018-10-21 15:32:30,022 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 19871
+2018-10-21 15:32:30,047 [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/testCaseManager/2/ HTTP/1.1" 500 59
+2018-10-21 15:32:39,129 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/getTestCaseInfo/11/ HTTP/1.1" 200 557
+2018-10-21 15:32:40,333 [django.server:124] [basehttp:log_message] [INFO]- "POST /api/execute_cases/11/ HTTP/1.1" 200 87
+2018-10-21 15:32:43,426 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/2/ HTTP/1.1" 200 83425
+2018-10-21 15:40:50,095 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 98575
+2018-10-21 15:40:51,416 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/TestcaseAdd/ HTTP/1.1" 200 12377
+2018-10-21 15:41:10,636 [django.server:124] [basehttp:log_message] [ERROR]- "GET /static/js/jquery.min.map HTTP/1.1" 500 59
+2018-10-21 16:14:01,810 [django.server:124] [basehttp:log_message] [INFO]- "GET /login HTTP/1.1" 200 3442
+2018-10-21 16:14:16,225 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/runTest HTTP/1.1" 301 0
+2018-10-21 16:14:16,412 [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/runTest/ HTTP/1.1" 500 59
+2018-10-21 16:21:08,648 [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/runTest/ HTTP/1.1" 500 59
+2018-10-21 16:21:09,042 [django.server:124] [basehttp:log_message] [INFO]- "GET /favicon.ico HTTP/1.1" 302 0
+2018-10-21 16:21:09,140 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/favicon.ico HTTP/1.1" 200 1424
+2018-10-21 16:21:24,516 [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/runTest/ HTTP/1.1" 500 59
+2018-10-21 16:21:24,813 [django.server:124] [basehttp:log_message] [INFO]- "GET /favicon.ico HTTP/1.1" 302 0
+2018-10-21 16:21:24,851 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/favicon.ico HTTP/1.1" 200 1424
+2018-10-21 16:22:42,865 [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/runTest/ HTTP/1.1" 500 59
+2018-10-21 16:22:43,246 [django.server:124] [basehttp:log_message] [INFO]- "GET /favicon.ico HTTP/1.1" 302 0
+2018-10-21 16:22:43,296 [django.server:124] [basehttp:log_message] [INFO]- "GET /static/favicon.ico HTTP/1.1" 200 1424
+2018-10-21 17:25:11,313 [django.server:124] [basehttp:log_message] [INFO]- "GET /api/testCaseManager/0/ HTTP/1.1" 200 98559

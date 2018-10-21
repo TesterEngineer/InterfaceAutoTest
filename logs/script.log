@@ -11596,3 +11596,46 @@ Traceback (most recent call last):
   File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 402, in runCase
     testcaseInfo.update(resp_result=response.text, update_time=update_time, test_result=2)
 UnboundLocalError: local variable 'response' referenced before assignment
+2018-10-21 11:55:53,416 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/7/
+Traceback (most recent call last):
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 375, in runCase
+    response = requests.get(url,params=params)
+  File "C:\Users\Administrator.E4QRESRDPETMYDQ\AppData\Roaming\Python\Python37\site-packages\requests\api.py", line 72, in get
+    return request('get', url, params=params, **kwargs)
+  File "C:\Users\Administrator.E4QRESRDPETMYDQ\AppData\Roaming\Python\Python37\site-packages\requests\api.py", line 58, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\Administrator.E4QRESRDPETMYDQ\AppData\Roaming\Python\Python37\site-packages\requests\sessions.py", line 498, in request
+    prep = self.prepare_request(req)
+  File "C:\Users\Administrator.E4QRESRDPETMYDQ\AppData\Roaming\Python\Python37\site-packages\requests\sessions.py", line 441, in prepare_request
+    hooks=merge_hooks(request.hooks, self.hooks),
+  File "C:\Users\Administrator.E4QRESRDPETMYDQ\AppData\Roaming\Python\Python37\site-packages\requests\models.py", line 309, in prepare
+    self.prepare_url(url, params)
+  File "C:\Users\Administrator.E4QRESRDPETMYDQ\AppData\Roaming\Python\Python37\site-packages\requests\models.py", line 383, in prepare_url
+    raise MissingSchema(error)
+requests.exceptions.MissingSchema: Invalid URL 'asdfasd': No schema supplied. Perhaps you meant http://asdfasd?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\InterfaceAutoTest\InterfaceAutoTest\activator.py", line 14, in process
+    result = fun(request, index) if index else fun(request)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 23, in wrapper
+    return func(request, *args, **kwargs)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 416, in execute_cases
+    return runCase(id=id,url=requestPath,method=method,params=params,except_result=except_result)
+  File "E:\InterfaceAutoTest\InterfaceTestManage\views.py", line 399, in runCase
+    content = {"info": "请检测请求地址是否正确,执行发送请求出现异常了！"+str(e.message),"statu":"error"}
+AttributeError: 'MissingSchema' object has no attribute 'message'
+2018-10-21 14:55:53,634 [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /api/execute_cases/12/
+Traceback (most recent call last):
+  File "C:\python\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\python\lib\site-packages\django\core\handlers\base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view InterfaceAutoTest.activator.process didn't return an HttpResponse object. It returned None instead.

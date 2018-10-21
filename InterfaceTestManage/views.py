@@ -372,13 +372,8 @@ ids =[]
 def runAsCase(id,url):
         testcaseInfo = TestCase.objects.get(id=id)
         if len(testcaseInfo.case_id) == 0:
-            reposeText = params(id,url,testcaseInfo)
-
-            json = reposeText
-            json_exec = parse(testcaseInfo.resp_data)
-            male = json_exec.find(json)
-            reposeText = [match.value for match in male]
-            print(reposeText)  # [['电影1', '电影2', '电影3']]
+            #第一条用例不需要依赖父类数据，第一条用例就是父类
+            reposeText = params(id,url,"")
 
             ids.reverse()
             for i in range(0,len(ids)):
@@ -386,23 +381,24 @@ def runAsCase(id,url):
                     reposeText = params(ids[i], url, reposeText)
                     return reposeText
                 reposeText = params(ids[i], url, reposeText)
-                json = reposeText
-                json_exec = parse(testcaseInfo.resp_data)
-                male = json_exec.find(json)
-                reposeText = [match.value for match in male]
-
-
 
         else:
             ids.append(id)
             runAsCase(id=testcaseInfo.case_id,url=url)
 
-def params(id,url,testcaseInfo):
+def params(id,url,needParentData):
         # 先执行好case_id的用例，取出resp_data数据,在附加到id用例的执行
         testcaseInfo = TestCase.objects.filter(id=id)
         urls = url.split("/")
         url = urls[0] + "//" + urls[2] + testcaseInfo.req_path
         response = requests.get(url, params=testcaseInfo.req_param)
+        if needParentData:
+            json = needParentData #父类json数据
+            json_exec = parse(testcaseInfo.resp_data)
+            male = json_exec.find(json)
+            reposeText = [match.value for match in male]
+            print(reposeText)
+            return  reposeText  #得到依赖数据
         # 执行完第一条用例后，获取的返回值在递归去
         return response.content
 
