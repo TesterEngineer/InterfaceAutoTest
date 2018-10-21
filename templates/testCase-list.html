@@ -163,7 +163,7 @@
                 'type': 'POST',
                 'data': req_params,
                 'dataType': "json",
-                async: false,
+                'async': false,
                 'beforeSend': function (XMLHttpRequest) {
                     layer.msg('用例执行中,请稍后哦！', {icon: 16});
                     //layer.load(1);
@@ -175,15 +175,22 @@
                     layer.closeAll();
                     if (data.statu == "error") {
                         layer.open({
-                            title: '执行用例结果'
-                            , content:"<i class='layui-layer-ico layui-layer-ico5'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;<span style='color:red'>"+data.info+"</span>"
+                            title: '执行用例结果',
+                            content:"<i class='layui-layer-ico layui-layer-ico5'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;<span style='color:red'>"+data.info+"</span>",
+                            yes:function (data) {
+                                  location.replace(location.href);
+                            }
                         });
                         $("#btnResult_" + id).attr("class", "layui-btn layui-btn-danger layui-btn-mini");
                         $("#btnResult_" + id).text("失败");
                     } else if( data.statu == "success"){
+                        debugger;
                         layer.open({
-                            title: '执行用例结果'
-                            , content:"<i class='layui-layer-ico layui-layer-ico6'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;<span style='color:green'>"+data.info+"</span>"
+                            title: '执行用例结果',
+                            content:"<i class='layui-layer-ico layui-layer-ico6'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;<span style='color:green'>"+data.info+"</span>",
+                            yes:function (data) {
+                                  location.replace(location.href);
+                            }
                         });
                         $("#btnResult_" + id).attr("class", "layui-btn layui-btn-normal layui-btn-mini");
                         $("#btnResult_" + id).text("成功");
@@ -194,8 +201,11 @@
                 'error': function (data) {
                     debugger
                    layer.open({
-                            title: '执行用例结果'
-                            , content:"<i class='layui-layer-ico layui-layer-ico5'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;<span style='color:red'>"+data.info+"</span>"
+                            title: '执行用例结果',
+                            content:"<i class='layui-layer-ico layui-layer-ico5'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;<span style='color:red'>"+data.info+"</span>",
+                            yes:function (data) {
+                                  location.replace(location.href);
+                            }
                         });
                     $("#btnResult_" + id).attr("class", "layui-btn layui-btn-danger layui-btn-mini");
                     $("#btnResult_" + id).text("失败");
@@ -224,7 +234,9 @@
                 '        </select>',
                 yes: function (index) {
                     //alert("这是点击确定按钮走的回调");
-                    var value = $("#environId option:selected").val();
+                    var host = $("#environId option:selected").val();
+
+
 
                     //根据id，将url+data+method获取到传到后台
                     $.get("/api/getTestCaseInfo/" + id + "/", function (data) {
@@ -236,7 +248,8 @@
                         //
                         var params = {};
                         params['req_method'] = fields.req_method;
-                        params['req_path'] = fields.req_path;
+                        host.length >0 ?params['req_path'] = host+fields.req_path:params['req_path'] = fields.req_path;
+                        //params['req_path'] = fields.req_path;
                         params['req_param'] = fields.req_param;
                         params['except_result'] = fields.except_result;
                         ajax_request(JSON.stringify(params), id);
@@ -268,6 +281,7 @@
                             area: ['450px', '300px'],
                             btn: ['确定', '取消'],
                             content: "<i class='layui-layer-ico layui-layer-ico6'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>服务器返回结果:</span><p>"+result+"</p>",
+
                         }
                     )
                 } else {
