@@ -75,7 +75,7 @@ class TestCase(BaseTable):
 
     username = models.CharField('操作人', max_length=10, null=False)
     case_id = models.CharField('用例id', null=True, max_length=30)
-    resp_data = models.CharField('提前依赖的json数据', null=True, max_length=50)
+    resp_data = models.CharField('提取依赖的json数据', null=True, max_length=3000)
 
     class Meta:
         verbose_name = '测试用例'

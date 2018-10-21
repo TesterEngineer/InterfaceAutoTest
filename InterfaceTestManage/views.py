@@ -2,6 +2,7 @@
 import json
 import logging
 import  time
+from jsonpath_rw import jsonpath, parse
 
 import requests
 from django.contrib.gis import serializers
@@ -366,14 +367,76 @@ def getTestCaseInfo(request,id):
     context = {'testcaseInfo': json_data}
     return JsonResponse(context)
 
+ids =[]
+'''递归查找依赖的用例数据，运行'''
+def runAsCase(id,url):
+        testcaseInfo = TestCase.objects.get(id=id)
+        if len(testcaseInfo.case_id) == 0:
+            reposeText = params(id,url,testcaseInfo)
+
+            json = reposeText
+            json_exec = parse(testcaseInfo.resp_data)
+            male = json_exec.find(json)
+            reposeText = [match.value for match in male]
+            print(reposeText)  # [['电影1', '电影2', '电影3']]
+
+            ids.reverse()
+            for i in range(0,len(ids)):
+                if i == len(ids) - 1:
+                    reposeText = params(ids[i], url, reposeText)
+                    return reposeText
+                reposeText = params(ids[i], url, reposeText)
+                json = reposeText
+                json_exec = parse(testcaseInfo.resp_data)
+                male = json_exec.find(json)
+                reposeText = [match.value for match in male]
+
+
+
+        else:
+            ids.append(id)
+            runAsCase(id=testcaseInfo.case_id,url=url)
+
+def params(id,url,testcaseInfo):
+        # 先执行好case_id的用例，取出resp_data数据,在附加到id用例的执行
+        testcaseInfo = TestCase.objects.filter(id=id)
+        urls = url.split("/")
+        url = urls[0] + "//" + urls[2] + testcaseInfo.req_path
+        response = requests.get(url, params=testcaseInfo.req_param)
+        # 执行完第一条用例后，获取的返回值在递归去
+        return response.content
+
+
+
+
+def runTest(request):
+    runAsCase(3,"http://www.baidu.com/")
+
 
 
 '''执行测试用例'''
-def runCase(id,url,method,params,except_result,*args):
-    if method == 'GET':
+def runCase(id,url,method,params,except_result,**kwargs):
         try:
-          response = requests.get(url,params=params)
-          if response.status_code == 200:
+            if method == 'GET':
+                if kwargs['case_id'] and kwargs['resp_data']:
+                    #先执行好case_id的用例，取出resp_data数据,在附加到id用例的执行
+                    testcaseInfo = TestCase.objects.filter(id= kwargs['case_id'])
+                    urls = url.split("/")
+                    url = urls[0]+"//"+urls[2]+testcaseInfo.req_path
+                    response = requests.get(url, params=params)
+
+
+
+                else:
+                    response = requests.get(url,params=params)
+            elif method == 'POST':
+                response = requests.post(url, params=params)
+            elif method =='PUT':
+                response = requests.put(url, params=params)
+            elif method == 'DELETE':
+                response = requests.delete(url, params=params)
+
+            if response.status_code == 200:
               try:
                 assert except_result in response.text
                 info1="恭喜,用例执行成功了"
@@ -389,17 +452,17 @@ def runCase(id,url,method,params,except_result,*args):
                  update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
                  testcaseInfo.update(resp_result=response.content.decode("utf8","ignore"), update_time=update_time, test_result=2)
                  return JsonResponse(content)
-          else:
-              content = {"info": "请求返回的状态不是200,尽快查看日志看看错误信息！","statu":"error"}
-              testcaseInfo = TestCase.objects.filter(id=id)
-              update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-              testcaseInfo.update(resp_result=response.content.decode("utf8","ignore"), update_time=update_time, test_result=2)
-              return JsonResponse(content)
+            else:
+                  content = {"info": "请求返回的状态不是200,尽快查看日志看看错误信息！","statu":"error"}
+                  testcaseInfo = TestCase.objects.filter(id=id)
+                  update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+                  testcaseInfo.update(resp_result=response.content.decode("utf8","ignore"), update_time=update_time, test_result=2)
+                  return JsonResponse(content)
         except BaseException as e:
-            content = {"info": "请检测请求地址是否正确,执行发送请求出现异常了！","statu":"error"}
+            content = {"info": "请检测请求地址是否正确,执行发送请求出现异常了！异常信息是:"+str(e),"statu":"error"}
             testcaseInfo = TestCase.objects.filter(id=id)
             update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-            testcaseInfo.update(resp_result=e,update_time=update_time, test_result=2)
+            testcaseInfo.update(resp_result=str(e),update_time=update_time, test_result=2)
             return JsonResponse(content)
 
 '''页面跑用例的方法'''
@@ -411,9 +474,14 @@ def execute_cases(request,id):
         requestPath = postdataDic.get("req_path","")
         params = postdataDic.get("req_param","")
         except_result = postdataDic.get("except_result","")
+        case_id = postdataDic.get("case_id","")
+        resp_data = postdataDic.get("resp_data","")
 
         #执行测试用例
-        return runCase(id=id,url=requestPath,method=method,params=params,except_result=except_result)
+        if case_id and resp_data:
+            return runCase(id=id,url=requestPath,method=method,params=params,except_result=except_result,case_id=case_id,resp_data=resp_data)
+        else:
+            return runCase(id=id, url=requestPath, method=method, params=params, except_result=except_result)
 
 
 
