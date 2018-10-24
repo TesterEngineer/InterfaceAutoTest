@@ -2,6 +2,8 @@
 import json
 import logging
 import  time
+from _mysql import IntegrityError
+
 from jsonpath_rw import jsonpath, parse
 
 import requests
@@ -107,11 +109,15 @@ def register(request):
                 user_info.create(username=username,password=password,phone=phone)
                 #return HttpResponseRedirect('/login')
                 context = {"success":"注册成功"}
-                return JsonResponse(context);
+                return JsonResponse(context)
             except MultiValueDictKeyError as error:
                 #如果想html页面通知发生错误了？比如500之内的。。
                 print("用户名重复了啊")
                 context = {"success": "注册出现异常了，请查看日志哦"+str(error)}
+                return JsonResponse(context)
+            except IntegrityError as error:
+                print(str(error))
+                context = {"success": "用户名重复了啊!" }
                 return JsonResponse(context)
 
             # user_info.create(username=username,password=password,phone=phone)
@@ -345,12 +351,12 @@ def TestcaseAdd(request):
         req_exceptResult = params.get('except_result','')
         case_id = params.get('case_id')
         resp_data = params.get('resp_data')
-
+        dataFormat = params.get('dataFormat')
         username = request.session.get("username",'')
         testcase = TestCase.objects
         if len(case_name) >0 and len(req_path) and len(req_method):
             testcase.create(case_name=case_name,req_path=req_path,req_method=req_method,req_param=req_param,
-                            username=username,except_result=req_exceptResult,case_id=case_id,resp_data=resp_data)
+                            username=username,except_result=req_exceptResult,case_id=case_id,resp_data=resp_data,dataFormat=dataFormat)
             context={'success':'添加成功啦'}
             return  JsonResponse(context)
 
@@ -374,7 +380,7 @@ def testCaseEdit(request,id):
         req_exceptResult = params.get('except_result', '')
         case_id = params.get('case_id')
         resp_data = params.get('resp_data')
-
+        dataFormat = params.get('dataFormat')
         username = request.session.get("username", '')
 
         if int(id):
@@ -383,7 +389,7 @@ def testCaseEdit(request,id):
             update_time=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
             try:
                 testcase_info.update(case_name=case_name,req_path=req_path,req_method=req_method,req_param=req_param,
-                            username=username,except_result=req_exceptResult,case_id=case_id,resp_data=resp_data,update_time=update_time)
+                            username=username,except_result=req_exceptResult,case_id=case_id,resp_data=resp_data,dataFormat=dataFormat,update_time=update_time)
                 context = {'success': '修改用例成功咯！'}
             except:
                 context = {'success':'修改用例失败了'}
