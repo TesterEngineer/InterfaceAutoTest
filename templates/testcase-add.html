@@ -77,11 +77,23 @@
     <div id="body">
         <div class="layui-form-item">
             <label class="layui-form-label">请求参数:</label>
-            <div class="layui-input-block">
+            <div class="layui-input-block" id="paramEdit">
                 <input type="text" name="req_param" lay-verify="required" placeholder="请输入key：value形式"
                        autocomplete="off" class="layui-input" value="{{ testcase_info.req_param }}">
             </div>
-
+            <div id="param">
+                 <div class="layui-inline">
+                    <input type="text" name="req_param" lay-verify="required" placeholder="请输入key：value形式"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-inline">
+                    <input type="text" name="req_param" lay-verify="required" placeholder="请输入key：value形式"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" id="layui-btn"><i class="layui-icon"></i>添加参数</button>
+                </div>
+            </div>
         </div>
     </div>
     <div class="layui-form-item">
@@ -169,6 +181,17 @@
                 }
             });
         }
+
+
+         var id = $("input:hidden[name='id']").val();
+         if (id.length > 0){
+               $("#param").attr("style","display:none");
+               $("#paramEdit").attr("style","display:block");
+         } else {
+              $("#paramEdit").attr("style","display:none");
+              $("#param").attr("style","display:block");
+         }
+
 
 
         var count = 1;

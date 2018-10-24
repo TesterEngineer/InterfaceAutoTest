@@ -135,7 +135,7 @@
         /*用户-删除*/
         function member_del(obj, id) {
             layer.confirm('确认要删除吗？', function (index) {
-
+                
                 var url = '/api/projectDelete/' + id + '/';
                 $.get(url, function (data) {
 
@@ -165,6 +165,10 @@
             var data = tableCheck.getData();
 
             layer.confirm('确认要删除吗？', function () {
+                  if(ids.length == 0){
+                    layer.open({"title":"没有删除的数据",content:"请确定要删除的数据！！"});
+                    return;
+                }
                 var data = {"ids": ids.join()};
                 //捉到所有被选中的，发异步进行删除
                 $.post("/api/projectDelete/0/", data, function (data) {
