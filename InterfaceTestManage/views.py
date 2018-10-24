@@ -521,8 +521,6 @@ def runCase(id,url,method,params,except_result,**kwargs):
             testcaseInfo.update(resp_result=str(e),update_time=update_time, test_result=2)
             return JsonResponse(content)
 
-
-
 '''页面跑用例的方法'''
 @login_check
 def execute_cases(request,id):
