@@ -390,7 +390,24 @@ def testCaseEdit(request,id):
         return JsonResponse(context)
 
 
-
+def testcaseDelete(request,id):
+    if request.method == 'GET':
+        if len(id) > 0:
+            TestCase.objects.filter(id=id).delete()
+            context = {"success": "删除成功！"}
+            return JsonResponse(context)
+    elif request.is_ajax():
+        ##删除所有
+        ids = request.POST.get("ids")
+        ids = eval(ids)
+        if len(ids) > 1:
+            for id in ids:
+                TestCase.objects.filter(id=id).delete()
+            context = {"success": "删除成功！"}
+        else:
+            TestCase.objects.filter(id=ids).delete()
+        return JsonResponse(context)
+    pass
 
 
 '''新增'''
@@ -497,6 +514,8 @@ def runCase(id,url,method,params,except_result,**kwargs):
             update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
             testcaseInfo.update(resp_result=str(e),update_time=update_time, test_result=2)
             return JsonResponse(content)
+
+
 
 '''页面跑用例的方法'''
 @login_check

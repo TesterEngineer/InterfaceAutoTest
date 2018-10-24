@@ -38,9 +38,9 @@
             {% for testcase in testCaseList %}
 
                 <tr>
-                    <input type="hidden" name="id" value={{ environ.id }}></input>
+                    <input type="hidden" name="id" value={{ testcase.id }}></input>
                     <td>
-                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='{{ environ.id }}'><i
+                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='{{ testcase.id }}'><i
                                 class="layui-icon">&#xe605;</i></div>
                     </td>
                     <td>{{ testcase.id }}</td>
@@ -308,7 +308,7 @@
             layer.confirm('确认要删除吗？', function (index) {
 
                 //var id = $("input:hidden[name='id']").val();
-                var url = '/api/environDelete/' + id + '/';
+                var url = '/api/testcaseDelete/' + id + '/';
                 $.get(url, function (data) {
 
                     if (data.success.length > 0) {
@@ -327,7 +327,7 @@
 
 
         function delAll(argument) {
-
+            debugger;
             var select_checked = $(".layui-form-checked");
             var ids = [];
             for (var i = 1; i < select_checked.length; i++) {
@@ -339,7 +339,7 @@
 
                 var data = {"ids": ids.join()};
                 //捉到所有被选中的，发异步进行删除
-                $.post("/api/environDelete/0/", data, function (data) {
+                $.post("/api/testcaseDelete/0/", data, function (data) {
                     if (data.success.length > 0) {
                         layer.msg(data.success, {icon: 1});
                         $(".layui-form-checked").not('.header').parents('tr').remove();
