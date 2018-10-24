@@ -358,6 +358,57 @@ def TestcaseAdd(request):
             context = '添加失败了，请重新添加'
             return JsonResponse({'success':context})
 
+@login_check
+def testCaseEdit(request,id):
+    if request.method == 'GET':
+        testcase =TestCase.objects
+        testcase_info = testcase.get(id=id)
+        context = {'testcase_info': testcase_info, 'btn': '编辑','id': id}
+        return render(request,'testcase-add.html',context)
+    elif request.is_ajax():
+        params = eval(request.body)
+        case_name = params.get('case_name', '')
+        req_path = params.get('req_path', '')
+        req_method = params.get('req_method', '')
+        req_param = params.get('req_param', '')
+        req_exceptResult = params.get('except_result', '')
+        case_id = params.get('case_id')
+        resp_data = params.get('resp_data')
+
+        username = request.session.get("username", '')
+
+        if int(id):
+            testcase_obj = TestCase.objects
+            testcase_info = testcase_obj.filter(id=id)
+            update_time=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+            try:
+                testcase_info.update(case_name=case_name,req_path=req_path,req_method=req_method,req_param=req_param,
+                            username=username,except_result=req_exceptResult,case_id=case_id,resp_data=resp_data,update_time=update_time)
+                context = {'success': '修改用例成功咯！'}
+            except:
+                context = {'success':'修改用例失败了'}
+        return JsonResponse(context)
+
+
+def testcaseDelete(request,id):
+    if request.method == 'GET':
+        if len(id) > 0:
+            TestCase.objects.filter(id=id).delete()
+            context = {"success": "删除成功！"}
+            return JsonResponse(context)
+    elif request.is_ajax():
+        ##删除所有
+        ids = request.POST.get("ids")
+        ids = eval(ids)
+        if len(ids) > 1:
+            for id in ids:
+                TestCase.objects.filter(id=id).delete()
+            context = {"success": "删除成功！"}
+        else:
+            TestCase.objects.filter(id=ids).delete()
+        return JsonResponse(context)
+    pass
+
 
 '''新增'''
 @login_check
@@ -366,6 +417,9 @@ def getTestCaseInfo(request,id):
     json_data = serializers.serialize("json", testcaseInfo)
     context = {'testcaseInfo': json_data}
     return JsonResponse(context)
+
+
+
 
 ids =[]
 '''递归查找依赖的用例数据，运行'''
@@ -460,6 +514,8 @@ def runCase(id,url,method,params,except_result,**kwargs):
             update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
             testcaseInfo.update(resp_result=str(e),update_time=update_time, test_result=2)
             return JsonResponse(content)
+
+
 
 '''页面跑用例的方法'''
 @login_check

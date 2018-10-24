@@ -27,19 +27,20 @@
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
 <body>
-
 <div class="layui-form  layui-form-pane  x-body layui-anim layui-anim-up" action="">
+    <input type="hidden" name="id" value="{{ testcase_info.id }}">
     <div class="layui-form-item">
         <label class="layui-form-label">用例名称</label>
         <div class="layui-input-block">
-            <input type="text" name="case_name" autocomplete="off" placeholder="请输入标题" class="layui-input">
+            <input type="text" name="case_name" autocomplete="off" placeholder="请输入标题" class="layui-input"
+                   value="{{ testcase_info.case_name }}">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">接口地址</label>
         <div class="layui-input-block">
             <input type="text" name="req_path" lay-verify="required" placeholder="请输入" autocomplete="off"
-                   class="layui-input">
+                   class="layui-input" value="{{ testcase_info.req_path }}">
         </div>
     </div>
 
@@ -68,33 +69,45 @@
     <div class="layui-form-item">
         <label class="layui-form-label">依赖数据</label>
         <div class="layui-input-block">
-            <input type="text" name="resp_data" lay-verify="required" placeholder="请输入需要依赖上一个接口的数据匹配" autocomplete="off"
-                   class="layui-input">
+            <div class="layui-inline">
+                <select name="dataFormat" id="dataformat">
+                    <option value="JSON" selected="">JSON</option>
+                    <option value="HTML">HTML</option>
+                    <option value="XML">XML</option>
+                </select>
+            </div>
+             <span class="layui-inline"><input type="text" name="resp_data" lay-verify="required" placeholder="依赖上一个接口的数据匹配" autocomplete="off"
+                   class="layui-input" value="{{ testcase_info.resp_data }}"></span>
         </div>
     </div>
 
     <div id="body">
         <div class="layui-form-item">
             <label class="layui-form-label">请求参数:</label>
-            <div class="layui-inline">
+            <div class="layui-input-block" id="paramEdit">
                 <input type="text" name="req_param" lay-verify="required" placeholder="请输入key：value形式"
-                       autocomplete="off" class="layui-input">
+                       autocomplete="off" class="layui-input" value="{{ testcase_info.req_param }}">
             </div>
-            <div class="layui-inline">
-                <input type="text" name="req_param" lay-verify="required" placeholder="请输入key：value形式"
-                       autocomplete="off" class="layui-input">
+            <div id="param">
+                 <div class="layui-inline">
+                    <input type="text" name="req_param" lay-verify="required" placeholder="请输入key：value形式"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-inline">
+                    <input type="text" name="req_param" lay-verify="required" placeholder="请输入key：value形式"
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" id="layui-btn"><i class="layui-icon"></i>添加参数</button>
+                </div>
             </div>
-            <div class="layui-inline">
-                <button class="layui-btn" id="layui-btn"><i class="layui-icon"></i>添加参数</button>
-            </div>
-
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">期望结果</label>
         <div class="layui-input-block">
             <input type="text" name="except_result" lay-verify="required" placeholder="请输入期望结果" autocomplete="off"
-                   class="layui-input">
+                   class="layui-input" value="{{ testcase_info.except_result }}">
         </div>
     </div>
 
@@ -160,6 +173,41 @@
 
 
     $(document).ready(function () {
+        //页面加载的时候,selected回显数据.
+        if ('{{ testcase_info.req_method }}') {
+            $('#method option').each(function () {
+                if ($(this).val() == '{{ testcase_info.req_method }}') {
+                    $(this).attr("selected", "selected")
+                }
+            });
+        }
+        if ('{{ testcase_info.caseId }}') {
+            $('#method option').each(function () {
+                if ($(this).val() == '{{ testcase_info.caseId }}') {
+                    $(this).attr("selected", "selected")
+                }
+            });
+        }
+           if ('{{ testcase_info.dataFormat }}') {
+            $('#dataformat option').each(function () {
+                if ($(this).val() == '{{ testcase_info.dataFormat }}') {
+                    $(this).attr("selected", "selected")
+                }
+            });
+        }
+
+
+         var id = $("input:hidden[name='id']").val();
+         if (id.length > 0){
+               $("#param").attr("style","display:none");
+               $("#paramEdit").attr("style","display:block");
+         } else {
+              $("#paramEdit").attr("style","display:none");
+              $("#param").attr("style","display:block");
+         }
+
+
+
         var count = 1;
 
         //用来判断是删除 还是增加按钮 以便count值进行计算
@@ -241,6 +289,7 @@
         var req_exceptRsult = $("input[name='except_result']").val();
 
         var case_id = $("#caseId option:selected").val();
+        var dataFormat=$("#dataformat option:selected").val();
         var resp_data = $("input[name='resp_data']").val();
 
         if (case_name.length > 0 && req_path.length > 0 && req_method.length > 0) {
@@ -251,64 +300,69 @@
             req1['except_result'] = req_exceptRsult;
             req1['case_id'] = case_id.length > 0 ? case_id : '';
             req1['resp_data'] = resp_data.length > 0 ? resp_data : '';
-
+            req1['dataFormat']=dataFormat.length > 0 ? dataFormat: '';
 
             //获取参数的取值
             var params = $("input[name='req_param']");
-            var req = {};
-
+            var id = $("input:hidden[name='id']").val();
+            var url;
             var req_params = "";
-            if (params.length > 0) {
-                for (var i = 0; i < params.length; i++) {
-                    var key = $(params[i]).val();
-                    var value = $(params[i + 1]).val();
-                     if(key && value){
-                          req[key] = value;
-                          i = i + 1;
+            if (id.length > 0) {
+                debugger;
+                url = '/api/testCaseEdit/' + id + "/";
+                var param = params.val().length > 0 ? params.val() : "";
+                req1['req_param'] = param;
+
+            } else {
+                url = '/api/TestcaseAdd/';
+                var req = {};
+                if (params.length > 0) {
+                    for (var i = 0; i < params.length; i++) {
+                        var key = $(params[i]).val();
+                        var value = $(params[i + 1]).val();
+                        if (key && value) {
+                            req[key] = value;
+                            i = i + 1;
+                        }
+                    }
+                    if (!$.isEmptyObject(req)) {
+                        req1['req_param'] = req;
+
                     }
                 }
-                if(!$.isEmptyObject(req)){
-                    req1['req_param'] = req;
-
-                }
+            }
                 //js对象转化成字符串
                 req_params = JSON.stringify(req1);
-            }
-            $.ajax({
-                'url': '/api/TestcaseAdd/',
-                'contentType': "application/json; charset=utf-8",
-                'type': 'POST',
-                'data': req_params,
-                //'data':req,
-                'dataType': "json",
-                'success': function (data) {
-                    window.parent.location.href = '/api/testCaseManager/0/';
-                    layer.alert(data.success, {icon: 6}, function () {
-                        // 获得frame索引
-                        var index = parent.layer.getFrameIndex(window.name);
-                        //关闭当前frame
-                        parent.layer.close(index);
-                        //window.location.href ='/api/EnviromentManager/0'
-                    });
-                    layer.close();
+                $.ajax({
+                    'url': url,
+                    'contentType': "application/json; charset=utf-8",
+                    'type': 'POST',
+                    'data': req_params,
+                    //'data':req,
+                    'dataType': "json",
+                    'success': function (data) {
+                        window.parent.location.href = '/api/testCaseManager/0/';
+                        layer.alert(data.success, {icon: 6}, function () {
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                            //window.location.href ='/api/EnviromentManager/0'
+                        });
+                        layer.close();
+                    },
+                    'error': function (data) {
+                        layer.closeAll();
+                        layer.open({'title': '错误提交信息', 'content': data.error});
+                    }
 
-                },
-                'error': function (data) {
-                    layer.closeAll();
-                    layer.open({'title': '错误提交信息', 'content': data.error});
-
-                }
-
-
-            });
-            layer.load(2);
-
+                });
+                layer.load(2);
 
         } else {
             layer.open({'title': '错误提交信息', 'content': '请按要求填写信息'});
             return;
         }
-
 
     });
 

@@ -102,29 +102,13 @@
             //监听提交
             form.on('submit(add)', function (data) {
                 console.log(data);
-                //发异步，把数据提交给python
-                //'数据字段 '
-               /* $.post("/register", data.field, function (data, status) {
-                        console.log(data.field);
-                        console.log(status)
-                        {% comment %}                             layer.alert(info, {icon: 6},function (index) {
-                                                     // 获得frame索引
-                                                    // var index = parent.layer.getFrameIndex(window.name);
-                                                     //关闭当前frame
-                                                      //parent.layer.close(index);
-                                                         //layer.close(index);
-                                                         layer.closeAll();
-                                                    });{% endcomment %}
-                        layer.closeAll();
-
-                    }
-                )   */
                 console.log(data.field);
                  $.ajax({
                        'type':"POST",
                        'url': "/register",
                       'contentType': "application/json; charset=utf-8",
                        'data':JSON.stringify(data.field),
+                        'async ':false,
                        'dataType': "json",
                        success:function (data) {
                               layer.alert(data.success, {icon: 6},function () {
@@ -135,8 +119,9 @@
                             });
                        },
                        error:function (data) {
+                           debugger;
                              console.log(data);
-                             layer.alert(data.success, {icon: 5},function () {
+                             layer.alert(data.responseText, {icon: 5},function () {
                              // 获得frame索引
                              var index = parent.layer.getFrameIndex(window.name);
                              //关闭当前frame
