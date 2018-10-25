@@ -31,8 +31,6 @@ class userInfo(BaseTable):
 
 
 '''项目管理'''
-
-
 class project(BaseTable):
     projectName = models.CharField('项目名称', max_length=10)
     projectdesc = models.TextField('项目说明', null=False)
