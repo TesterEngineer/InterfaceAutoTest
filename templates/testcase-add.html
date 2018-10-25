@@ -69,8 +69,15 @@
     <div class="layui-form-item">
         <label class="layui-form-label">依赖数据</label>
         <div class="layui-input-block">
-            <input type="text" name="resp_data" lay-verify="required" placeholder="请输入需要依赖上一个接口的数据匹配" autocomplete="off"
-                   class="layui-input" value="">
+            <div class="layui-inline">
+                <select name="dataFormat" id="dataformat">
+                    <option value="JSON" selected="">JSON</option>
+                    <option value="HTML">HTML</option>
+                    <option value="XML">XML</option>
+                </select>
+            </div>
+             <span class="layui-inline"><input type="text" name="resp_data" lay-verify="required" placeholder="依赖上一个接口的数据匹配" autocomplete="off"
+                   class="layui-input" value="{{ testcase_info.resp_data }}"></span>
         </div>
     </div>
 
@@ -181,6 +188,13 @@
                 }
             });
         }
+           if ('{{ testcase_info.dataFormat }}') {
+            $('#dataformat option').each(function () {
+                if ($(this).val() == '{{ testcase_info.dataFormat }}') {
+                    $(this).attr("selected", "selected")
+                }
+            });
+        }
 
 
          var id = $("input:hidden[name='id']").val();
@@ -275,6 +289,7 @@
         var req_exceptRsult = $("input[name='except_result']").val();
 
         var case_id = $("#caseId option:selected").val();
+        var dataFormat=$("#dataformat option:selected").val();
         var resp_data = $("input[name='resp_data']").val();
 
         if (case_name.length > 0 && req_path.length > 0 && req_method.length > 0) {
@@ -285,7 +300,7 @@
             req1['except_result'] = req_exceptRsult;
             req1['case_id'] = case_id.length > 0 ? case_id : '';
             req1['resp_data'] = resp_data.length > 0 ? resp_data : '';
-
+            req1['dataFormat']=dataFormat.length > 0 ? dataFormat: '';
 
             //获取参数的取值
             var params = $("input[name='req_param']");
