@@ -195,6 +195,13 @@
                 }
             });
         }
+        if('{{ testcase_info.case_id }}'){
+            $('#caseId option').each(function () {
+                if ($(this).val() == '{{ testcase_info.case_id }}') {
+                    $(this).attr("selected", "selected")
+                }
+            });
+        }
 
 
          var id = $("input:hidden[name='id']").val();

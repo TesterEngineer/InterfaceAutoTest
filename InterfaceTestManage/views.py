@@ -377,7 +377,8 @@ def testCaseEdit(request,id):
     if request.method == 'GET':
         testcase =TestCase.objects
         testcase_info = testcase.get(id=id)
-        context = {'testcase_info': testcase_info, 'btn': '编辑','id': id}
+        testcaseInfo = TestCase.objects.all()
+        context = {'testcase_info': testcase_info, 'btn': '编辑','id': id,"testcaseInfo":testcaseInfo}
         return render(request,'testcase-add.html',context)
     elif request.is_ajax():
         params = eval(request.body)
@@ -480,15 +481,37 @@ def runTest(request):
 
 
 '''执行测试用例'''
-def runCase(id,url,method,params,except_result,**kwargs):
+def runCase(testcaseInfo,url,method,params,except_result,**kwargs):
         try:
             if method == 'GET':
                 if len(kwargs):
                     #先执行好case_id的用例，取出resp_data数据,在附加到id用例的执行
-                    testcaseInfo = TestCase.objects.filter(id= kwargs['case_id'])
+                    testcaseInfoChild = TestCase.objects.get(id= kwargs['case_id'])
                     urls = url.split("/")
-                    url = urls[0]+"//"+urls[2]+testcaseInfo.req_path
-                    response = requests.get(url, params=params)
+
+                    #根据服务器返回的数据格式:JSON XML HTML格式
+                    #testcaseInfo = TestCase.objects.get(id=id)
+                    if testcaseInfo.dataFormat == "JSON":
+                        childResp =  testcaseInfoChild.resp_result
+                        resp_data = testcaseInfo.resp_data
+                        childResp = json.loads(childResp)
+
+                        #json = {"msg": "success", "repo": {'sid': 8999901, 'moviesList': ['电影1', '电影2', '电影3']}}
+                        json_exec = parse(resp_data+'')
+                        male = json_exec.find(childResp)
+                        values = [match.value for match in male]
+
+                        dic ={}
+                        dic[resp_data+'']=values
+                        params = str(dic)
+
+                        response = requests.get(url, params=params)
+                    else:
+                        pass
+
+
+
+
 
                 else:
                     response = requests.get(url,params=params)
@@ -504,26 +527,26 @@ def runCase(id,url,method,params,except_result,**kwargs):
                 assert except_result in response.text
                 info1="恭喜,用例执行成功了"
                 content={"info":info1,"statu":"success"}
-                testcaseInfo = TestCase.objects.filter(id=id)
+                testcaseInfo = TestCase.objects.filter(id=testcaseInfo.id)
                 update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
                 testcaseInfo.update(resp_result=response.content.decode("utf8","ignore"),update_time=update_time,test_result=1)
                 return JsonResponse(content)
               except AssertionError as e:
                  print(e)
                  content = {"info": "用例执行失败,预期结果和响应结果不一致！","statu":"error"}
-                 testcaseInfo = TestCase.objects.filter(id=id)
+                 testcaseInfo = TestCase.objects.filter(id=testcaseInfo.id)
                  update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
                  testcaseInfo.update(resp_result=response.content.decode("utf8","ignore"), update_time=update_time, test_result=2)
                  return JsonResponse(content)
             else:
                   content = {"info": "请求返回的状态不是200,尽快查看日志看看错误信息！","statu":"error"}
-                  testcaseInfo = TestCase.objects.filter(id=id)
+                  testcaseInfo = TestCase.objects.filter(id=testcaseInfo.id)
                   update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
                   testcaseInfo.update(resp_result=response.content.decode("utf8","ignore"), update_time=update_time, test_result=2)
                   return JsonResponse(content)
         except BaseException as e:
             content = {"info": "请检测请求地址是否正确,执行发送请求出现异常了！异常信息是:"+str(e),"statu":"error"}
-            testcaseInfo = TestCase.objects.filter(id=id)
+            testcaseInfo = TestCase.objects.filter(id=testcaseInfo.id)
             update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
             testcaseInfo.update(resp_result=str(e),update_time=update_time, test_result=2)
             return JsonResponse(content)
@@ -540,11 +563,13 @@ def execute_cases(request,id):
         case_id = postdataDic.get("case_id","")
         resp_data = postdataDic.get("resp_data","")
 
+        testcaseInfo = TestCase.objects.get(id=id)
+
         #执行测试用例
-        if case_id and resp_data:
-            return runCase(id=id,url=requestPath,method=method,params=params,except_result=except_result,case_id=case_id,resp_data=resp_data)
+        if testcaseInfo.case_id:
+            return runCase(testcaseInfo=testcaseInfo,url=requestPath,method=method,params=params,except_result=except_result,case_id=testcaseInfo.case_id,resp_data=resp_data)
         else:
-            return runCase(id=id, url=requestPath, method=method, params=params, except_result=except_result)
+            return runCase(testcaseInfo=testcaseInfo, url=requestPath, method=method, params=params, except_result=except_result)
 
 
 
