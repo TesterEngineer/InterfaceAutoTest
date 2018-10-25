@@ -195,9 +195,13 @@ def projectDelete(request,id):
         ##删除所有
         ids = request.POST.get("ids")
         ids = eval(ids)
-        for id in ids:
-            project.objects.filter(id=id).delete()
-        context = {"success": "删除成功！"}
+        if type(ids) != int:
+            for id in ids:
+                project.objects.filter(id=id).delete()
+            context = {"success": "删除成功！"}
+        else:
+            project.objects.filter(id=ids).delete()
+            context = {"success": "删除成功！"}
         return JsonResponse(context)
 
 
@@ -288,9 +292,13 @@ def environDelete(request,id):
         ##删除所有
         ids =request.POST.get("ids")
         ids = eval(ids)
-        for id in ids:
-            Environment.objects.filter(id=id).delete()
-        context = {"success": "删除成功！"}
+        if type(ids) != int:
+            for id in ids:
+                Environment.objects.filter(id=id).delete()
+            context = {"success": "删除成功！"}
+        else:
+            Environment.objects.filter(id=ids).delete()
+            context = {"success": "删除成功！"}
         return JsonResponse(context)
 
 @login_check
@@ -400,11 +408,12 @@ def testcaseDelete(request,id):
         ##删除所有
         ids = request.POST.get("ids")
         ids = eval(ids)
-        if len(ids) > 1:
+        if type(ids) != int:
             for id in ids:
                 TestCase.objects.filter(id=id).delete()
             context = {"success": "删除成功！"}
         else:
+            context = {"success": "删除成功！"}
             TestCase.objects.filter(id=ids).delete()
         return JsonResponse(context)
     pass
@@ -468,14 +477,12 @@ def runTest(request):
 def runCase(id,url,method,params,except_result,**kwargs):
         try:
             if method == 'GET':
-                if kwargs['case_id'] and kwargs['resp_data']:
+                if len(kwargs):
                     #先执行好case_id的用例，取出resp_data数据,在附加到id用例的执行
                     testcaseInfo = TestCase.objects.filter(id= kwargs['case_id'])
                     urls = url.split("/")
                     url = urls[0]+"//"+urls[2]+testcaseInfo.req_path
                     response = requests.get(url, params=params)
-
-
 
                 else:
                     response = requests.get(url,params=params)
