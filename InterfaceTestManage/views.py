@@ -1,6 +1,7 @@
 #coding:utf-8
 import json
 import logging
+import re
 import  time
 from _mysql import IntegrityError
 
@@ -15,10 +16,12 @@ from django.http import HttpResponseRedirect,JsonResponse,HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.core   import serializers
 
-logger = logging.getLogger(__name__)
+from InterfaceTestManage.utils import loghelper
+
+loghelper = loghelper.loghelper()
+logger = loghelper.get_logger()
 
 # Create your views here.
-
 def login_check(func):
     def wrapper(request, *args, **kwargs):
         if not request.session.get('username'):
@@ -71,6 +74,7 @@ def login(request):
                 redirect_index.set_cookie('password',password)
 
             logger.info('{username} 登录成功'.format(username=username))
+            loghelper.close_handler()
             return redirect_index
             #return  request.getRequestDispatcher().forward('/index')
 
@@ -78,6 +82,7 @@ def login(request):
             print('用户名或密码错误')
             context = {'message':'用户名或密码错误'}
             logger.info('用户名:{username}和密码:{password}存在错误啊！ '.format(username=username,password=password))
+            loghelper.close_handler()
             return JsonResponse(context)
 
 
@@ -524,13 +529,30 @@ def runCase(testcaseInfo,url,method,params,except_result,**kwargs):
 
             if response.status_code == 200:
               try:
-                assert except_result in response.text
-                info1="恭喜,用例执行成功了"
-                content={"info":info1,"statu":"success"}
-                testcaseInfo = TestCase.objects.filter(id=testcaseInfo.id)
-                update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-                testcaseInfo.update(resp_result=response.content.decode("utf8","ignore"),update_time=update_time,test_result=1)
-                return JsonResponse(content)
+                if response.headers['content-type']=='text/html':
+                    list = re.findall(except_result,response.content.decode("utf8","ignore"))
+                    if len(list):
+                        info1 = "恭喜,用例执行成功了"
+                        content = {"info": info1, "statu": "success"}
+                        testcaseInfo = TestCase.objects.filter(id=testcaseInfo.id)
+                        update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+                        testcaseInfo.update(resp_result=response.content.decode("utf8", "ignore"),update_time=update_time, test_result=1)
+                        return JsonResponse(content)
+                    else:
+                        content = {"info": "用例执行失败,预期结果和响应结果不一致！", "statu": "error"}
+                        testcaseInfo = TestCase.objects.filter(id=testcaseInfo.id)
+                        update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+                        testcaseInfo.update(resp_result=response.content.decode("utf8", "ignore"),
+                                            update_time=update_time, test_result=1)
+                        return JsonResponse(content)
+                else:
+                    assert except_result in response.content.decode("utf8","ignore")
+                    info1="恭喜,用例执行成功了"
+                    content={"info":info1,"statu":"success"}
+                    testcaseInfo = TestCase.objects.filter(id=testcaseInfo.id)
+                    update_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+                    testcaseInfo.update(resp_result=response.content.decode("utf8","ignore"),update_time=update_time,test_result=1)
+                    return JsonResponse(content)
               except AssertionError as e:
                  print(e)
                  content = {"info": "用例执行失败,预期结果和响应结果不一致！","statu":"error"}
